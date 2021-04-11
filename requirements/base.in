@@ -1,3 +1,5 @@
 # Direct dependencies.
 
 Django==3.2
+gunicorn
+psycopg2

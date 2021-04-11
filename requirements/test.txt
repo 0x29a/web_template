@@ -12,12 +12,16 @@ attrs==20.3.0
     # via pytest
 django==3.2
     # via -r requirements/base.txt
+gunicorn==20.1.0
+    # via -r requirements/base.txt
 iniconfig==1.1.1
     # via pytest
 packaging==20.9
     # via pytest
 pluggy==0.13.1
     # via pytest
+psycopg2==2.8.6
+    # via -r requirements/base.txt
 py==1.10.0
     # via pytest
 pyparsing==2.4.7
@@ -34,3 +38,6 @@ sqlparse==0.4.1
     #   django
 toml==0.10.2
     # via pytest
+
+# The following packages are considered to be unsafe in a requirements file:
+# setuptools

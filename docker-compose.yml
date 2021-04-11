@@ -1,0 +1,27 @@
+version: '3'
+
+volumes:
+  production_postgres_data: {}
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/web/Dockerfile
+    image: application_web
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - ./.env
+    command: /start
+
+  postgres:
+    image: postgres:12.6
+    volumes:
+      - production_postgres_data:/var/lib/postgresql/data:Z
+    env_file:
+      - ./.env
+
+  redis:
+    image: redis:5.0

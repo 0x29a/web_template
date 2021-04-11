@@ -26,6 +26,8 @@ click==7.1.2
     #   pip-tools
 django==3.2
     # via -r requirements/quality.txt
+gunicorn==20.1.0
+    # via -r requirements/quality.txt
 iniconfig==1.1.1
     # via
     #   -r requirements/quality.txt
@@ -52,6 +54,8 @@ pluggy==0.13.1
     # via
     #   -r requirements/quality.txt
     #   pytest
+psycopg2==2.8.6
+    # via -r requirements/quality.txt
 py==1.10.0
     # via
     #   -r requirements/quality.txt
@@ -92,3 +96,4 @@ typing-extensions==3.7.4.3
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip
+# setuptools
