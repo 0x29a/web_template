@@ -1,9 +1,25 @@
-version: '3'
+version: '3.7'
 
 volumes:
   production_postgres_data: {}
+  caddy_data:
+  caddy_config:
 
 services:
+  caddy:
+    image: caddy:latest
+    restart: unless-stopped
+    depends_on:
+      - web
+    ports:
+      - "8003:80"
+      - "4433:443"
+    volumes:
+      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    environment:
+      - SITE_ADDRESS
   web:
     build:
       context: .
@@ -12,16 +28,22 @@ services:
     depends_on:
       - postgres
       - redis
-    env_file:
-      - ./.env
     command: /start
+    environment:
+      - POSTGRES_HOST
+      - POSTGRES_PORT
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
 
   postgres:
     image: postgres:12.6
     volumes:
       - production_postgres_data:/var/lib/postgresql/data:Z
-    env_file:
-      - ./.env
+    environment:
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
 
   redis:
     image: redis:5.0
