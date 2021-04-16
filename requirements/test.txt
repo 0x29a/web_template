@@ -11,6 +11,10 @@ asgiref==3.3.4
 attrs==20.3.0
     # via pytest
 django==3.2
+    # via
+    #   -r requirements/base.txt
+    #   djangorestframework
+djangorestframework==3.12.4
     # via -r requirements/base.txt
 gunicorn==20.1.0
     # via -r requirements/base.txt

@@ -7,6 +7,10 @@
 asgiref==3.3.4
     # via django
 django==3.2
+    # via
+    #   -r requirements/base.in
+    #   djangorestframework
+djangorestframework==3.12.4
     # via -r requirements/base.in
 gunicorn==20.1.0
     # via -r requirements/base.in

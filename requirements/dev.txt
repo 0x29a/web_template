@@ -25,6 +25,10 @@ click==7.1.2
     #   black
     #   pip-tools
 django==3.2
+    # via
+    #   -r requirements/quality.txt
+    #   djangorestframework
+djangorestframework==3.12.4
     # via -r requirements/quality.txt
 gunicorn==20.1.0
     # via -r requirements/quality.txt
@@ -48,7 +52,7 @@ pep517==0.10.0
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
-pip-tools==6.0.1
+pip-tools==6.1.0
     # via -r requirements/pip-tools.txt
 pluggy==0.13.1
     # via
@@ -85,7 +89,7 @@ toml==0.10.2
     #   black
     #   pep517
     #   pytest
-typed-ast==1.4.2
+typed-ast==1.4.3
     # via
     #   -r requirements/quality.txt
     #   black
