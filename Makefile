@@ -23,5 +23,5 @@ down: ## destroy all containers defined in docker-compose.yml
 logs: ## show logs from all containers defined in docker-compose.yml
 	docker-compose logs -f
 
-reformat: ## use black to reformat all files
+format: ## use black to reformat all files
 	black ./application -l 120
