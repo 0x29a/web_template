@@ -14,7 +14,7 @@ services:
     depends_on:
       - web
     ports:
-      - "8123:8123"
+      - "8123:80"
     volumes:
       - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
@@ -30,7 +30,9 @@ services:
     image: application_web
     depends_on:
       - postgres
-      - redis
+      - mailhog
+    volumes:
+      - ./application:/application:z
     command: /start
     env_file:
       - .env

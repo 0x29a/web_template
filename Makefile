@@ -12,17 +12,32 @@ upgrade: ## update the requirements/*.txt files with the latest packages satisfy
 	$(PIP_COMPILE) -o requirements/quality.txt requirements/quality.in
 	$(PIP_COMPILE) -o requirements/development.txt requirements/development.in
 
+format: ## use black to reformat all files
+	black ./application -l 120
+
 build: ## build docker containers
 	docker-compose -f $(COMPOSE_FILE) build
 
-up: ## start all services defined in docker-compose.yml
+up: ## start services defined in docker-compose.yml
 	docker-compose -f $(COMPOSE_FILE) up -d
+up.%:
+	docker-compose -f $(COMPOSE_FILE) up -d $*
+
+stop: ## stop services defined in docker-compose.yml
+	docker-compose -f $(COMPOSE_FILE) stop
+stop.%:
+	docker-compose -f $(COMPOSE_FILE) stop $*
 
 down: ## destroy all containers defined in docker-compose.yml
 	docker-compose -f $(COMPOSE_FILE) down
 
 logs: ## show logs from all containers defined in docker-compose.yml
 	docker-compose -f $(COMPOSE_FILE) logs -f
+logs.%:
+	docker-compose -f $(COMPOSE_FILE) logs -f $*
 
-format: ## use black to reformat all files
-	black ./application -l 120
+web-restart:
+	docker-compose -f $(COMPOSE_FILE) restart web
+
+web-shell:
+	docker-compose -f $(COMPOSE_FILE) exec web bash

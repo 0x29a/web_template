@@ -136,6 +136,8 @@ uritemplate==3.0.1
     # via
     #   -r requirements/quality.txt
     #   drf-spectacular
+werkzeug==1.0.1
+    # via -r requirements/development.in
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip
