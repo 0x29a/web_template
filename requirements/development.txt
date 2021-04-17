@@ -30,7 +30,7 @@ dj-rest-auth==2.1.4
 django-environ==0.4.5
     # via -r requirements/quality.txt
 django-extensions==3.1.2
-    # via -r requirements/dev.in
+    # via -r requirements/development.in
 django==3.1.8
     # via
     #   -r requirements/quality.txt

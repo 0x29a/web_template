@@ -29,7 +29,7 @@ RUN pip wheel --wheel-dir /usr/src/app/wheels  \
 # Python 'run' stage
 FROM python as python-run-stage
 
-ARG BUILD_ENVIRONMENT=base
+ARG BUILD_ENVIRONMENT=production
 ARG APP_HOME=/application
 
 ENV PYTHONUNBUFFERED 1
@@ -69,7 +69,7 @@ RUN sed -i 's/\r$//g' /start
 RUN chmod +x /start
 
 # copy application code to WORKDIR
-COPY ./${APP_HOME} ${APP_HOME}
+COPY --chown=django:django ./${APP_HOME} ${APP_HOME}
 
 # make django owner of the WORKDIR directory as well.
 RUN chown -R django:django ${APP_HOME}

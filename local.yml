@@ -7,13 +7,14 @@ volumes:
 
 services:
   caddy:
-    image: caddy:latest
+    build:
+      context: .
+      dockerfile: ./docker/caddy/Dockerfile
     restart: unless-stopped
     depends_on:
       - web
     ports:
-      - "8003:80"
-      - "8443:443"
+      - "8123:8123"
     volumes:
       - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
@@ -24,6 +25,8 @@ services:
     build:
       context: .
       dockerfile: ./docker/web/Dockerfile
+      args:
+        BUILD_ENVIRONMENT: development
     image: application_web
     depends_on:
       - postgres
