@@ -31,6 +31,9 @@ stop.%:
 down: ## destroy all containers defined in docker-compose.yml
 	docker-compose -f $(COMPOSE_FILE) down
 
+fresh:
+	docker-compose -f $(COMPOSE_FILE) down -v && docker-compose -f $(COMPOSE_FILE) build && docker-compose -f $(COMPOSE_FILE) up -d
+
 logs: ## show logs from all containers defined in docker-compose.yml
 	docker-compose -f $(COMPOSE_FILE) logs -f
 logs.%:
@@ -39,5 +42,8 @@ logs.%:
 web-restart:
 	docker-compose -f $(COMPOSE_FILE) restart web
 
-web-shell:
+web-bash:
 	docker-compose -f $(COMPOSE_FILE) exec web bash
+
+web-shell:
+	docker-compose -f $(COMPOSE_FILE) exec web bash -c 'python manage.py shell_plus' 

@@ -5,4 +5,5 @@
 -r quality.txt            # Core and quality check dependencies
 
 django-extensions
+ipython
 Werkzeug

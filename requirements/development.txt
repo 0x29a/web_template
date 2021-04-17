@@ -17,6 +17,8 @@ attrs==20.3.0
     #   -r requirements/quality.txt
     #   jsonschema
     #   pytest
+backcall==0.2.0
+    # via ipython
 black==20.8b1
     # via -r requirements/quality.txt
 click==7.1.2
@@ -25,6 +27,8 @@ click==7.1.2
     #   -r requirements/quality.txt
     #   black
     #   pip-tools
+decorator==5.0.7
+    # via ipython
 dj-rest-auth==2.1.4
     # via -r requirements/quality.txt
 django-environ==0.4.5
@@ -55,6 +59,12 @@ iniconfig==1.1.1
     # via
     #   -r requirements/quality.txt
     #   pytest
+ipython-genutils==0.2.0
+    # via traitlets
+ipython==7.22.0
+    # via -r requirements/development.in
+jedi==0.18.0
+    # via ipython
 jsonschema==3.2.0
     # via
     #   -r requirements/quality.txt
@@ -67,6 +77,8 @@ packaging==20.9
     # via
     #   -r requirements/quality.txt
     #   pytest
+parso==0.8.2
+    # via jedi
 pathspec==0.8.1
     # via
     #   -r requirements/quality.txt
@@ -75,18 +87,28 @@ pep517==0.10.0
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
+pexpect==4.8.0
+    # via ipython
+pickleshare==0.7.5
+    # via ipython
 pip-tools==6.1.0
     # via -r requirements/pip-tools.txt
 pluggy==0.13.1
     # via
     #   -r requirements/quality.txt
     #   pytest
+prompt-toolkit==3.0.18
+    # via ipython
 psycopg2==2.8.6
     # via -r requirements/quality.txt
+ptyprocess==0.7.0
+    # via pexpect
 py==1.10.0
     # via
     #   -r requirements/quality.txt
     #   pytest
+pygments==2.8.1
+    # via ipython
 pyparsing==2.4.7
     # via
     #   -r requirements/quality.txt
@@ -124,6 +146,8 @@ toml==0.10.2
     #   black
     #   pep517
     #   pytest
+traitlets==5.0.5
+    # via ipython
 typed-ast==1.4.3
     # via
     #   -r requirements/quality.txt
@@ -136,6 +160,8 @@ uritemplate==3.0.1
     # via
     #   -r requirements/quality.txt
     #   drf-spectacular
+wcwidth==0.2.5
+    # via prompt-toolkit
 werkzeug==1.0.1
     # via -r requirements/development.in
 
