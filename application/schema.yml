@@ -1,0 +1,466 @@
+openapi: 3.0.3
+info:
+  title: ''
+  version: 0.0.0
+paths:
+  /auth/login/:
+    post:
+      operationId: login_create
+      description: |-
+        Check the credentials and return the REST Token
+        if the credentials are valid and authenticated.
+        Calls Django Auth login method to register User ID
+        in Django session framework
+
+        Accept the following POST parameters: username, password
+        Return the REST Framework Token Object's key.
+      tags:
+      - login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Login'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Login'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JWT'
+          description: ''
+  /auth/logout/:
+    post:
+      operationId: logout_create
+      description: |-
+        Calls Django logout method and delete the Token object
+        assigned to the current User object.
+
+        Accepts/Returns nothing.
+      tags:
+      - logout
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestAuthDetail'
+          description: ''
+  /auth/password/change/:
+    post:
+      operationId: password_change_create
+      description: |-
+        Calls Django Auth SetPasswordForm save method.
+
+        Accepts the following POST parameters: new_password1, new_password2
+        Returns the success/fail message.
+      tags:
+      - password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordChange'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PasswordChange'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PasswordChange'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestAuthDetail'
+          description: ''
+  /auth/password/reset/:
+    post:
+      operationId: password_reset_create
+      description: |-
+        Calls Django Auth PasswordResetForm save method.
+
+        Accepts the following POST parameters: email
+        Returns the success/fail message.
+      tags:
+      - password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordReset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PasswordReset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PasswordReset'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestAuthDetail'
+          description: ''
+  /auth/password/reset/confirm/:
+    post:
+      operationId: password_reset_confirm_create
+      description: |-
+        Password reset e-mail link is confirmed, therefore
+        this resets the user's password.
+
+        Accepts the following POST parameters: token, uid,
+            new_password1, new_password2
+        Returns the success/fail message.
+      tags:
+      - password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirm'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirm'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirm'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestAuthDetail'
+          description: ''
+  /auth/token/refresh/:
+    post:
+      operationId: token_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+  /auth/token/verify/:
+    post:
+      operationId: token_verify_create
+      description: |-
+        Takes a token and indicates if it is valid.  This view provides no
+        information about a token's fitness for a particular use.
+      tags:
+      - token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenVerify'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenVerify'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenVerify'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenVerify'
+          description: ''
+  /auth/user/:
+    get:
+      operationId: user_retrieve
+      description: |-
+        Reads and updates UserModel fields
+        Accepts GET, PUT, PATCH methods.
+
+        Default accepted fields: username, first_name, last_name
+        Default display fields: pk, username, email, first_name, last_name
+        Read-only fields: pk, email
+
+        Returns UserModel fields.
+      tags:
+      - user
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetails'
+          description: ''
+    put:
+      operationId: user_update
+      description: |-
+        Reads and updates UserModel fields
+        Accepts GET, PUT, PATCH methods.
+
+        Default accepted fields: username, first_name, last_name
+        Default display fields: pk, username, email, first_name, last_name
+        Read-only fields: pk, email
+
+        Returns UserModel fields.
+      tags:
+      - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDetails'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserDetails'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserDetails'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetails'
+          description: ''
+    patch:
+      operationId: user_partial_update
+      description: |-
+        Reads and updates UserModel fields
+        Accepts GET, PUT, PATCH methods.
+
+        Default accepted fields: username, first_name, last_name
+        Default display fields: pk, username, email, first_name, last_name
+        Read-only fields: pk, email
+
+        Returns UserModel fields.
+      tags:
+      - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUserDetails'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUserDetails'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUserDetails'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetails'
+          description: ''
+components:
+  schemas:
+    JWT:
+      type: object
+      description: Serializer for JWT authentication.
+      properties:
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+        user:
+          $ref: '#/components/schemas/UserDetails'
+      required:
+      - access_token
+      - refresh_token
+      - user
+    Login:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+      required:
+      - password
+    PasswordChange:
+      type: object
+      properties:
+        new_password1:
+          type: string
+          maxLength: 128
+        new_password2:
+          type: string
+          maxLength: 128
+      required:
+      - new_password1
+      - new_password2
+    PasswordReset:
+      type: object
+      description: Serializer for requesting a password reset e-mail.
+      properties:
+        email:
+          type: string
+          format: email
+      required:
+      - email
+    PasswordResetConfirm:
+      type: object
+      description: Serializer for confirming a password reset attempt.
+      properties:
+        new_password1:
+          type: string
+          maxLength: 128
+        new_password2:
+          type: string
+          maxLength: 128
+        uid:
+          type: string
+        token:
+          type: string
+      required:
+      - new_password1
+      - new_password2
+      - token
+      - uid
+    PatchedUserDetails:
+      type: object
+      description: User model w/o password
+      properties:
+        pk:
+          type: integer
+          readOnly: true
+          title: ID
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+    RestAuthDetail:
+      type: object
+      properties:
+        detail:
+          type: string
+          readOnly: true
+      required:
+      - detail
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          writeOnly: true
+      required:
+      - access
+      - refresh
+    TokenVerify:
+      type: object
+      properties:
+        token:
+          type: string
+      required:
+      - token
+    UserDetails:
+      type: object
+      description: User model w/o password
+      properties:
+        pk:
+          type: integer
+          readOnly: true
+          title: ID
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+      required:
+      - email
+      - pk
+      - username
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: Session

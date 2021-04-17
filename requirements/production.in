@@ -3,6 +3,7 @@
 Django<3.2
 djangorestframework==3.12.4
 dj-rest-auth
+djangorestframework-simplejwt
 drf-spectacular
 django-environ
 gunicorn

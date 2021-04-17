@@ -17,11 +17,15 @@ django==3.1.8
     #   -r requirements/production.in
     #   dj-rest-auth
     #   djangorestframework
+    #   djangorestframework-simplejwt
     #   drf-spectacular
+djangorestframework-simplejwt==4.6.0
+    # via -r requirements/production.in
 djangorestframework==3.12.4
     # via
     #   -r requirements/production.in
     #   dj-rest-auth
+    #   djangorestframework-simplejwt
     #   drf-spectacular
 drf-spectacular==0.15.1
     # via -r requirements/production.in
@@ -33,6 +37,8 @@ jsonschema==3.2.0
     # via drf-spectacular
 psycopg2==2.8.6
     # via -r requirements/production.in
+pyjwt==2.0.1
+    # via djangorestframework-simplejwt
 pyrsistent==0.17.3
     # via jsonschema
 pytz==2021.1

@@ -22,11 +22,15 @@ django==3.1.8
     #   -r requirements/production.txt
     #   dj-rest-auth
     #   djangorestframework
+    #   djangorestframework-simplejwt
     #   drf-spectacular
+djangorestframework-simplejwt==4.6.0
+    # via -r requirements/production.txt
 djangorestframework==3.12.4
     # via
     #   -r requirements/production.txt
     #   dj-rest-auth
+    #   djangorestframework-simplejwt
     #   drf-spectacular
 drf-spectacular==0.15.1
     # via -r requirements/production.txt
@@ -50,6 +54,10 @@ psycopg2==2.8.6
     # via -r requirements/production.txt
 py==1.10.0
     # via pytest
+pyjwt==2.0.1
+    # via
+    #   -r requirements/production.txt
+    #   djangorestframework-simplejwt
 pyparsing==2.4.7
     # via packaging
 pyrsistent==0.17.3

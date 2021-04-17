@@ -47,3 +47,15 @@ web-bash:
 
 web-shell:
 	docker-compose -f $(COMPOSE_FILE) exec web bash -c 'python manage.py shell_plus' 
+
+user_id: ## https://stackoverflow.com/a/40510068
+	docker-compose -f $(COMPOSE_FILE) exec web id
+
+schema:
+	docker-compose -f $(COMPOSE_FILE) exec web bash -c 'python manage.py spectacular --file schema.yml --validate --fail-on-warn'
+
+migrations:
+	docker-compose -f $(COMPOSE_FILE) exec web bash -c 'python manage.py makemigrations'
+
+migrate:
+	docker-compose -f $(COMPOSE_FILE) exec web bash -c 'python manage.py migrate'
