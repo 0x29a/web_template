@@ -12,16 +12,16 @@ upgrade: ## update the requirements/*.txt files with the latest packages satisfy
 	$(PIP_COMPILE) -o requirements/dev.txt requirements/dev.in
 
 build: ## build docker containers
-	docker-compose build
+	docker-compose -f local.yml build
 
 up: ## start all services defined in docker-compose.yml
-	docker-compose up -d
+	docker-compose -f local.yml up -d
 
 down: ## destroy all containers defined in docker-compose.yml
-	docker-compose down
+	docker-compose -f local.yml down
 
 logs: ## show logs from all containers defined in docker-compose.yml
-	docker-compose logs -f
+	docker-compose -f local.yml logs -f
 
 format: ## use black to reformat all files
 	black ./application -l 120

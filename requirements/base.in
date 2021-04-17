@@ -1,6 +1,9 @@
 # Direct dependencies.
 
-Django==3.2
+Django<3.2
 djangorestframework==3.12.4
+dj-rest-auth
+drf-spectacular
+django-environ
 gunicorn
 psycopg2

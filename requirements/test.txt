@@ -9,17 +9,39 @@ asgiref==3.3.4
     #   -r requirements/base.txt
     #   django
 attrs==20.3.0
-    # via pytest
-django==3.2
     # via
     #   -r requirements/base.txt
+    #   jsonschema
+    #   pytest
+dj-rest-auth==2.1.4
+    # via -r requirements/base.txt
+django-environ==0.4.5
+    # via -r requirements/base.txt
+django==3.1.8
+    # via
+    #   -r requirements/base.txt
+    #   dj-rest-auth
     #   djangorestframework
+    #   drf-spectacular
 djangorestframework==3.12.4
+    # via
+    #   -r requirements/base.txt
+    #   dj-rest-auth
+    #   drf-spectacular
+drf-spectacular==0.15.1
     # via -r requirements/base.txt
 gunicorn==20.1.0
     # via -r requirements/base.txt
+inflection==0.5.1
+    # via
+    #   -r requirements/base.txt
+    #   drf-spectacular
 iniconfig==1.1.1
     # via pytest
+jsonschema==3.2.0
+    # via
+    #   -r requirements/base.txt
+    #   drf-spectacular
 packaging==20.9
     # via pytest
 pluggy==0.13.1
@@ -30,18 +52,34 @@ py==1.10.0
     # via pytest
 pyparsing==2.4.7
     # via packaging
+pyrsistent==0.17.3
+    # via
+    #   -r requirements/base.txt
+    #   jsonschema
 pytest==6.2.3
     # via -r requirements/test.in
 pytz==2021.1
     # via
     #   -r requirements/base.txt
     #   django
+pyyaml==5.4.1
+    # via
+    #   -r requirements/base.txt
+    #   drf-spectacular
+six==1.15.0
+    # via
+    #   -r requirements/base.txt
+    #   jsonschema
 sqlparse==0.4.1
     # via
     #   -r requirements/base.txt
     #   django
 toml==0.10.2
     # via pytest
+uritemplate==3.0.1
+    # via
+    #   -r requirements/base.txt
+    #   drf-spectacular
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools

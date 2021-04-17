@@ -13,7 +13,7 @@ services:
       - web
     ports:
       - "8003:80"
-      - "4433:443"
+      - "8443:443"
     volumes:
       - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
@@ -29,12 +29,8 @@ services:
       - postgres
       - redis
     command: /start
-    environment:
-      - POSTGRES_HOST
-      - POSTGRES_PORT
-      - POSTGRES_DB
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
+    env_file:
+      - .env
 
   postgres:
     image: postgres:12.6
@@ -47,3 +43,9 @@ services:
 
   redis:
     image: redis:5.0
+
+  mailhog:
+    image: mailhog/mailhog:v1.0.0
+    container_name: mailhog
+    ports:
+      - "8025:8025"
