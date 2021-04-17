@@ -64,7 +64,7 @@ COPY --chown=django:django ./docker/web/entrypoint /entrypoint
 RUN sed -i 's/\r$//g' /entrypoint
 RUN chmod +x /entrypoint
 
-COPY --chown=django:django ./docker/web/start /start
+COPY --chown=django:django ./docker/web/start_${BUILD_ENV} /start
 RUN sed -i 's/\r$//g' /start
 RUN chmod +x /start
 
