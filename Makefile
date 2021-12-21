@@ -47,7 +47,10 @@ web-bash:
 	docker-compose -f $(COMPOSE_FILE) exec web bash
 
 web-shell:
-	docker-compose -f $(COMPOSE_FILE) exec web bash -c 'python manage.py shell_plus' 
+	docker-compose -f $(COMPOSE_FILE) exec web bash -c 'python manage.py shell_plus'
+
+web-urls:
+	docker-compose -f $(COMPOSE_FILE) exec web bash -c 'python manage.py show_urls'
 
 user_id: ## https://stackoverflow.com/a/40510068
 	docker-compose -f $(COMPOSE_FILE) exec web id

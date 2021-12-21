@@ -4,5 +4,5 @@ docs_dir: pages
 dev_addr: 0.0.0.0:8124
 nav:
     - Home: index.md
-    - About: about.md
+    - Management commands: management.md
 theme: readthedocs

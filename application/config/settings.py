@@ -17,12 +17,17 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
 ]
 
 THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "dj_rest_auth",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "dj_rest_auth.registration",
     "drf_spectacular",
 ]
 
@@ -115,3 +120,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_USE_JWT = True
 JWT_AUTH_COOKIE = "jwt-auth"
+
+SITE_ID = 1
