@@ -1,0 +1,8 @@
+site_name: Template
+site_url: https://example.com/
+docs_dir: pages
+dev_addr: 0.0.0.0:8124
+nav:
+    - Home: index.md
+    - About: about.md
+theme: readthedocs
