@@ -8,6 +8,10 @@ My template for quick prototyping.
     ```bash
     cp .env.local .env
     ```
+1. Create `docker-compose.override.yml`:
+    ```bash
+    cp docker-compose.override.yml.local docker-compose.override.yml
+    ```
 1. Start all services:
     ```bash
     make up

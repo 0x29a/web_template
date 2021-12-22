@@ -1,0 +1,49 @@
+x-app: &default-app
+  build:
+    context: .
+    dockerfile: ./docker/web/Dockerfile
+    args:
+      BUILD_ENVIRONMENT: "${DOCKER_BUILD_ENVIRONMENT:-production}"
+  depends_on:
+    - postgres
+  image: application_web
+  env_file:
+    - .env
+
+services:
+  caddy:
+    build:
+      context: .
+      dockerfile: ./docker/caddy/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - web
+    ports:
+      - "${DOCKER_CADDY_PORT_FORWARD:-80}:80"
+    volumes:
+      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    environment:
+      - SITE_ADDRESS
+
+  web:
+    <<: *default-app
+    command: /start
+
+  postgres:
+    image: postgres:12.6
+    volumes:
+      - production_postgres_data:/var/lib/postgresql/data:Z
+    environment:
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+
+  redis:
+    image: redis:5.0
+
+volumes:
+  caddy_data:
+  caddy_config:
+  production_postgres_data: {}

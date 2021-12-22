@@ -1,6 +1,5 @@
 # Define PIP_COMPILE_OPTS=-v to get more information during make upgrade.
 PIP_COMPILE = pip-compile --rebuild --upgrade $(PIP_COMPILE_OPTS)
-COMPOSE_FILE = local.yml
 
 upgrade: export CUSTOM_COMPILE_COMMAND=make upgrade
 upgrade: ## update the requirements/*.txt files with the latest packages satisfying requirements/*.in
@@ -17,49 +16,49 @@ format: ## use black to reformat all files
 	black ./application -l 120
 
 build: ## build docker containers
-	docker-compose -f $(COMPOSE_FILE) build
+	docker-compose build
 
 up: ## start services defined in docker-compose.yml
-	docker-compose -f $(COMPOSE_FILE) up -d
+	docker-compose up -d
 up.%:
-	docker-compose -f $(COMPOSE_FILE) up -d $*
+	docker-compose up -d $*
 
 stop: ## stop services defined in docker-compose.yml
-	docker-compose -f $(COMPOSE_FILE) stop
+	docker-compose stop
 stop.%:
-	docker-compose -f $(COMPOSE_FILE) stop $*
+	docker-compose stop $*
 
 down: ## destroy all containers defined in docker-compose.yml
-	docker-compose -f $(COMPOSE_FILE) down
+	docker-compose down
 
 fresh:
-	docker-compose -f $(COMPOSE_FILE) down -v && docker-compose -f $(COMPOSE_FILE) build && docker-compose -f $(COMPOSE_FILE) up -d
+	docker-compose down -v && docker-compose build && docker-compose up -d
 
 logs: ## show logs from all containers defined in docker-compose.yml
-	docker-compose -f $(COMPOSE_FILE) logs -f
+	docker-compose logs -f
 logs.%:
-	docker-compose -f $(COMPOSE_FILE) logs -f $*
+	docker-compose logs -f $*
 
 web-restart:
-	docker-compose -f $(COMPOSE_FILE) restart web
+	docker-compose restart web
 
 web-bash:
-	docker-compose -f $(COMPOSE_FILE) exec web bash
+	docker-compose exec web bash
 
 web-shell:
-	docker-compose -f $(COMPOSE_FILE) exec web bash -c 'python manage.py shell_plus'
+	docker-compose exec web bash -c 'python manage.py shell_plus'
 
 web-urls:
-	docker-compose -f $(COMPOSE_FILE) exec web bash -c 'python manage.py show_urls'
+	docker-compose exec web bash -c 'python manage.py show_urls'
 
 user_id: ## https://stackoverflow.com/a/40510068
-	docker-compose -f $(COMPOSE_FILE) exec web id
+	docker-compose exec web id
 
 schema:
-	docker-compose -f $(COMPOSE_FILE) exec web bash -c 'python manage.py spectacular --file schema.yml --validate --fail-on-warn'
+	docker-compose exec web bash -c 'python manage.py spectacular --file schema.yml --validate --fail-on-warn'
 
 migrations:
-	docker-compose -f $(COMPOSE_FILE) exec web bash -c 'python manage.py makemigrations'
+	docker-compose exec web bash -c 'python manage.py makemigrations'
 
 migrate:
-	docker-compose -f $(COMPOSE_FILE) exec web bash -c 'python manage.py migrate'
+	docker-compose exec web bash -c 'python manage.py migrate'

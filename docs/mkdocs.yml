@@ -3,6 +3,6 @@ site_url: https://example.com/
 docs_dir: pages
 dev_addr: 0.0.0.0:8124
 nav:
-    - Home: index.md
+    - Misc: index.md
     - Management commands: management.md
 theme: readthedocs
