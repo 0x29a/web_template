@@ -16,3 +16,5 @@ RUN chown -R frontend:frontend ${APP_HOME}
 USER frontend
 
 RUN yarn install
+
+RUN yarn add file:/frontend/packages/client

@@ -57,6 +57,16 @@ user_id: ## https://stackoverflow.com/a/40510068
 schema:
 	docker-compose exec web bash -c 'python manage.py spectacular --file schema.yml --validate --fail-on-warn'
 
+frontend-client:
+	docker run --rm \
+		-v $(shell pwd)/application/schema.yml:/application/schema.yml \
+		-v $(shell pwd)/frontend/packages/client/:/frontend/packages/client/ \
+		openapitools/openapi-generator-cli generate \
+		-i /application/schema.yml \
+		--config /frontend/packages/client/openapi-generator-config.json \
+		-g typescript-axios \
+		-o /frontend/packages/client
+
 migrations:
 	docker-compose exec web bash -c 'python manage.py makemigrations'
 
