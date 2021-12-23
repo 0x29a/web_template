@@ -5,6 +5,18 @@ services:
     volumes:
       - ./application:/application:z
 
+  frontend:
+    build:
+      context: .
+      dockerfile: ./docker/frontend/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/frontend:z
+      # the volume above prevents the host system's node_modules to be mounted
+      - exclude:/frontend/node_modules
+    command: yarn start
+
   mailhog:
     image: mailhog/mailhog:v1.0.0
     container_name: mailhog
@@ -30,3 +42,6 @@ services:
       - SWAGGER_JSON=/schema.yml
     volumes:
       - ./application/schema.yml:/schema.yml
+
+volumes:
+  exclude:
