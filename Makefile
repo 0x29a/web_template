@@ -51,8 +51,26 @@ web-shell:
 web-urls:
 	docker-compose exec web bash -c 'python manage.py show_urls'
 
-user_id: ## https://stackoverflow.com/a/40510068
+# In case web service is unable to write to the shared volume,
+# use this command to fetch uid and gid, then change ownership of the shared
+# directory on host.
+# Also see: https://stackoverflow.com/a/40510068
+web_user_id:
 	docker-compose exec web id
+
+# In case frontend service is unable to write to the shared volume,
+# use this command to fetch uid and gid, then change ownership of the node_modules:
+# sudo chown -R 101:101 frontend/node_modules
+# Also see: https://stackoverflow.com/a/29251160
+front_user_id:
+	docker-compose exec frontend id
+
+set_frontend_permissions:
+	touch frontend/yarn-error.log
+	sudo chown -R 101:101 frontend/node_modules frontend/package.json frontend/yarn.lock frontend/yarn-error.log
+
+set_frontend_permissions_back:
+	sudo chown -R $(USER):$(USER) frontend/node_modules frontend/package.json frontend/yarn.lock frontend/yarn-error.log
 
 schema:
 	docker-compose exec web bash -c 'python manage.py spectacular --file schema.yml --validate --fail-on-warn'

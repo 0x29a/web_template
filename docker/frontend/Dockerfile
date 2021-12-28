@@ -10,11 +10,11 @@ RUN addgroup --system frontend \
 # copy application code to WORKDIR
 COPY --chown=frontend:frontend ./${APP_HOME} ${APP_HOME}
 
-# make django owner of the WORKDIR directory as well.
+COPY --chown=frontend:frontend ./docker/frontend/start /start
+RUN sed -i 's/\r$//g' /start
+RUN chmod +x /start
+
+# make frontend owner of the WORKDIR directory as well.
 RUN chown -R frontend:frontend ${APP_HOME}
 
 USER frontend
-
-RUN yarn install
-
-RUN yarn add file:/frontend/packages/client

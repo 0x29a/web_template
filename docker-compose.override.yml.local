@@ -13,9 +13,7 @@ services:
       - "3000:3000"
     volumes:
       - ./frontend:/frontend:z
-      # the volume above prevents the host system's node_modules to be mounted
-      - exclude:/frontend/node_modules
-    command: yarn start
+    command: /start
 
   mailhog:
     image: mailhog/mailhog:v1.0.0
