@@ -5,5 +5,5 @@ set -o pipefail
 set -o nounset
 
 yarn
-yarn add file:/frontend/packages/client
+yarn add file:packages/client
 yarn start

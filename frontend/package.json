@@ -15,7 +15,7 @@
     "react-bootstrap": "^2.0.4",
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.0",
-    "template-client": "file:/frontend/packages/client",
+    "template-client": "file:packages/client",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0"
   },
