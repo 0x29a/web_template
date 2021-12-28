@@ -20,12 +20,12 @@ build: ## build docker containers
 
 up: ## start services defined in docker-compose.yml
 	docker-compose up -d
-up.%:
+%.up:
 	docker-compose up -d $*
 
 stop: ## stop services defined in docker-compose.yml
 	docker-compose stop
-stop.%:
+%.stop:
 	docker-compose stop $*
 
 down: ## destroy all containers defined in docker-compose.yml
@@ -36,14 +36,14 @@ fresh:
 
 logs: ## show logs from all containers defined in docker-compose.yml
 	docker-compose logs -f
-logs.%:
+%.logs:
 	docker-compose logs -f $*
 
 web-restart:
 	docker-compose restart web
 
-web-bash:
-	docker-compose exec web bash
+%.bash:
+	docker-compose exec $* bash
 
 web-shell:
 	docker-compose exec web bash -c 'python manage.py shell_plus'
