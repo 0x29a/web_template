@@ -1,14 +1,14 @@
 {
-  "name": "template-client",
+  "name": "api-client",
   "version": "0.0.1",
-  "description": "OpenAPI client for template-client",
+  "description": "OpenAPI client for api-client",
   "author": "OpenAPI-Generator Contributors",
   "keywords": [
     "axios",
     "typescript",
     "openapi-client",
     "openapi-generator",
-    "template-client"
+    "api-client"
   ],
   "license": "Unlicense",
   "main": "./dist/index.js",

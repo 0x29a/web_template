@@ -1,4 +1,4 @@
-site_name: Template
+site_name: WebTemplate
 site_url: https://example.com/
 docs_dir: pages
 dev_addr: 0.0.0.0:8124

@@ -1,6 +1,6 @@
-# Template
+# WebTemplate
 
-My template for quick prototyping.
+My template for quick web services prototyping.
 
 ## Getting started
 

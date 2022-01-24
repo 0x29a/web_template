@@ -7,7 +7,7 @@ const Layout = () => (
   <Col lg={"8"} className="mx-auto p-3 py-md-5">
     <Header />
     <main>
-      <h1>Get started with Template</h1>
+      <h1>Get started with WebTemplate</h1>
       <p className="fs-5 col-md-8">Quickly and easily get started with Bootstrap's compiled, production-ready files with this barebones example featuring some basic HTML and helpful links. Download all our examples to get started.</p>
 
       <div className="mb-5">
@@ -19,7 +19,7 @@ const Layout = () => (
       <div className="row g-5">
         <div className="col-md-6">
           <h2>Starter projects</h2>
-          <p>Ready to beyond the starter template? Check out these open source projects that you can quickly duplicate to a new GitHub repository.</p>
+          <p>Ready to beyond the starter webtemplate? Check out these open source projects that you can quickly duplicate to a new GitHub repository.</p>
           <ul className="icon-list">
             <li><a href="https://github.com/twbs/bootstrap-npm-starter">Bootstrap npm starter</a></li>
             <li className="text-muted">Bootstrap Parcel starter (coming soon!)</li>
