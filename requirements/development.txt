@@ -17,10 +17,8 @@ attrs==21.4.0
     #   pytest
 backcall==0.2.0
     # via ipython
-black==21.12b0
-    # via
-    #   -r requirements/quality.txt
-    #   ipython
+black==22.3.0
+    # via -r requirements/quality.txt
 certifi==2021.10.8
     # via
     #   -r requirements/quality.txt
@@ -29,17 +27,17 @@ cffi==1.15.0
     # via
     #   -r requirements/quality.txt
     #   cryptography
-charset-normalizer==2.0.10
+charset-normalizer==2.0.12
     # via
     #   -r requirements/quality.txt
     #   requests
-click==8.0.3
+click==8.1.2
     # via
     #   -r requirements/pip-tools.txt
     #   -r requirements/quality.txt
     #   black
     #   pip-tools
-cryptography==36.0.1
+cryptography==37.0.1
     # via
     #   -r requirements/quality.txt
     #   pyjwt
@@ -49,7 +47,7 @@ defusedxml==0.7.1
     # via
     #   -r requirements/quality.txt
     #   python3-openid
-dj-rest-auth[with_social]==2.2.2
+dj-rest-auth[with_social]==2.2.4
     # via -r requirements/quality.txt
 django==3.1.14
     # via
@@ -60,7 +58,7 @@ django==3.1.14
     #   djangorestframework
     #   djangorestframework-simplejwt
     #   drf-spectacular
-django-allauth==0.47.0
+django-allauth==0.50.0
     # via
     #   -r requirements/quality.txt
     #   dj-rest-auth
@@ -74,11 +72,11 @@ djangorestframework==3.12.4
     #   dj-rest-auth
     #   djangorestframework-simplejwt
     #   drf-spectacular
-djangorestframework-simplejwt==5.0.0
+djangorestframework-simplejwt==5.1.0
     # via -r requirements/quality.txt
-drf-spectacular==0.21.1
+drf-spectacular==0.22.1
     # via -r requirements/quality.txt
-executing==0.8.2
+executing==0.8.3
     # via stack-data
 gunicorn==20.1.0
     # via -r requirements/quality.txt
@@ -94,7 +92,7 @@ iniconfig==1.1.1
     # via
     #   -r requirements/quality.txt
     #   pytest
-ipython==8.0.1
+ipython==8.2.0
     # via -r requirements/development.in
 jedi==0.18.1
     # via ipython
@@ -108,7 +106,7 @@ mypy-extensions==0.4.3
     # via
     #   -r requirements/quality.txt
     #   black
-oauthlib==3.1.1
+oauthlib==3.2.0
     # via
     #   -r requirements/quality.txt
     #   requests-oauthlib
@@ -130,9 +128,9 @@ pexpect==4.8.0
     # via ipython
 pickleshare==0.7.5
     # via ipython
-pip-tools==6.4.0
+pip-tools==6.6.0
     # via -r requirements/pip-tools.txt
-platformdirs==2.4.1
+platformdirs==2.5.2
     # via
     #   -r requirements/quality.txt
     #   black
@@ -140,7 +138,7 @@ pluggy==1.0.0
     # via
     #   -r requirements/quality.txt
     #   pytest
-prompt-toolkit==3.0.24
+prompt-toolkit==3.0.29
     # via ipython
 psycopg2==2.9.3
     # via -r requirements/quality.txt
@@ -156,14 +154,14 @@ pycparser==2.21
     # via
     #   -r requirements/quality.txt
     #   cffi
-pygments==2.11.2
+pygments==2.12.0
     # via ipython
 pyjwt[crypto]==2.3.0
     # via
     #   -r requirements/quality.txt
     #   django-allauth
     #   djangorestframework-simplejwt
-pyparsing==3.0.7
+pyparsing==3.0.8
     # via
     #   -r requirements/quality.txt
     #   packaging
@@ -171,13 +169,13 @@ pyrsistent==0.18.1
     # via
     #   -r requirements/quality.txt
     #   jsonschema
-pytest==6.2.5
+pytest==7.1.2
     # via -r requirements/quality.txt
 python3-openid==3.2.0
     # via
     #   -r requirements/quality.txt
     #   django-allauth
-pytz==2021.3
+pytz==2022.1
     # via
     #   -r requirements/quality.txt
     #   django
@@ -190,7 +188,7 @@ requests==2.27.1
     #   -r requirements/quality.txt
     #   django-allauth
     #   requests-oauthlib
-requests-oauthlib==1.3.0
+requests-oauthlib==1.3.1
     # via
     #   -r requirements/quality.txt
     #   django-allauth
@@ -200,12 +198,8 @@ sqlparse==0.4.2
     # via
     #   -r requirements/quality.txt
     #   django
-stack-data==0.1.4
+stack-data==0.2.0
     # via ipython
-toml==0.10.2
-    # via
-    #   -r requirements/quality.txt
-    #   pytest
 tomli==1.2.3
     # via
     #   -c requirements/constraints.txt
@@ -213,11 +207,12 @@ tomli==1.2.3
     #   -r requirements/quality.txt
     #   black
     #   pep517
+    #   pytest
 traitlets==5.1.1
     # via
     #   ipython
     #   matplotlib-inline
-typing-extensions==4.0.1
+typing-extensions==4.2.0
     # via
     #   -r requirements/quality.txt
     #   black
@@ -225,14 +220,16 @@ uritemplate==4.1.1
     # via
     #   -r requirements/quality.txt
     #   drf-spectacular
-urllib3==1.26.8
+urllib3==1.26.9
     # via
     #   -r requirements/quality.txt
     #   requests
 wcwidth==0.2.5
     # via prompt-toolkit
-werkzeug==2.0.2
-    # via -r requirements/development.in
+werkzeug==2.0.3
+    # via
+    #   -c requirements/constraints.txt
+    #   -r requirements/development.in
 wheel==0.37.1
     # via
     #   -r requirements/pip-tools.txt

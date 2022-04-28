@@ -13,7 +13,7 @@ attrs==21.4.0
     #   -r requirements/test.txt
     #   jsonschema
     #   pytest
-black==21.12b0
+black==22.3.0
     # via -r requirements/quality.in
 certifi==2021.10.8
     # via
@@ -23,13 +23,13 @@ cffi==1.15.0
     # via
     #   -r requirements/test.txt
     #   cryptography
-charset-normalizer==2.0.10
+charset-normalizer==2.0.12
     # via
     #   -r requirements/test.txt
     #   requests
-click==8.0.3
+click==8.1.2
     # via black
-cryptography==36.0.1
+cryptography==37.0.1
     # via
     #   -r requirements/test.txt
     #   pyjwt
@@ -37,7 +37,7 @@ defusedxml==0.7.1
     # via
     #   -r requirements/test.txt
     #   python3-openid
-dj-rest-auth[with_social]==2.2.2
+dj-rest-auth[with_social]==2.2.4
     # via -r requirements/test.txt
 django==3.1.14
     # via
@@ -47,7 +47,7 @@ django==3.1.14
     #   djangorestframework
     #   djangorestframework-simplejwt
     #   drf-spectacular
-django-allauth==0.47.0
+django-allauth==0.50.0
     # via
     #   -r requirements/test.txt
     #   dj-rest-auth
@@ -59,9 +59,9 @@ djangorestframework==3.12.4
     #   dj-rest-auth
     #   djangorestframework-simplejwt
     #   drf-spectacular
-djangorestframework-simplejwt==5.0.0
+djangorestframework-simplejwt==5.1.0
     # via -r requirements/test.txt
-drf-spectacular==0.21.1
+drf-spectacular==0.22.1
     # via -r requirements/test.txt
 gunicorn==20.1.0
     # via -r requirements/test.txt
@@ -83,7 +83,7 @@ jsonschema==4.4.0
     #   drf-spectacular
 mypy-extensions==0.4.3
     # via black
-oauthlib==3.1.1
+oauthlib==3.2.0
     # via
     #   -r requirements/test.txt
     #   requests-oauthlib
@@ -93,7 +93,7 @@ packaging==21.3
     #   pytest
 pathspec==0.9.0
     # via black
-platformdirs==2.4.1
+platformdirs==2.5.2
     # via black
 pluggy==1.0.0
     # via
@@ -114,7 +114,7 @@ pyjwt[crypto]==2.3.0
     #   -r requirements/test.txt
     #   django-allauth
     #   djangorestframework-simplejwt
-pyparsing==3.0.7
+pyparsing==3.0.8
     # via
     #   -r requirements/test.txt
     #   packaging
@@ -122,13 +122,13 @@ pyrsistent==0.18.1
     # via
     #   -r requirements/test.txt
     #   jsonschema
-pytest==6.2.5
+pytest==7.1.2
     # via -r requirements/test.txt
 python3-openid==3.2.0
     # via
     #   -r requirements/test.txt
     #   django-allauth
-pytz==2021.3
+pytz==2022.1
     # via
     #   -r requirements/test.txt
     #   django
@@ -141,7 +141,7 @@ requests==2.27.1
     #   -r requirements/test.txt
     #   django-allauth
     #   requests-oauthlib
-requests-oauthlib==1.3.0
+requests-oauthlib==1.3.1
     # via
     #   -r requirements/test.txt
     #   django-allauth
@@ -149,21 +149,19 @@ sqlparse==0.4.2
     # via
     #   -r requirements/test.txt
     #   django
-toml==0.10.2
-    # via
-    #   -r requirements/test.txt
-    #   pytest
 tomli==1.2.3
     # via
     #   -c requirements/constraints.txt
+    #   -r requirements/test.txt
     #   black
-typing-extensions==4.0.1
+    #   pytest
+typing-extensions==4.2.0
     # via black
 uritemplate==4.1.1
     # via
     #   -r requirements/test.txt
     #   drf-spectacular
-urllib3==1.26.8
+urllib3==1.26.9
     # via
     #   -r requirements/test.txt
     #   requests
