@@ -1,15 +1,13 @@
 import { loginSuccess } from './slice';
-import { LoginApi } from '../../packages/client';
-
+import { loginApi } from '../api';
 import { AppThunk } from '../store';
 
 export function login(): AppThunk {
   return async dispatch => {
-    const api = new LoginApi();
-    const result = await api.loginCreate({
+    const result = loginApi.loginCreate({
       username: 'example',
-      email: 'example',
-      password: 'example'
+      email: 'test@example.com',
+      password: 'example',
     })
 
     dispatch(loginSuccess("lol"))
