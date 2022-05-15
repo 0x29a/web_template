@@ -17,6 +17,8 @@ format: ## use black to reformat all files
 
 build: ## build docker containers
 	docker-compose build
+%.build:
+	docker-compose build $*
 
 up: ## start services defined in docker-compose.yml
 	docker-compose up -d
@@ -38,6 +40,11 @@ logs: ## show logs from all containers defined in docker-compose.yml
 	docker-compose logs -f
 %.logs:
 	docker-compose logs -f $*
+
+restart:
+	docker-compose restart
+%.restart:
+	docker-compose restart $*
 
 web-restart:
 	docker-compose restart web
@@ -81,12 +88,12 @@ schema:
 frontend-client:
 	docker run --rm \
 		-v $(shell pwd)/application/schema.yml:/application/schema.yml \
-		-v $(shell pwd)/frontend/packages/client/:/frontend/packages/client/ \
+		-v $(shell pwd)/frontend/src/packages/client/:/frontend/src/packages/client/ \
 		openapitools/openapi-generator-cli generate \
 		-i /application/schema.yml \
-		--config /frontend/packages/client/openapi-generator-config.json \
+		--config /frontend/src/packages/client/openapi-generator-config.json \
 		-g typescript-axios \
-		-o /frontend/packages/client
+		-o /frontend/src/packages/client
 
 migrations:
 	docker-compose exec web bash -c 'python manage.py makemigrations'

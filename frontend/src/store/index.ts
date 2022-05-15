@@ -1,3 +1,3 @@
-import { initializeStore } from './store';
+import { store } from './store';
 
-export default initializeStore;
+export default store;

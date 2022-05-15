@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import initializeStore from './store';
+import store from './store';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,7 +9,7 @@ import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={initializeStore()}>
+    <Provider store={store}>
       <App />
     </Provider>
   </React.StrictMode>,

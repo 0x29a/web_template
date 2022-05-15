@@ -2,11 +2,19 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const slice = createSlice({
   name: 'login',
-  initialState: {},
-  reducers: {},
+  initialState: {
+    token: null
+  },
+  reducers: {
+    loginSuccess: (state, { payload }) => {
+      state.token = payload.token;
+    }
+  },
 });
 
-export const {} = slice.actions;
+export const {
+  loginSuccess
+} = slice.actions;
 
 export const {
   reducer,

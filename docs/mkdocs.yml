@@ -7,4 +7,6 @@ nav:
     - Management commands: management_commands.md
     - Dependencies upgrade: dependencies_upgrade.md
     - API client upgrade: api_client_upgrade.md
-theme: readthedocs
+    - Frontend upgrade: frontend_upgrade.md
+theme:
+    name: material

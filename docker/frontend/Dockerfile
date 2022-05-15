@@ -1,4 +1,4 @@
-FROM node:16.13.1-bullseye-slim
+FROM node:18-bullseye-slim
 
 ARG APP_HOME=/frontend
 
