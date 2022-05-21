@@ -37,7 +37,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/JWT'
+                $ref: '#/components/schemas/Token'
           description: ''
   /auth/logout/:
     post:
@@ -186,7 +186,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/JWT'
+                $ref: '#/components/schemas/Token'
           description: ''
   /auth/registration/resend-email/:
     post:
@@ -242,60 +242,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestAuthDetail'
-          description: ''
-  /auth/token/refresh/:
-    post:
-      operationId: token_refresh_create
-      description: |-
-        Takes a refresh type JSON web token and returns an access type JSON web
-        token if the refresh token is valid.
-      tags:
-      - token
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TokenRefresh'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/TokenRefresh'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/TokenRefresh'
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TokenRefresh'
-          description: ''
-  /auth/token/verify/:
-    post:
-      operationId: token_verify_create
-      description: |-
-        Takes a token and indicates if it is valid.  This view provides no
-        information about a token's fitness for a particular use.
-      tags:
-      - token
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TokenVerify'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/TokenVerify'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/TokenVerify'
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TokenVerify'
           description: ''
   /auth/user/:
     get:
@@ -392,20 +338,6 @@ paths:
           description: ''
 components:
   schemas:
-    JWT:
-      type: object
-      description: Serializer for JWT authentication.
-      properties:
-        access_token:
-          type: string
-        refresh_token:
-          type: string
-        user:
-          $ref: '#/components/schemas/UserDetails'
-      required:
-      - access_token
-      - refresh_token
-      - user
     Login:
       type: object
       properties:
@@ -517,26 +449,15 @@ components:
           readOnly: true
       required:
       - detail
-    TokenRefresh:
+    Token:
       type: object
+      description: Serializer for Token model.
       properties:
-        access:
+        key:
           type: string
-          readOnly: true
-        refresh:
-          type: string
-          writeOnly: true
+          maxLength: 40
       required:
-      - access
-      - refresh
-    TokenVerify:
-      type: object
-      properties:
-        token:
-          type: string
-          writeOnly: true
-      required:
-      - token
+      - key
     UserDetails:
       type: object
       description: User model w/o password

@@ -1,13 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { Token } from '../../packages/client';
 
 const slice = createSlice({
   name: 'login',
   initialState: {
-    token: null
+    token: ''
   },
   reducers: {
-    loginSuccess: (state, { payload }) => {
-      state.token = payload.token;
+    loginSuccess: (state, { payload } : { payload: Token }) => {
+      state.token = payload.key;
     }
   },
 });

@@ -7,7 +7,8 @@ import { reducer as loginReducer } from './login/slice';
 export const store = configureStore({
   reducer: {
     login: loginReducer,
-  }
+  },
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

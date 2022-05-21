@@ -22,31 +22,6 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from './base';
 
 /**
- * Serializer for JWT authentication.
- * @export
- * @interface JWT
- */
-export interface JWT {
-    /**
-     * 
-     * @type {string}
-     * @memberof JWT
-     */
-    'access_token': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof JWT
-     */
-    'refresh_token': string;
-    /**
-     * 
-     * @type {UserDetails}
-     * @memberof JWT
-     */
-    'user': UserDetails;
-}
-/**
  * 
  * @export
  * @interface Login
@@ -229,36 +204,17 @@ export interface RestAuthDetail {
     'detail': string;
 }
 /**
- * 
+ * Serializer for Token model.
  * @export
- * @interface TokenRefresh
+ * @interface Token
  */
-export interface TokenRefresh {
+export interface Token {
     /**
      * 
      * @type {string}
-     * @memberof TokenRefresh
+     * @memberof Token
      */
-    'access': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof TokenRefresh
-     */
-    'refresh': string;
-}
-/**
- * 
- * @export
- * @interface TokenVerify
- */
-export interface TokenVerify {
-    /**
-     * 
-     * @type {string}
-     * @memberof TokenVerify
-     */
-    'token': string;
+    'key': string;
 }
 /**
  * User model w/o password
@@ -374,7 +330,7 @@ export const LoginApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async loginCreate(login: Login, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<JWT>> {
+        async loginCreate(login: Login, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Token>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.loginCreate(login, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -394,7 +350,7 @@ export const LoginApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        loginCreate(login: Login, options?: any): AxiosPromise<JWT> {
+        loginCreate(login: Login, options?: any): AxiosPromise<Token> {
             return localVarFp.loginCreate(login, options).then((request) => request(axios, basePath));
         },
     };
@@ -914,7 +870,7 @@ export const RegistrationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async registrationCreate(register: Register, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<JWT>> {
+        async registrationCreate(register: Register, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Token>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.registrationCreate(register, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -954,7 +910,7 @@ export const RegistrationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        registrationCreate(register: Register, options?: any): AxiosPromise<JWT> {
+        registrationCreate(register: Register, options?: any): AxiosPromise<Token> {
             return localVarFp.registrationCreate(register, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1016,174 +972,6 @@ export class RegistrationApi extends BaseAPI {
      */
     public registrationVerifyEmailCreate(verifyEmail: VerifyEmail, options?: AxiosRequestConfig) {
         return RegistrationApiFp(this.configuration).registrationVerifyEmailCreate(verifyEmail, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-/**
- * TokenApi - axios parameter creator
- * @export
- */
-export const TokenApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * Takes a refresh type JSON web token and returns an access type JSON web token if the refresh token is valid.
-         * @param {TokenRefresh} tokenRefresh 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tokenRefreshCreate: async (tokenRefresh: TokenRefresh, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'tokenRefresh' is not null or undefined
-            assertParamExists('tokenRefreshCreate', 'tokenRefresh', tokenRefresh)
-            const localVarPath = `/auth/token/refresh/`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(tokenRefresh, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Takes a token and indicates if it is valid.  This view provides no information about a token\'s fitness for a particular use.
-         * @param {TokenVerify} tokenVerify 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tokenVerifyCreate: async (tokenVerify: TokenVerify, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'tokenVerify' is not null or undefined
-            assertParamExists('tokenVerifyCreate', 'tokenVerify', tokenVerify)
-            const localVarPath = `/auth/token/verify/`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(tokenVerify, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * TokenApi - functional programming interface
- * @export
- */
-export const TokenApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = TokenApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * Takes a refresh type JSON web token and returns an access type JSON web token if the refresh token is valid.
-         * @param {TokenRefresh} tokenRefresh 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async tokenRefreshCreate(tokenRefresh: TokenRefresh, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TokenRefresh>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.tokenRefreshCreate(tokenRefresh, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Takes a token and indicates if it is valid.  This view provides no information about a token\'s fitness for a particular use.
-         * @param {TokenVerify} tokenVerify 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async tokenVerifyCreate(tokenVerify: TokenVerify, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TokenVerify>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.tokenVerifyCreate(tokenVerify, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
-};
-
-/**
- * TokenApi - factory interface
- * @export
- */
-export const TokenApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = TokenApiFp(configuration)
-    return {
-        /**
-         * Takes a refresh type JSON web token and returns an access type JSON web token if the refresh token is valid.
-         * @param {TokenRefresh} tokenRefresh 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tokenRefreshCreate(tokenRefresh: TokenRefresh, options?: any): AxiosPromise<TokenRefresh> {
-            return localVarFp.tokenRefreshCreate(tokenRefresh, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Takes a token and indicates if it is valid.  This view provides no information about a token\'s fitness for a particular use.
-         * @param {TokenVerify} tokenVerify 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        tokenVerifyCreate(tokenVerify: TokenVerify, options?: any): AxiosPromise<TokenVerify> {
-            return localVarFp.tokenVerifyCreate(tokenVerify, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * TokenApi - object-oriented interface
- * @export
- * @class TokenApi
- * @extends {BaseAPI}
- */
-export class TokenApi extends BaseAPI {
-    /**
-     * Takes a refresh type JSON web token and returns an access type JSON web token if the refresh token is valid.
-     * @param {TokenRefresh} tokenRefresh 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TokenApi
-     */
-    public tokenRefreshCreate(tokenRefresh: TokenRefresh, options?: AxiosRequestConfig) {
-        return TokenApiFp(this.configuration).tokenRefreshCreate(tokenRefresh, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Takes a token and indicates if it is valid.  This view provides no information about a token\'s fitness for a particular use.
-     * @param {TokenVerify} tokenVerify 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TokenApi
-     */
-    public tokenVerifyCreate(tokenVerify: TokenVerify, options?: AxiosRequestConfig) {
-        return TokenApiFp(this.configuration).tokenVerifyCreate(tokenVerify, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

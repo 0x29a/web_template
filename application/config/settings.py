@@ -118,7 +118,7 @@ STATIC_ROOT = "/application/static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-REST_USE_JWT = True
-JWT_AUTH_COOKIE = "jwt-auth"
+# REST_USE_JWT = True
+# JWT_AUTH_COOKIE = "jwt-auth"
 
 SITE_ID = 1
