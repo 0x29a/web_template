@@ -1,9 +1,8 @@
 # Direct dependencies.
 
-Django<3.2
-djangorestframework==3.12.4
+Django==4.0.4
+djangorestframework==3.13.1
 dj-rest-auth[with_social]
-djangorestframework-simplejwt
 drf-spectacular
 django-environ
 gunicorn

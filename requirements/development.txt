@@ -4,7 +4,7 @@
 #
 #    make upgrade
 #
-asgiref==3.5.1
+asgiref==3.5.2
     # via
     #   -r requirements/quality.txt
     #   django
@@ -19,7 +19,7 @@ backcall==0.2.0
     # via ipython
 black==22.3.0
     # via -r requirements/quality.txt
-certifi==2021.10.8
+certifi==2022.5.18.1
     # via
     #   -r requirements/quality.txt
     #   requests
@@ -49,14 +49,13 @@ defusedxml==0.7.1
     #   python3-openid
 dj-rest-auth[with_social]==2.2.4
     # via -r requirements/quality.txt
-django==3.1.14
+django==4.0.4
     # via
     #   -r requirements/quality.txt
     #   dj-rest-auth
     #   django-allauth
     #   django-extensions
     #   djangorestframework
-    #   djangorestframework-simplejwt
     #   drf-spectacular
 django-allauth==0.50.0
     # via
@@ -66,14 +65,11 @@ django-environ==0.8.1
     # via -r requirements/quality.txt
 django-extensions==3.1.5
     # via -r requirements/development.in
-djangorestframework==3.12.4
+djangorestframework==3.13.1
     # via
     #   -r requirements/quality.txt
     #   dj-rest-auth
-    #   djangorestframework-simplejwt
     #   drf-spectacular
-djangorestframework-simplejwt==5.1.0
-    # via -r requirements/quality.txt
 drf-spectacular==0.22.1
     # via -r requirements/quality.txt
 executing==0.8.3
@@ -160,7 +156,6 @@ pyjwt[crypto]==2.4.0
     # via
     #   -r requirements/quality.txt
     #   django-allauth
-    #   djangorestframework-simplejwt
 pyparsing==3.0.9
     # via
     #   -r requirements/quality.txt
@@ -178,7 +173,7 @@ python3-openid==3.2.0
 pytz==2022.1
     # via
     #   -r requirements/quality.txt
-    #   django
+    #   djangorestframework
 pyyaml==6.0
     # via
     #   -r requirements/quality.txt
@@ -208,7 +203,7 @@ tomli==1.2.3
     #   black
     #   pep517
     #   pytest
-traitlets==5.2.0
+traitlets==5.2.1.post0
     # via
     #   ipython
     #   matplotlib-inline

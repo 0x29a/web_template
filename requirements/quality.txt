@@ -4,7 +4,7 @@
 #
 #    make upgrade
 #
-asgiref==3.5.1
+asgiref==3.5.2
     # via
     #   -r requirements/test.txt
     #   django
@@ -15,7 +15,7 @@ attrs==21.4.0
     #   pytest
 black==22.3.0
     # via -r requirements/quality.in
-certifi==2021.10.8
+certifi==2022.5.18.1
     # via
     #   -r requirements/test.txt
     #   requests
@@ -39,13 +39,12 @@ defusedxml==0.7.1
     #   python3-openid
 dj-rest-auth[with_social]==2.2.4
     # via -r requirements/test.txt
-django==3.1.14
+django==4.0.4
     # via
     #   -r requirements/test.txt
     #   dj-rest-auth
     #   django-allauth
     #   djangorestframework
-    #   djangorestframework-simplejwt
     #   drf-spectacular
 django-allauth==0.50.0
     # via
@@ -53,14 +52,11 @@ django-allauth==0.50.0
     #   dj-rest-auth
 django-environ==0.8.1
     # via -r requirements/test.txt
-djangorestframework==3.12.4
+djangorestframework==3.13.1
     # via
     #   -r requirements/test.txt
     #   dj-rest-auth
-    #   djangorestframework-simplejwt
     #   drf-spectacular
-djangorestframework-simplejwt==5.1.0
-    # via -r requirements/test.txt
 drf-spectacular==0.22.1
     # via -r requirements/test.txt
 gunicorn==20.1.0
@@ -113,7 +109,6 @@ pyjwt[crypto]==2.4.0
     # via
     #   -r requirements/test.txt
     #   django-allauth
-    #   djangorestframework-simplejwt
 pyparsing==3.0.9
     # via
     #   -r requirements/test.txt
@@ -131,7 +126,7 @@ python3-openid==3.2.0
 pytz==2022.1
     # via
     #   -r requirements/test.txt
-    #   django
+    #   djangorestframework
 pyyaml==6.0
     # via
     #   -r requirements/test.txt
