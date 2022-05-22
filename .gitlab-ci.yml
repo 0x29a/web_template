@@ -39,6 +39,7 @@ include:
   services:
     - docker:dind
   before_script:
+    - apk update && apk add make
     - cp .env.local .env
     - cp docker-compose.override.yml.local docker-compose.override.yml
     - make up
