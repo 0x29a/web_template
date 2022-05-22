@@ -25,6 +25,6 @@
         make set_frontend_permissions
         make frontend.restart
 
-7.  Upgrade other packages:
+7. Upgrade other packages:
 
         yarn upgrade react-bootstrap bootstrap @reduxjs/toolkit --upgrade
