@@ -1,5 +1,7 @@
 # Define PIP_COMPILE_OPTS=-v to get more information during make upgrade.
 PIP_COMPILE = pip-compile --rebuild --upgrade $(PIP_COMPILE_OPTS)
+WEB_USER_ID = $(shell docker-compose exec web id -u)
+FRONTEND_USER_ID = $(shell docker-compose exec frontend id -u)
 
 upgrade: export CUSTOM_COMPILE_COMMAND=make upgrade
 upgrade: ## update the requirements/*.txt files with the latest packages satisfying requirements/*.in
@@ -58,27 +60,19 @@ web-shell:
 web-urls:
 	docker-compose exec web bash -c 'python manage.py show_urls'
 
-# In case web service is unable to write to the shared volume,
-# use this command to fetch uid and gid, then change ownership of the shared
-# directory on host.
-# Also see: https://stackoverflow.com/a/40510068
-web_user_id:
-	docker-compose exec web id
-
-# In case frontend service is unable to write to the shared volume,
-# use this command to fetch uid and gid, then change ownership of the node_modules:
-# sudo chown -R 101:101 frontend/node_modules
-# Also see: https://stackoverflow.com/a/29251160
-front_user_id:
-	docker-compose exec frontend id
-
 set_frontend_permissions:
 	touch frontend/yarn-error.log
 	mkdir -p frontend/node_modules
-	sudo chown -R 101:101 frontend/node_modules frontend/package.json frontend/yarn.lock frontend/yarn-error.log
+	sudo chown -R $(FRONTEND_USER_ID) frontend/node_modules frontend/package.json frontend/yarn.lock frontend/yarn-error.log
 
 set_frontend_permissions_back:
 	sudo chown -R $(USER):$(USER) frontend/node_modules frontend/package.json frontend/yarn.lock frontend/yarn-error.log
+
+set_web_permissions:
+	sudo chown -R $(WEB_USER_ID) application
+
+set_web_permissions_back:
+	sudo chown -R $(USER):$(USER) application
 
 schema:
 	sudo chown 101:101 application/schema.yml
@@ -96,7 +90,12 @@ frontend-client:
 		-o /frontend/src/packages/client
 
 migrations:
-	docker-compose exec web bash -c 'python manage.py makemigrations'
+	docker-compose run --rm web python manage.py makemigrations
 
 migrate:
-	docker-compose exec web bash -c 'python manage.py migrate'
+	docker-compose run --rm web python manage.py migrate
+
+test:
+	sudo chown -R $(WEB_USER_ID) application
+	docker-compose run --rm web pytest
+	sudo chown -R $(USER):$(USER) application

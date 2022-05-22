@@ -3,8 +3,6 @@ import { loginApi } from '../api';
 import { AppThunk } from '../store';
 import { handleError } from '../utils';
 
-import { AxiosResponse } from 'axios';
-
 export function login(): AppThunk {
   return async dispatch => {
     try {

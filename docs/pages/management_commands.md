@@ -44,14 +44,6 @@ Description.
 
 Description.
 
-## `make web_user_id`
-
-Description.
-
-## `make frontend_user_id`
-
-Description.
-
 ## `make set_frontend_permissions`
 
 Description.

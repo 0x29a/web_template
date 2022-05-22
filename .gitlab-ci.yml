@@ -1,3 +1,20 @@
+stages:
+- lint
+- test
+
+
+# Docs ########################################################################
+
+lint docs:
+  stage: lint
+  image: node:latest
+  script:
+    - npm install markdownlint-cli
+    - npx markdownlint docs
+
+
+# Security ####################################################################
+
 # You can override the included template(s) by including variable overrides
 # SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
 # Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/#customizing-settings
@@ -5,10 +22,27 @@
 # Container Scanning customization: https://docs.gitlab.com/ee/user/application_security/container_scanning/#customizing-the-container-scanning-settings
 # Note that environment variables can be set in several places
 # See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
-stages:
-- test
+
 sast:
   stage: test
 include:
 - template: Security/SAST.gitlab-ci.yml
 
+
+# Backend #####################################################################
+
+.backend:
+  stage: test
+  image: docker/compose:1.29.2
+  tags:
+    - docker
+  services:
+    - docker:dind
+  before_script:
+    - cp .env.local .env
+    - cp docker-compose.override.yml.local docker-compose.override.yml
+    - make up
+
+pytest:
+  extends: .backend
+  script: make test
