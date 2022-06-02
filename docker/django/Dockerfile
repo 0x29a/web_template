@@ -60,11 +60,11 @@ COPY --from=python-build-stage /usr/src/app/wheels  /wheels/
 RUN pip install --no-cache-dir --no-index --find-links=/wheels/ /wheels/* \
   && rm -rf /wheels/
 
-COPY --chown=django:django ./docker/web/entrypoint /entrypoint
+COPY --chown=django:django ./docker/django/entrypoint /entrypoint
 RUN sed -i 's/\r$//g' /entrypoint
 RUN chmod +x /entrypoint
 
-COPY --chown=django:django ./docker/web/start_${BUILD_ENV} /start
+COPY --chown=django:django ./docker/django/start_${BUILD_ENV} /start
 RUN sed -i 's/\r$//g' /start
 RUN chmod +x /start
 

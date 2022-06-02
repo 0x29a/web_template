@@ -1,7 +1,8 @@
+# General #####################################################################
+
 stages:
 - lint
 - test
-
 
 # Docs ########################################################################
 
@@ -12,23 +13,6 @@ lint docs:
     - npm install markdownlint-cli
     - npx markdownlint docs
 
-
-# Security ####################################################################
-
-# You can override the included template(s) by including variable overrides
-# SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
-# Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/#customizing-settings
-# Dependency Scanning customization: https://docs.gitlab.com/ee/user/application_security/dependency_scanning/#customizing-the-dependency-scanning-settings
-# Container Scanning customization: https://docs.gitlab.com/ee/user/application_security/container_scanning/#customizing-the-container-scanning-settings
-# Note that environment variables can be set in several places
-# See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
-
-sast:
-  stage: test
-include:
-- template: Security/SAST.gitlab-ci.yml
-
-
 # Backend #####################################################################
 
 .backend:
@@ -38,11 +22,11 @@ include:
     - docker
   services:
     - docker:dind
+    - postgres:12.6
+    - redis:5.0
   before_script:
     - apk update && apk add make
-    - cp .env.local .env
-    - cp docker-compose.override.yml.local docker-compose.override.yml
-    - make up
+    - make migrate
 
 pytest:
   extends: .backend

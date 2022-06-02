@@ -1,7 +1,7 @@
 # Define PIP_COMPILE_OPTS=-v to get more information during make upgrade.
 PIP_COMPILE = pip-compile --rebuild --upgrade $(PIP_COMPILE_OPTS)
-WEB_USER_ID = $(shell docker-compose exec web id -u)
-FRONTEND_USER_ID = $(shell docker-compose exec frontend id -u)
+DJANGO_USER_ID = $(shell docker-compose run --rm django id -u)
+FRONTEND_USER_ID = $(shell docker-compose run --rm frontend id -u)
 
 upgrade: export CUSTOM_COMPILE_COMMAND=make upgrade
 upgrade: ## update the requirements/*.txt files with the latest packages satisfying requirements/*.in
@@ -48,17 +48,17 @@ restart:
 %.restart:
 	docker-compose restart $*
 
-web-restart:
-	docker-compose restart web
+django-restart:
+	docker-compose restart django
 
 %.bash:
 	docker-compose exec $* bash
 
-web-shell:
-	docker-compose exec web bash -c 'python manage.py shell_plus'
+django-shell:
+	docker-compose exec django bash -c 'python manage.py shell_plus'
 
-web-urls:
-	docker-compose exec web bash -c 'python manage.py show_urls'
+django-urls:
+	docker-compose exec django bash -c 'python manage.py show_urls'
 
 set_frontend_permissions:
 	touch frontend/yarn-error.log
@@ -68,15 +68,15 @@ set_frontend_permissions:
 set_frontend_permissions_back:
 	sudo chown -R $(USER):$(USER) frontend/node_modules frontend/package.json frontend/yarn.lock frontend/yarn-error.log
 
-set_web_permissions:
-	sudo chown -R $(WEB_USER_ID) application
+set_django_permissions:
+	sudo chown -R $(DJANGO_USER_ID) application
 
-set_web_permissions_back:
+set_django_permissions_back:
 	sudo chown -R $(USER):$(USER) application
 
 schema:
 	sudo chown 101:101 application/schema.yml
-	docker-compose exec web bash -c 'python manage.py spectacular --file schema.yml --validate --fail-on-warn'
+	docker-compose exec django bash -c 'python manage.py spectacular --file schema.yml --validate --fail-on-warn'
 	sudo chown $(USER):$(USER) application/schema.yml
 
 frontend-client:
@@ -90,12 +90,10 @@ frontend-client:
 		-o /frontend/src/packages/client
 
 migrations:
-	docker-compose run --rm web python manage.py makemigrations
+	docker-compose run --rm django python manage.py makemigrations
 
 migrate:
-	docker-compose run --rm web python manage.py migrate
+	docker-compose run --rm django python manage.py migrate
 
 test:
-	sudo chown -R $(WEB_USER_ID) application
-	docker-compose run --rm web pytest
-	sudo chown -R $(USER):$(USER) application
+	docker-compose run --rm django pytest

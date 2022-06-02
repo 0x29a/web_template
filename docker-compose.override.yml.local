@@ -1,9 +1,22 @@
 services:
-  web:
+  django:
     depends_on:
+      - postgres
       - mailhog
     volumes:
       - ./application:/application:z
+
+  postgres:
+    image: postgres:12.6
+    volumes:
+      - production_postgres_data:/var/lib/postgresql/data:Z
+    environment:
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+
+  redis:
+    image: redis:5.0
 
   frontend:
     build:
@@ -42,4 +55,4 @@ services:
       - ./application/schema.yml:/schema.yml
 
 volumes:
-  exclude:
+  production_postgres_data: {}
