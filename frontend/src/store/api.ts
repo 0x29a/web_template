@@ -1,15 +1,15 @@
 import {
-  LoginApi,
-  Configuration
-} from '../packages/client';
+    LoginApi,
+    Configuration
+} from "../packages/client";
 
 const getApiKey = () => {
-  return ''
-}
+    return "";
+};
 
 const configuration = new Configuration({
-  basePath: 'http://localhost:8123',
-  apiKey: getApiKey,
+    basePath: "http://localhost:8123",
+    apiKey: getApiKey,
 });
 
 export const loginApi = new LoginApi(configuration);

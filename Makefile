@@ -60,6 +60,24 @@ django-shell:
 django-urls:
 	docker-compose exec django bash -c 'python manage.py show_urls'
 
+frontend-client:
+	docker run --rm \
+		-v $(shell pwd)/application/schema.yml:/application/schema.yml \
+		-v $(shell pwd)/frontend/src/packages/client/:/frontend/src/packages/client/ \
+		openapitools/openapi-generator-cli generate \
+		-i /application/schema.yml \
+		--config /frontend/src/packages/client/openapi-generator-config.json \
+		-g typescript-axios \
+		-o /frontend/src/packages/client
+
+frontend.lint:
+	docker-compose exec frontend bash -c 'yarn lint'
+
+frontend.fix:
+	sudo chown -R $(FRONTEND_USER_ID) frontend/src
+	docker-compose exec frontend bash -c 'yarn lint --fix' || true
+	sudo chown -R $(USER):$(USER) frontend/src
+
 set_frontend_permissions:
 	touch frontend/yarn-error.log
 	mkdir -p frontend/node_modules
@@ -78,16 +96,6 @@ schema:
 	sudo chown 101:101 application/schema.yml
 	docker-compose exec django bash -c 'python manage.py spectacular --file schema.yml --validate --fail-on-warn'
 	sudo chown $(USER):$(USER) application/schema.yml
-
-frontend-client:
-	docker run --rm \
-		-v $(shell pwd)/application/schema.yml:/application/schema.yml \
-		-v $(shell pwd)/frontend/src/packages/client/:/frontend/src/packages/client/ \
-		openapitools/openapi-generator-cli generate \
-		-i /application/schema.yml \
-		--config /frontend/src/packages/client/openapi-generator-config.json \
-		-g typescript-axios \
-		-o /frontend/src/packages/client
 
 migrations:
 	docker-compose run --rm django python manage.py makemigrations
