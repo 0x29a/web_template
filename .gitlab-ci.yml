@@ -1,8 +1,18 @@
 # General #####################################################################
 
 stages:
-- lint
-- test
+  - lint
+  - test
+
+variables:
+  - ALLOWED_HOSTS: localhost
+  - POSTGRES_HOST: postgres
+  - POSTGRES_PORT: 5432
+  - POSTGRES_DB: web_template
+  - POSTGRES_USER: postgres
+  - POSTGRES_PASSWORD: postgres
+  - DEBUG: false
+  - SECRET_KEY: test
 
 # Docs ########################################################################
 

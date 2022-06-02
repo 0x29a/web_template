@@ -38,7 +38,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/docs/Dockerfile
-    image: application_docs
+    image: web_template_docs
     volumes:
       - ./docs:/docs:z
     ports:
