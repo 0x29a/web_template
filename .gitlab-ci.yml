@@ -13,6 +13,9 @@ variables:
   POSTGRES_PASSWORD: postgres
   DEBUG: "false"
   SECRET_KEY: test
+  SITE_ADDRESS: localhost:80
+  DOCKER_BUILD_ENVIRONMENT: development
+  DOCKER_CADDY_PORT_FORWARD: 8123
 
 # Docs ########################################################################
 
