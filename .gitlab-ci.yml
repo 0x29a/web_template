@@ -17,6 +17,7 @@ variables:
   SITE_ADDRESS: localhost:80
   DOCKER_BUILD_ENVIRONMENT: development
   DOCKER_CADDY_PORT_FORWARD: 8123
+  DOCKER_NETWORK_MODE: host
 
 # Docs ########################################################################
 
@@ -31,7 +32,7 @@ lint docs:
 
 .backend:
   stage: test
-  image: docker/compose:1.29.2
+  image: docker/compose:latest
   tags:
     - docker
   services:
