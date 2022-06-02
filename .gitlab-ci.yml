@@ -11,7 +11,7 @@ variables:
   POSTGRES_DB: web_template
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
-  DEBUG: false
+  DEBUG: "false"
   SECRET_KEY: test
 
 # Docs ########################################################################
