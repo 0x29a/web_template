@@ -15,7 +15,7 @@ upgrade: ## update the requirements/*.txt files with the latest packages satisfy
 	$(PIP_COMPILE) -o requirements/docs.txt requirements/docs.in
 
 format: ## use black to reformat all files
-	black ./application -l 120
+	black .
 
 build: ## build docker containers
 	docker-compose build

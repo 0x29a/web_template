@@ -4,18 +4,6 @@ stages:
   - lint
   - test
 
-variables:
-  ALLOWED_HOSTS: localhost
-  POSTGRES_HOST: postgres
-  POSTGRES_PORT: 5432
-  POSTGRES_DB: web_template
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: postgres
-  DEBUG: "false"
-  SECRET_KEY: test
-  SITE_ADDRESS: localhost:80
-  DOCKER_BUILD_ENVIRONMENT: development
-
 # Docs ########################################################################
 
 lint docs:
@@ -24,6 +12,16 @@ lint docs:
   script:
     - npm install markdownlint-cli
     - npx markdownlint docs
+
+# Black #######################################################################
+
+black:
+  stage: lint
+  image: python:3.9-alpine
+  before_script:
+    - pip install -q black
+  script:
+    - black --diff --check .
 
 # Backend #####################################################################
 
@@ -38,6 +36,17 @@ lint docs:
     - apk update && apk add make
     - make build
     - make migrate
+  variables:
+    ALLOWED_HOSTS: localhost
+    POSTGRES_HOST: postgres
+    POSTGRES_PORT: 5432
+    POSTGRES_DB: web_template
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres
+    DEBUG: "false"
+    SECRET_KEY: test
+    SITE_ADDRESS: localhost:80
+    DOCKER_BUILD_ENVIRONMENT: development
 
 pytest:
   extends: .backend
