@@ -11,6 +11,7 @@ variables:
   POSTGRES_DB: web_template
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
+  POSTGRES_HOST_AUTH_METHOD: trust
   DEBUG: "false"
   SECRET_KEY: test
   SITE_ADDRESS: localhost:80
