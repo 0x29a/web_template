@@ -5,6 +5,8 @@ x-app: &default-app
     args:
       BUILD_ENVIRONMENT: "${DOCKER_BUILD_ENVIRONMENT:-production}"
   image: web_template
+  depends_on:
+    - postgres
   environment:
     - ALLOWED_HOSTS
     - POSTGRES_HOST
@@ -34,9 +36,21 @@ services:
 
   django:
     <<: *default-app
-    network_mode: "${DOCKER_NETWORK_MODE:-web_template_default}"
     command: /start
+
+  postgres:
+    image: postgres:12.6
+    volumes:
+      - production_postgres_data:/var/lib/postgresql/data:Z
+    environment:
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+
+  redis:
+    image: redis:5.0
 
 volumes:
   caddy_data:
   caddy_config:
+  production_postgres_data: {}

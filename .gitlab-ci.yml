@@ -8,16 +8,13 @@ variables:
   ALLOWED_HOSTS: localhost
   POSTGRES_HOST: postgres
   POSTGRES_PORT: 5432
-  POSTGRES_DB: $POSTGRES_DB
-  POSTGRES_USER: $POSTGRES_USER
-  POSTGRES_PASSWORD: $POSTGRES_PASSWORD
-  POSTGRES_HOST_AUTH_METHOD: trust
+  POSTGRES_DB: web_template
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
   DEBUG: "false"
   SECRET_KEY: test
   SITE_ADDRESS: localhost:80
   DOCKER_BUILD_ENVIRONMENT: development
-  DOCKER_CADDY_PORT_FORWARD: 8123
-  DOCKER_NETWORK_MODE: host
 
 # Docs ########################################################################
 
@@ -37,8 +34,6 @@ lint docs:
     - docker
   services:
     - docker:dind
-    - postgres:12.6
-    - redis:5.0
   before_script:
     - apk update && apk add make
     - make build
