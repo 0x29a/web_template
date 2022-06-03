@@ -1,6 +1,8 @@
-# WebTemplate [![Pipeline Status][pipeline-image]][pipeline-url]
+# WebTemplate
 
-My template for quick web services prototyping.
+> My template for quick web services prototyping.
+
+[![Pipeline Status][pipeline-image]][pipeline-url]
 
 ## Getting started
 
