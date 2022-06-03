@@ -1,8 +1,6 @@
-# WebTemplate https://gitlab.com/0x29a/web_template/badges/master/pipeline.svg
+# WebTemplate [![Pipeline Status][pipeline-image]][pipeline-url]
 
-> My template for quick web services prototyping.
-
-[![Pipeline Status][pipeline-image]][pipeline-url]
+My template for quick web services prototyping.
 
 ## Getting started
 
