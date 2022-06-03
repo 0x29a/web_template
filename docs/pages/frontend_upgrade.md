@@ -32,6 +32,5 @@
 ## Linter
 
 To upgrade linter and all related libs, upgrade `eslint`, do the following:
-```bash
-npx eslint --init
-```
+
+        npx eslint --init

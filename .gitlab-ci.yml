@@ -6,7 +6,7 @@ stages:
 
 # Docs ########################################################################
 
-lint docs:
+markdownlint:
   stage: lint
   image: node:latest
   script:
@@ -22,6 +22,18 @@ black:
     - pip install -q black
   script:
     - black --diff --check .
+
+# Frontend ####################################################################
+
+eslint:
+  stage: lint
+  image: node:18-alpine
+  before_script:
+    - cd frontend
+    - yarn
+    - yarn add file:src/packages/client
+  script:
+    - yarn lint
 
 # Backend #####################################################################
 

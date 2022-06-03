@@ -8,7 +8,7 @@ const Layout = () => (
         <Header />
         <main>
             <h1>Get started with WebTemplate</h1>
-            <p className="fs-5 col-md-8">Quickly and easily get started with Bootstrap's compiled, production-ready files with this barebones example featuring some basic HTML and helpful links. Download all our examples to get started.</p>
+            <p className="fs-5 col-md-8">Quickly and easily get started with Bootstrap&apos;s compiled, production-ready files with this barebones example featuring some basic HTML and helpful links. Download all our examples to get started.</p>
 
             <div className="mb-5">
                 <a href="/docs/5.1/examples/" className="btn btn-white btn-lg border-dark px-4">Example button</a>
