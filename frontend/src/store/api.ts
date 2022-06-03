@@ -1,7 +1,4 @@
-import {
-    LoginApi,
-    Configuration
-} from "../packages/client";
+import { LoginApi, Configuration } from "../packages/client";
 
 const getApiKey = () => {
     return "";

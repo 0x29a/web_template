@@ -8,5 +8,6 @@ nav:
     - Dependencies upgrade: dependencies_upgrade.md
     - API client upgrade: api_client_upgrade.md
     - Frontend upgrade: frontend_upgrade.md
+    - Frontend notes: frontend_notes.md
 theme:
     name: material

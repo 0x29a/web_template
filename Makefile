@@ -73,9 +73,12 @@ frontend-client:
 frontend.lint:
 	docker-compose exec frontend bash -c 'yarn lint'
 
+frontend.format-check:
+	docker-compose exec frontend bash -c 'yarn format-check'
+
 frontend.fix:
 	sudo chown -R $(FRONTEND_USER_ID) frontend/src
-	docker-compose exec frontend bash -c 'yarn lint --fix' || true
+	docker-compose exec frontend bash -c 'yarn lint --fix && yarn format' || true
 	sudo chown -R $(USER):$(USER) frontend/src
 
 set_frontend_permissions:

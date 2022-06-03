@@ -5,7 +5,7 @@ const defaultErrorCallback = (response: AxiosError["response"]) => {
     if (response) {
         console.log(response.data);
         console.log(response.status);
-        console.log(response.headers);  
+        console.log(response.headers);
     }
 };
 
@@ -13,7 +13,7 @@ export const handleError = (
     error: any,
     callback: (error: AxiosError["response"]) => void = defaultErrorCallback
 ) => {
-    if(!request.isAxiosError(error)) {
+    if (!request.isAxiosError(error)) {
         console.error(error);
     } else {
         if (error.response) {
@@ -27,6 +27,6 @@ export const handleError = (
             // Something happened in setting up the request that triggered an Error
             console.error("Error", error.message);
         }
-        console.log(error.config);    
+        console.log(error.config);
     }
 };

@@ -25,15 +25,23 @@ black:
 
 # Frontend ####################################################################
 
-eslint:
+.frontend:
   stage: lint
   image: node:18-alpine
   before_script:
     - cd frontend
     - yarn
     - yarn add file:src/packages/client
+
+eslint:
+  extends: .frontend
   script:
     - yarn lint
+
+prettier:
+  extends: .frontend
+  script:
+    - yarn format-check
 
 # Backend #####################################################################
 

@@ -28,9 +28,3 @@
 7. Upgrade other packages:
 
         yarn upgrade react-bootstrap bootstrap @reduxjs/toolkit --upgrade
-
-## Linter
-
-To upgrade linter and all related libs, upgrade `eslint`, do the following:
-
-        npx eslint --init

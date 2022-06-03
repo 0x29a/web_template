@@ -4,7 +4,7 @@ import { AppThunk } from "../store";
 import { handleError } from "../utils";
 
 export function login(): AppThunk {
-    return async dispatch => {
+    return async (dispatch) => {
         try {
             const response = await loginApi.loginCreate({
                 username: "example",
