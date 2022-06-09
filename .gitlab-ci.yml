@@ -31,7 +31,6 @@ black:
   before_script:
     - cd frontend
     - yarn
-    - yarn add file:src/packages/client
 
 eslint:
   extends: .frontend

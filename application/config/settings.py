@@ -26,7 +26,6 @@ THIRD_PARTY_APPS = [
     "dj_rest_auth",
     "allauth",
     "allauth.account",
-    "allauth.socialaccount",
     "dj_rest_auth.registration",
     "drf_spectacular",
 ]
@@ -98,6 +97,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+    ),
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
     ],
@@ -120,7 +123,7 @@ STATIC_ROOT = "/application/static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# REST_USE_JWT = True
+REST_USE_JWT = False
 # JWT_AUTH_COOKIE = "jwt-auth"
 
 SITE_ID = 1

@@ -61,14 +61,9 @@ django-urls:
 	docker-compose exec django bash -c 'python manage.py show_urls'
 
 frontend-client:
-	docker run --rm \
-		-v $(shell pwd)/application/schema.yml:/application/schema.yml \
-		-v $(shell pwd)/frontend/src/packages/client/:/frontend/src/packages/client/ \
-		openapitools/openapi-generator-cli generate \
-		-i /application/schema.yml \
-		--config /frontend/src/packages/client/openapi-generator-config.json \
-		-g typescript-axios \
-		-o /frontend/src/packages/client
+	sudo chown -R $(FRONTEND_USER_ID) frontend/src
+	docker-compose exec frontend bash -c 'npx @rtk-query/codegen-openapi openapi-config.json'
+	sudo chown -R $(USER):$(USER) frontend/src
 
 frontend.lint:
 	docker-compose exec frontend bash -c 'yarn lint'
@@ -96,9 +91,11 @@ set_django_permissions_back:
 	sudo chown -R $(USER):$(USER) application
 
 schema:
+	touch application/schema.yml
 	sudo chown 101:101 application/schema.yml
-	docker-compose exec django bash -c 'python manage.py spectacular --file schema.yml --validate --fail-on-warn'
+	docker-compose run --rm django python manage.py spectacular --file schema.yml --validate
 	sudo chown $(USER):$(USER) application/schema.yml
+	mv application/schema.yml frontend/backend_api_schema.yml
 
 migrations:
 	docker-compose run --rm django python manage.py makemigrations

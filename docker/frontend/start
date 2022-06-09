@@ -5,5 +5,4 @@ set -o pipefail
 set -o nounset
 
 yarn
-yarn add file:src/packages/client
 yarn start

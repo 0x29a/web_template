@@ -30,7 +30,7 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
+      - tokenAuth: []
       - {}
       responses:
         '200':
@@ -51,7 +51,7 @@ paths:
       - logout
       security:
       - cookieAuth: []
-      - basicAuth: []
+      - tokenAuth: []
       - {}
       responses:
         '200':
@@ -84,7 +84,7 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
+      - tokenAuth: []
       responses:
         '200':
           content:
@@ -116,7 +116,7 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
+      - tokenAuth: []
       - {}
       responses:
         '200':
@@ -151,7 +151,7 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
+      - tokenAuth: []
       - {}
       responses:
         '200':
@@ -179,7 +179,7 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
+      - tokenAuth: []
       - {}
       responses:
         '201':
@@ -206,7 +206,7 @@ paths:
               $ref: '#/components/schemas/ResendEmailVerification'
       security:
       - cookieAuth: []
-      - basicAuth: []
+      - tokenAuth: []
       - {}
       responses:
         '201':
@@ -234,7 +234,7 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
+      - tokenAuth: []
       - {}
       responses:
         '200':
@@ -259,7 +259,7 @@ paths:
       - user
       security:
       - cookieAuth: []
-      - basicAuth: []
+      - tokenAuth: []
       responses:
         '200':
           content:
@@ -294,7 +294,7 @@ paths:
         required: true
       security:
       - cookieAuth: []
-      - basicAuth: []
+      - tokenAuth: []
       responses:
         '200':
           content:
@@ -328,7 +328,7 @@ paths:
               $ref: '#/components/schemas/PatchedUserDetails'
       security:
       - cookieAuth: []
-      - basicAuth: []
+      - tokenAuth: []
       responses:
         '200':
           content:
@@ -495,10 +495,12 @@ components:
       required:
       - key
   securitySchemes:
-    basicAuth:
-      type: http
-      scheme: basic
     cookieAuth:
       type: apiKey
       in: cookie
       name: sessionid
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"

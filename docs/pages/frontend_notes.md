@@ -13,9 +13,6 @@ Then, `prettier` has been installed:
 as `prettier`conflicts with `eslint`, and can't disable rules from `rules`
 section in the `.eslintrc`.
 
-API-client has been exluded in `.prettierignore`, as it's auto-generated and
-shoudln't be formatted.
-
 Additonally, some entries has been added to the `scripts` section of `package.json`
 for convenience.
 
