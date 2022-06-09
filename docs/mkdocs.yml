@@ -4,7 +4,6 @@ docs_dir: pages
 dev_addr: 0.0.0.0:8124
 nav:
     - Main: index.md
-    - Management commands: management_commands.md
     - Dependencies upgrade: dependencies_upgrade.md
     - API client upgrade: api_client_upgrade.md
     - Frontend upgrade: frontend_upgrade.md

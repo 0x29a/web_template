@@ -1,11 +1,13 @@
-# Linting
+# Frontend notes
+
+## Linting
 
 `eslint` has been installed by running `yarn add -D eslint` withing the
 `frontend` container, and then has been configured with `npx eslint --init`.
 
 Then, `prettier` has been installed:
 
-        `yarn add -D prettier eslint-config-prettier`
+    yarn add -D prettier eslint-config-prettier
 
 `.eslintrc` needed to be tweaked to match `.prettierrc`,
 as `prettier`conflicts with `eslint`, and can't disable rules from `rules`
