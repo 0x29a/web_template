@@ -9,7 +9,7 @@
         make frontend-client
 
 3. Add wiped custom patches to `backendApi.ts`.
-4. Format `backendApi.ts`. 
+4. Format `backendApi.ts`.
 5. Rebuild `frontend` image:
 
         make build
