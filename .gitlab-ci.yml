@@ -19,7 +19,7 @@ markdownlint:
   stage: lint
   image: python:3.9-alpine
   before_script:
-    - pip install -q black flake8
+    - pip install -q flake8 black isort
 
 flake8:
   extends: .python
