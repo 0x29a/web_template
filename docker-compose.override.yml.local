@@ -37,6 +37,6 @@ services:
     ports:
       - "8125:8080"
     environment:
-      - SWAGGER_JSON=/schema.yml
+      - SWAGGER_JSON=/backend_api_schema.yml
     volumes:
-      - ./application/schema.yml:/schema.yml
+      - ./frondend/backend_api_schema.yml:/backend_api_schema.yml
