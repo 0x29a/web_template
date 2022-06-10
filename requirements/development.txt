@@ -74,6 +74,8 @@ drf-spectacular==0.22.1
     # via -r requirements/quality.txt
 executing==0.8.3
     # via stack-data
+flake8==4.0.1
+    # via -r requirements/quality.txt
 gunicorn==20.1.0
     # via -r requirements/quality.txt
 idna==3.3
@@ -90,6 +92,8 @@ iniconfig==1.1.1
     #   pytest
 ipython==8.4.0
     # via -r requirements/development.in
+isort==5.10.1
+    # via -r requirements/quality.txt
 jedi==0.18.1
     # via ipython
 jsonschema==4.6.0
@@ -98,6 +102,10 @@ jsonschema==4.6.0
     #   drf-spectacular
 matplotlib-inline==0.1.3
     # via ipython
+mccabe==0.6.1
+    # via
+    #   -r requirements/quality.txt
+    #   flake8
 mypy==0.961
     # via -r requirements/quality.txt
 mypy-extensions==0.4.3
@@ -149,10 +157,18 @@ py==1.11.0
     # via
     #   -r requirements/quality.txt
     #   pytest
+pycodestyle==2.8.0
+    # via
+    #   -r requirements/quality.txt
+    #   flake8
 pycparser==2.21
     # via
     #   -r requirements/quality.txt
     #   cffi
+pyflakes==2.4.0
+    # via
+    #   -r requirements/quality.txt
+    #   flake8
 pygments==2.12.0
     # via ipython
 pyjwt[crypto]==2.4.0

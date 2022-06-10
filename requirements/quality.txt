@@ -59,6 +59,8 @@ djangorestframework==3.13.1
     #   drf-spectacular
 drf-spectacular==0.22.1
     # via -r requirements/test.txt
+flake8==4.0.1
+    # via -r requirements/quality.in
 gunicorn==20.1.0
     # via -r requirements/test.txt
 idna==3.3
@@ -73,12 +75,20 @@ iniconfig==1.1.1
     # via
     #   -r requirements/test.txt
     #   pytest
+isort==5.10.1
+    # via -r requirements/quality.in
 jsonschema==4.6.0
     # via
     #   -r requirements/test.txt
     #   drf-spectacular
+mccabe==0.6.1
+    # via flake8
+mypy==0.961
+    # via -r requirements/quality.in
 mypy-extensions==0.4.3
-    # via black
+    # via
+    #   black
+    #   mypy
 oauthlib==3.2.0
     # via
     #   -r requirements/test.txt
@@ -101,10 +111,14 @@ py==1.11.0
     # via
     #   -r requirements/test.txt
     #   pytest
+pycodestyle==2.8.0
+    # via flake8
 pycparser==2.21
     # via
     #   -r requirements/test.txt
     #   cffi
+pyflakes==2.4.0
+    # via flake8
 pyjwt[crypto]==2.4.0
     # via
     #   -r requirements/test.txt
@@ -149,9 +163,12 @@ tomli==1.2.3
     #   -c requirements/constraints.txt
     #   -r requirements/test.txt
     #   black
+    #   mypy
     #   pytest
 typing-extensions==4.2.0
-    # via black
+    # via
+    #   black
+    #   mypy
 uritemplate==4.1.1
     # via
     #   -r requirements/test.txt

@@ -13,15 +13,28 @@ markdownlint:
     - npm install markdownlint-cli
     - npx markdownlint docs
 
-# Black #######################################################################
+# flake8, black and isort #####################################################
 
-black:
+.python:
   stage: lint
   image: python:3.9-alpine
   before_script:
-    - pip install -q black
+    - pip install -q black flake8
+
+flake8:
+  extends: .python
   script:
-    - black --diff --check .
+    - flake8 application --max-line-length=120
+
+black:
+  extends: .python
+  script:
+    - black application --diff --check
+
+isort:
+  extends: .python
+  script:
+    - isort application --check-only --diff
 
 # Frontend ####################################################################
 
@@ -66,6 +79,10 @@ prettier:
     SECRET_KEY: test
     SITE_ADDRESS: localhost:80
     DOCKER_BUILD_ENVIRONMENT: development
+
+mypy:
+  extends: .backend
+  script: make mypy
 
 pytest:
   extends: .backend

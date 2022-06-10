@@ -15,7 +15,10 @@ upgrade: ## update the requirements/*.txt files with the latest packages satisfy
 	$(PIP_COMPILE) -o requirements/docs.txt requirements/docs.in
 
 format: ## use black to reformat all files
-	black .
+	black application && isort application
+
+flake8: ## black handles line-length already
+	flake8 application --max-line-length=120
 
 build: ## build docker containers
 	docker-compose build
@@ -102,6 +105,9 @@ migrations:
 
 migrate:
 	docker-compose run --rm django python manage.py migrate
+
+mypy:
+	docker-compose run --rm django mypy .
 
 test:
 	docker-compose run --rm django pytest
