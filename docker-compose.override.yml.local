@@ -39,4 +39,4 @@ services:
     environment:
       - SWAGGER_JSON=/backend_api_schema.yml
     volumes:
-      - ./frondend/backend_api_schema.yml:/backend_api_schema.yml
+      - ./frontend/backend_api_schema.yml:/backend_api_schema.yml

@@ -75,14 +75,15 @@ frontend.format-check:
 	docker-compose exec frontend bash -c 'yarn format-check'
 
 frontend.fix:
-	sudo chown -R $(FRONTEND_USER_ID) frontend/src
+	sudo chown -R $(FRONTEND_USER_ID) frontend/pages
 	docker-compose exec frontend bash -c 'yarn lint --fix && yarn format' || true
-	sudo chown -R $(USER):$(USER) frontend/src
+	sudo chown -R $(USER):$(USER) frontend/pages
 
 set_frontend_permissions:
 	touch frontend/yarn-error.log
+	mkdir -p frontend/.next
 	mkdir -p frontend/node_modules
-	sudo chown -R $(FRONTEND_USER_ID) frontend/node_modules frontend/package.json frontend/yarn.lock frontend/yarn-error.log
+	sudo chown -R $(FRONTEND_USER_ID) frontend/.next frontend/node_modules frontend/package.json frontend/yarn.lock frontend/yarn-error.log
 
 set_frontend_permissions_back:
 	sudo chown -R $(USER):$(USER) frontend/node_modules frontend/package.json frontend/yarn.lock frontend/yarn-error.log

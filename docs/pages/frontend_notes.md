@@ -1,19 +1,16 @@
 # Frontend notes
 
-## Linting
+## How it has been created
 
-`eslint` has been installed by running `yarn add -D eslint` withing the
-`frontend` container, and then has been configured with `npx eslint --init`.
+1. `sudo chown 101:101 frontend`
+2. `docker-compose run frontend bash`
+3. `npx create-next-app@latest --ts` (`web_template`)
+4. `cp -r web_template/* .`
+5. `rm -r web_template/`
+6. `yarn lint` -> `Strict`
+7. `yarn add --dev eslint-config-prettier prettier`
+8. Added `prettier` to `.eslintrc.json`
+9. Added the following to `package.json`:
 
-Then, `prettier` has been installed:
-
-    yarn add -D prettier eslint-config-prettier
-
-`.eslintrc` needed to be tweaked to match `.prettierrc`,
-as `prettier`conflicts with `eslint`, and can't disable rules from `rules`
-section in the `.eslintrc`.
-
-Additonally, some entries has been added to the `scripts` section of `package.json`
-for convenience.
-
-Finally, `eslint-plugin-react` has been configured to detect `React` version.
+        "format": "prettier --write pages/ components/ lib/",
+        "format-check": "prettier --check pages/ components/ lib/"

@@ -1,8 +1,0 @@
-{
-    "schemaFile": "backend_api_schema.yml",
-    "apiFile": "./src/store/baseApi.ts",
-    "apiImport": "emptySplitApi",
-    "outputFile": "./src/store/backendApi.ts",
-    "exportName": "backendApi",
-    "hooks": true
-}

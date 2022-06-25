@@ -1,5 +1,7 @@
 # Frontend upgrade
 
+**TODO: this document should be updated.**
+
 1. Check `Dockerfile` for the frontend service and update [node](https://hub.docker.com/_/node) container version if needed.
 2. Stop `frontend` service:
 
