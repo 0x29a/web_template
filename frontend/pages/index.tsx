@@ -3,7 +3,21 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
+import { useLoginCreateMutation } from '../src/redux/api/backendApi';
+
 const Home: NextPage = () => {
+  const [loginPost, result] = useLoginCreateMutation()
+
+  const testLogin = () => {
+    loginPost(
+      {
+        login: {
+          email: 'test@example.com',
+          password: 'password123A'
+        }
+      }
+    );
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -19,7 +33,12 @@ const Home: NextPage = () => {
 
         <p className={styles.description}>
           Get started by editing{" "}
+
           <code className={styles.code}>pages/index.tsx</code>
+
+          <button onClick={testLogin} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Button
+          </button>
         </p>
 
         <div className={styles.grid}>

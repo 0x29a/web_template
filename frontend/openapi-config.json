@@ -1,0 +1,8 @@
+{
+    "schemaFile": "backend_api_schema.yml",
+    "apiFile": "./src/redux/api.ts",
+    "apiImport": "api",
+    "outputFile": "./src/redux/api/backendApi.ts",
+    "exportName": "backendApi",
+    "hooks": true
+}
