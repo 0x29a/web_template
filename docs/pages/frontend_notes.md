@@ -61,7 +61,6 @@
 
 5. Put the following into the `src/redux/api.ts`, according to [this RTK Query codegen documentation page](https://redux-toolkit.js.org/rtk-query/usage/code-generation):
 
-
         // Or from '@reduxjs/toolkit/query' if not using the auto-generated hooks
         import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
