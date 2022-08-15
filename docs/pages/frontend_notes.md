@@ -59,7 +59,6 @@
         │       ├── store.ts
         │       └── typeHelpers.ts
 
-
 5. Put the following into the `src/redux/api.ts`, according to [this RTK Query codegen documentation page](https://redux-toolkit.js.org/rtk-query/usage/code-generation):
 
 
