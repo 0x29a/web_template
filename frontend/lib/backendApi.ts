@@ -1,4 +1,4 @@
-import { api } from "../api";
+import { api } from "./api";
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
     loginCreate: build.mutation<LoginCreateApiResponse, LoginCreateApiArg>({

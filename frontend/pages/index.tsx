@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
-import { useLoginCreateMutation } from "../src/redux/api/backendApi";
+import { useLoginCreateMutation } from "../lib/backendApi";
 
 const Home: NextPage = () => {
   const [loginPost, result] = useLoginCreateMutation();

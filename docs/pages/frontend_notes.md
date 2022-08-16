@@ -44,22 +44,13 @@
 3. Removed `pages/api` directory.
 4. Created the folder with the following structure:
 
-        ├── src
-        │   ├── controls
-        │   ├── hoc
-        │   ├── hooks
-        │   └── redux
-        │       ├── api
-        │       │   └── catFactApi.ts
-        │       ├── api.ts
-        │       ├── axiosBaseQuery.ts
-        │       ├── axiosInstance.ts
-        │       ├── slices
-        │       │   └── catFactSlice.ts
-        │       ├── store.ts
-        │       └── typeHelpers.ts
+        ├── lib
+        │   ├── api.ts
+        │   ├── backendApi.ts
+        │   ├── store.ts
+        │   └── typeHelpers.ts
 
-5. Put the following into the `src/redux/api.ts`, according to [this RTK Query codegen documentation page](https://redux-toolkit.js.org/rtk-query/usage/code-generation):
+5. Put the following into the `lib/api.ts`, according to [this RTK Query codegen documentation page](https://redux-toolkit.js.org/rtk-query/usage/code-generation):
 
         // Or from '@reduxjs/toolkit/query' if not using the auto-generated hooks
         import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
@@ -74,15 +65,15 @@
 
         {
           "schemaFile": "backend_api_schema.yml",
-          "apiFile": "./src/redux/api.ts",
+          "apiFile": "./lib/api.ts",
           "apiImport": "api",
-          "outputFile": "./src/redux/api/backendApi.ts",
+          "outputFile": "./lib/backendApi.ts",
           "exportName": "backendApi",
           "hooks": true
         }
 
-7. Ran `make frontend-client` to generate the RTK query client. Under the hood, it calls `npx @rtk-query/codegen-openapi openapi-config.json`, which results in `src/redux/api/backendApi.ts` file being created. This file has all API endpoints, as well as model types.
-8. Put the following in the `src/redux/store.ts` (TODO: explain each line):
+7. Ran `make frontend-client` to generate the RTK query client. Under the hood, it calls `npx @rtk-query/codegen-openapi openapi-config.json`, which results in `lib/backendApi.ts` file being created. This file has all API endpoints, as well as model types.
+8. Put the following in the `lib/store.ts` (TODO: explain each line):
 
         import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
         import { createWrapper } from 'next-redux-wrapper';
@@ -120,7 +111,7 @@
 
         import "../styles/globals.css";
         import type { AppProps } from "next/app";
-        import { wrapper } from '../src/redux/store';
+        import { wrapper } from '../lib/store';
 
         function MyApp({ Component, pageProps }: AppProps) {
         return <Component {...pageProps} />;

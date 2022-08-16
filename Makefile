@@ -64,9 +64,9 @@ django-urls:
 	docker-compose exec django bash -c 'python manage.py show_urls'
 
 frontend-client:
-	sudo chown -R $(FRONTEND_USER_ID) frontend/src
+	sudo chown -R $(FRONTEND_USER_ID) frontend/lib
 	docker-compose exec frontend bash -c 'npx @rtk-query/codegen-openapi openapi-config.json'
-	sudo chown -R $(USER):$(USER) frontend/src
+	sudo chown -R $(USER):$(USER) frontend/lib
 
 frontend.lint:
 	docker-compose exec frontend bash -c 'yarn lint'
@@ -75,9 +75,9 @@ frontend.format-check:
 	docker-compose exec frontend bash -c 'yarn format-check'
 
 frontend.fix:
-	sudo chown -R $(FRONTEND_USER_ID) frontend/pages
+	sudo chown -R $(FRONTEND_USER_ID) frontend/pages frontend/lib frontend/components
 	docker-compose exec frontend bash -c 'yarn lint --fix && yarn format' || true
-	sudo chown -R $(USER):$(USER) frontend/pages
+	sudo chown -R $(USER):$(USER) frontend/pages frontend/lib frontend/components
 
 set_frontend_permissions:
 	touch frontend/yarn-error.log
