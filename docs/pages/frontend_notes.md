@@ -105,7 +105,7 @@
         // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
         export type AppDispatch = AppStore['dispatch'];
 
-        export const wrapper = createWrapper<AppStore>(makeStore);
+        export const wrapper = createWrapper<AppStore>(makeStore, {'debug': process.env.NODE_ENV !== "production"});
 
 9. Using the wrapper from `next-redux-wrapper`, connected the main component to the store, so `pages/_app.tsx` looks like:
 

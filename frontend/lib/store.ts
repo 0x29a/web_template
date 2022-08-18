@@ -1,18 +1,18 @@
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
-import { api } from "./api";
+import { backendApi } from "./backendApi";
 
 const makeStore = () => {
   const store = configureStore({
     // Add the generated reducer as a specific top-level slice
     reducer: {
-      [api.reducerPath]: api.reducer,
+      [backendApi.reducerPath]: backendApi.reducer,
     },
     devTools: process.env.NODE_ENV !== "production",
     // Adding the api middleware enables caching, invalidation, polling,
     // and other useful features of `rtk-query`.
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(api.middleware),
+      getDefaultMiddleware().concat(backendApi.middleware),
   });
   return store;
 };
@@ -34,4 +34,4 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = AppStore["dispatch"];
 
-export const wrapper = createWrapper<AppStore>(makeStore);
+export const wrapper = createWrapper<AppStore>(makeStore, {'debug': process.env.NODE_ENV !== "production"});
