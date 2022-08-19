@@ -1,20 +1,20 @@
-import { backendApi } from "../lib/backendApi";
+import { backendApi, useLogoutCreateMutation } from "../lib/backendApi";
 import { wrapper } from "../lib/store";
+import Link from "next/link";
 
 const About = () => {
-    return <div>Hello, World!</div>
+    const [logoutCreation, status] = useLogoutCreateMutation();
+    return <div>
+        <Link href="/"><a>Go Home</a></Link>
+        <button onClick={() => {logoutCreation()}}>Hello, World!</button>
+      </div>
 }
 
 export default About;
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
-    store.dispatch(backendApi.endpoints.loginCreate.initiate({
-      login: {
-        email: 'test@example.com',
-        password: 'test'
-      }
-    }))
+    store.dispatch(backendApi.endpoints.userRetrieve.initiate())
     await Promise.all(backendApi.util.getRunningOperationPromises());
 
     return {
