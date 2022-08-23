@@ -39,7 +39,7 @@ services:
     command: /start
 
   postgres:
-    image: postgres:12.6
+    image: docker.io/postgres:12.6
     volumes:
       - production_postgres_data:/var/lib/postgresql/data:Z
     environment:
@@ -48,7 +48,7 @@ services:
       - POSTGRES_PASSWORD
 
   redis:
-    image: redis:5.0
+    image: docker.io/redis:5.0
 
 volumes:
   caddy_data:
