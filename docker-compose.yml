@@ -28,7 +28,6 @@ services:
     ports:
       - "${DOCKER_CADDY_PORT_FORWARD:-80}:80"
     volumes:
-      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
     environment:

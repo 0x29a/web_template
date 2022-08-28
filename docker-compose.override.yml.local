@@ -1,4 +1,8 @@
 services:
+  caddy:
+    volumes:
+      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile
+
   django:
     depends_on:
       - mailhog
