@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const About = () => {
   return (
-    <div>
+    <div className="grid">
       <p>About page</p>
       <Link href="/">
         <a>See the homepage.</a>

@@ -6,20 +6,14 @@ services:
       - ./application:/application:z
 
   frontend:
-    build:
-      context: .
-      dockerfile: ./docker/frontend/Dockerfile
-    ports:
-      - "3000:3000"
     volumes:
       - ./frontend:/frontend:z
-    command: /start
 
   mailhog:
     image: docker.io/mailhog/mailhog:v1.0.0
     container_name: mailhog
     ports:
-      - "8025:8025"
+      - 8025:8025
 
   docs:
     build:
@@ -29,13 +23,13 @@ services:
     volumes:
       - ./docs:/docs:z
     ports:
-      - "8124:8124"
+      - 8124:8124
     command: /start-docs
 
   swagger:
     image: docker.io/swaggerapi/swagger-ui:latest
     ports:
-      - "8125:8080"
+      - 8125:8080
     environment:
       - SWAGGER_JSON=/backend_api_schema.yml
     volumes:

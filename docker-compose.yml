@@ -38,6 +38,14 @@ services:
     <<: *default-app
     command: /start
 
+  frontend:
+    build:
+      context: .
+      dockerfile: ./docker/frontend/Dockerfile
+      args:
+        BUILD_ENVIRONMENT: "${DOCKER_BUILD_ENVIRONMENT:-production}"
+    command: /start
+
   postgres:
     image: docker.io/postgres:12.6
     volumes:
