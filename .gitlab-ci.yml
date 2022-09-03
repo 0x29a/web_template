@@ -107,4 +107,4 @@ deploy:
     - chmod 700 ~/.ssh
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
   script:
-    - ssh -p $DEPLOYMENT_PORT $DEPLOYMENT_USER@$DEPLOYMENT_HOST "cd $DEPLOYMENT_WORKDIR ; bash deploy.sh"
+    - ssh -p $DEPLOYMENT_PORT $DEPLOYMENT_USER@$DEPLOYMENT_HOST "/bin/bash $DEPLOYMENT_WORKDIR/deploy.sh"

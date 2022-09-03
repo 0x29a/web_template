@@ -1,5 +1,7 @@
 #!/bin/bash
 set -ex
+source $HOME/.profile
+cd $(dirname $0)
 git pull
 docker-compose pull
 docker-compose build
