@@ -9,6 +9,8 @@ x-app: &default-app
     - postgres
   environment:
     - ALLOWED_HOSTS
+    - ADMIN_URL
+    - STATIC_URL
     - POSTGRES_HOST
     - POSTGRES_PORT
     - POSTGRES_DB
