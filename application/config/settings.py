@@ -117,7 +117,9 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_URL = "/backend/static/"
+ADMIN_URL = env("ADMIN_URL")
+
+STATIC_URL = env("STATIC_URL")
 
 STATIC_ROOT = "/application/static/"
 
