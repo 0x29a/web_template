@@ -71,6 +71,8 @@ prettier:
     - make migrate
   variables:
     ALLOWED_HOSTS: localhost
+    ADMIN_URL: admin/
+    STATIC_URL: /backend/static/
     POSTGRES_HOST: postgres
     POSTGRES_PORT: 5432
     POSTGRES_DB: web_template
