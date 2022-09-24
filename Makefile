@@ -121,3 +121,13 @@ mypy:
 
 test:
 	docker-compose run --rm django pytest
+
+ci-build-images:
+	docker build \
+		--build-arg BUILDKIT_INLINE_CACHE=1 \
+		--cache-from "${CI_REGISTRY_IMAGE}/intermediary:latest" \
+		--cache-from "${CI_REGISTRY_IMAGE}$(IMAGE):$(TAG)" \
+		--cache-from "${CI_REGISTRY_IMAGE}$(IMAGE):latest" \
+		-t "${CI_REGISTRY_IMAGE}$(IMAGE):$(TAG)" \
+		-t "${CI_REGISTRY_IMAGE}$(IMAGE):latest" \
+		-f ./compose/production/django/Dockerfile .

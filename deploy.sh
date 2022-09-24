@@ -2,7 +2,7 @@
 set -ex
 source $HOME/.profile
 cd $(dirname $0)
-git pull
-docker-compose build
+docker-compose pull
 docker-compose stop
+git pull
 docker-compose up -d

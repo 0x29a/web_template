@@ -4,7 +4,7 @@ x-app: &default-app
     dockerfile: ./docker/django/Dockerfile
     args:
       BUILD_ENVIRONMENT: "${DOCKER_BUILD_ENVIRONMENT:-production}"
-  image: web_template
+  image: "${DOCKER_BUILD_IMAGE_PREFIX}/django"
   depends_on:
     - postgres
   environment:
@@ -24,6 +24,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/caddy/Dockerfile
+    image: "${DOCKER_BUILD_IMAGE_PREFIX}/caddy"
     restart: unless-stopped
     depends_on:
       - django
@@ -45,6 +46,7 @@ services:
       dockerfile: ./docker/frontend/Dockerfile
       args:
         BUILD_ENVIRONMENT: "${DOCKER_BUILD_ENVIRONMENT:-production}"
+    image: "${DOCKER_BUILD_IMAGE_PREFIX}/frontend"
     command: /start
 
   postgres:
