@@ -4,6 +4,8 @@ x-app: &default-app
     dockerfile: ./docker/django/Dockerfile
     args:
       BUILD_ENVIRONMENT: "${DOCKER_BUILD_ENVIRONMENT:-production}"
+    cache_from:
+      - "${DOCKER_BUILD_IMAGE_PREFIX}/django:latest"
   image: "${DOCKER_BUILD_IMAGE_PREFIX}/django"
   depends_on:
     - postgres
@@ -41,9 +43,6 @@ services:
 
   django:
     <<: *default-app
-    build:
-      cache_from:
-        - "${DOCKER_BUILD_IMAGE_PREFIX}/caddy:latest"
     command: /start
 
   frontend:
