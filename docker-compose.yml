@@ -24,6 +24,9 @@ services:
     build:
       context: .
       dockerfile: ./docker/caddy/Dockerfile
+      cache_from:
+        - "${DOCKER_BUILD_IMAGE_PREFIX}/caddy:latest"
+
     image: "${DOCKER_BUILD_IMAGE_PREFIX}/caddy"
     restart: unless-stopped
     depends_on:
@@ -38,6 +41,9 @@ services:
 
   django:
     <<: *default-app
+    build:
+      cache_from:
+        - "${DOCKER_BUILD_IMAGE_PREFIX}/caddy:latest"
     command: /start
 
   frontend:
@@ -46,6 +52,9 @@ services:
       dockerfile: ./docker/frontend/Dockerfile
       args:
         BUILD_ENVIRONMENT: "${DOCKER_BUILD_ENVIRONMENT:-production}"
+      cache_from:
+        - "${DOCKER_BUILD_IMAGE_PREFIX}/frontend:latest"
+
     image: "${DOCKER_BUILD_IMAGE_PREFIX}/frontend"
     command: /start
 

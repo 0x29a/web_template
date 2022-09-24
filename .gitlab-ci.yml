@@ -103,6 +103,7 @@ prettier:
   variables:
     # Docker
     DOCKER_BUILDKIT: 1
+    COMPOSE_DOCKER_CLI_BUILD: 1
     # Application
     ALLOWED_HOSTS: localhost
     ADMIN_URL: admin/
@@ -124,7 +125,6 @@ prettier:
 build:
   extends: .builder
   script:
-    - docker-compose pull caddy frontend django
     - docker-compose build --build-arg BUILDKIT_INLINE_CACHE=1
     - docker-compose push
 
