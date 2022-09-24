@@ -124,7 +124,7 @@ prettier:
 build:
   extends: .builder
   script:
-    - docker-compose pull $CI_REGISTRY_IMAGE/django $CI_REGISTRY_IMAGE/caddy $CI_REGISTRY_IMAGE/frontend
+    - docker-compose pull caddy frontend django
     - docker-compose build --build-arg BUILDKIT_INLINE_CACHE=1
     - docker-compose push
 
