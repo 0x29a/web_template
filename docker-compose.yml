@@ -6,6 +6,7 @@ x-app: &default-app
       BUILD_ENVIRONMENT: "${DOCKER_BUILD_ENVIRONMENT:-production}"
     cache_from:
       - "${DOCKER_BUILD_IMAGE_PREFIX}/django:latest"
+
   image: "${DOCKER_BUILD_IMAGE_PREFIX}/django"
   depends_on:
     - postgres
