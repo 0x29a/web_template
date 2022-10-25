@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react'
 import Head from "next/head";
 
+import Header from '../Header/Header';
 
 export default function Layout({
     children
@@ -10,9 +11,14 @@ export default function Layout({
             <Head>
                 <title>Web Template</title>
             </Head>
-            <main>
-                {children}
-            </main>
+            <div className="font-inter antialiased bg-white text-gray-900 tracking-light">
+                <div className="flex flex-col min-h-screen overflow-hidden">
+                    <Header />
+                    <main className="grow">
+                        {children}
+                    </main>
+                </div>
+            </div>
         </>
     )
 }

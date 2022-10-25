@@ -4,10 +4,10 @@ import Link from "next/link";
 
 const Home: NextPageWithLayout = () => {
   return (
-    <div>
-      <p>Hello, World!</p>
+    <div className="mt-20 max-w-6xl mx-auto px-4 sm:px-6">
+      <p className="">Hello, World!</p>
       <Link href="/about">
-        <a>See the about page.</a>
+        <a className="">See the about page.</a>
       </Link>
     </div>
   );
