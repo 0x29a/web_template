@@ -7,7 +7,7 @@ export default function Header() {
     const [top, setTop] = useState(true);
 
     const trigger = useRef<HTMLButtonElement>(null);
-    const mobileNav = useRef(null);
+    const mobileNav = useRef<HTMLElement>(null);
 
     // close the mobile menu on click outside
     useEffect(() => {
