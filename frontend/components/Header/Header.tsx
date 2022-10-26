@@ -46,19 +46,17 @@ export default function Header() {
                     {/* Site branding */}
                     <div className="shrink-0 mr-4">
                         {/* Logo */}
-                        <Link href="/">
-                            <a className="block" aria-label="Web Template">
-                                <svg className="w-8 h-8" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                                    <defs>
-                                        <radialGradient cx="21.152%" cy="86.063%" fx="21.152%" fy="86.063%" r="79.941%" id="header-logo">
-                                            <stop stopColor="#4FD1C5" offset="0%" />
-                                            <stop stopColor="#81E6D9" offset="25.871%" />
-                                            <stop stopColor="#338CF5" offset="100%" />
-                                        </radialGradient>
-                                    </defs>
-                                    <rect width="32" height="32" rx="16" fill="url(#header-logo)" fillRule="nonzero" />
-                                </svg>
-                            </a>
+                        <Link href="/" className="block" aria-label="Web Template">
+                            <svg className="w-8 h-8" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <radialGradient cx="21.152%" cy="86.063%" fx="21.152%" fy="86.063%" r="79.941%" id="header-logo">
+                                        <stop stopColor="#4FD1C5" offset="0%" />
+                                        <stop stopColor="#81E6D9" offset="25.871%" />
+                                        <stop stopColor="#338CF5" offset="100%" />
+                                    </radialGradient>
+                                </defs>
+                                <rect width="32" height="32" rx="16" fill="url(#header-logo)" fillRule="nonzero" />
+                            </svg>
                         </Link>
                     </div>
 
@@ -67,16 +65,16 @@ export default function Header() {
                         {/* Desktop menu links */}
                         <ul className="flex grow justify-end flex-wrap items-center">
                             <li>
-                                <Link href="/"><a className="text-gray-600 hover:text-gray-900 px-3 lg:px-5 py-2 flex items-center">Pricing</a></Link>
+                                <Link href="/" className="text-gray-600 hover:text-gray-900 px-3 lg:px-5 py-2 flex items-center">Pricing</Link>
                             </li>
                             <li>
-                                <Link href="/"><a className="text-gray-600 hover:text-gray-900 px-3 lg:px-5 py-2 flex items-center">About us</a></Link>
+                                <Link href="/" className="text-gray-600 hover:text-gray-900 px-3 lg:px-5 py-2 flex items-center">About us</Link>
                             </li>
                             <li>
-                                <Link href="/"><a className="text-gray-600 hover:text-gray-900 px-3 lg:px-5 py-2 flex items-center">Tutorials</a></Link>
+                                <Link href="/" className="text-gray-600 hover:text-gray-900 px-3 lg:px-5 py-2 flex items-center">Tutorials</Link>
                             </li>
                             <li>
-                                <Link href="/"><a className="text-gray-600 hover:text-gray-900 px-3 lg:px-5 py-2 flex items-center">Blog</a></Link>
+                                <Link href="/" className="text-gray-600 hover:text-gray-900 px-3 lg:px-5 py-2 flex items-center">Blog</Link>
                             </li>
                         </ul>
                         {/* Desktop sign in links */}

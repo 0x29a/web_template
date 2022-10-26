@@ -7,7 +7,7 @@ const Home: NextPageWithLayout = () => {
     <div className="mt-20 max-w-6xl mx-auto px-4 sm:px-6">
       <p className="">Hello, World!</p>
       <Link href="/about">
-        <a className="">See the about page.</a>
+        See the about page.
       </Link>
     </div>
   );
