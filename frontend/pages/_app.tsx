@@ -1,4 +1,9 @@
+import "nprogress/nprogress.css";
 import "../styles/globals.css";
+
+import Router from "next/router";
+import NProgress from "nprogress";
+
 import { wrapper } from "../lib/store";
 import type { ReactElement, ReactNode } from "react";
 import type { NextPage } from "next";
@@ -13,6 +18,12 @@ export type NextPageWithLayout = NextPage & {
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
+
+// Loading bar.
+NProgress.configure({ showSpinner: false })
+Router.events.on("routeChangeStart", () => NProgress.start());
+Router.events.on("routeChangeComplete", () => NProgress.done());
+Router.events.on("routeChangeError", () => NProgress.done());
 
 function defaultGetLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
