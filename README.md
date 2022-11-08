@@ -2,14 +2,18 @@
 
 [![GitLab CI pipeline status.][pipeline-image]][pipeline-url]
 
-Template for quick web services prototyping. It's aimed on as fast as possible
-bootstrapping of production-ready web services, with Django-based backend, and React-based frontend.
-In order to reduce boilerplate, it utilizes technologies such as:
+Template for a quick web services prototyping. It's intended to speed up bootstrapping
+of production-ready applications, with Django-based backend, and Next.js-based frontend.
+In attempt to reduce boilerplate to the absolute possible minimum, it utilizes technologies such as:
 
 - [drf-spectacular](https://github.com/tfranzel/drf-spectacular) to generate OpenAPI 3 schema.
-- [redux-toolkit](https://github.com/reduxjs/redux-toolkit) and [@rtk-query/codegen-openapi](https://redux-toolkit.js.org/rtk-query/usage/code-generation#openapi) in particular to generate RTK Query-based API client.
+- [redux-toolkit](https://github.com/reduxjs/redux-toolkit) and [@rtk-query/codegen-openapi](https://redux-toolkit.js.org/rtk-query/usage/code-generation#openapi) to generate API client based on RTK Query.
 - [pip-tools](https://github.com/jazzband/pip-tools) to manage dependencies.
-- TBA: some React UI library.
+- [Next.js](https://nextjs.org/) for its file-based routing, nice static pages handling and dozens of other optimizations.
+- [Tailwind UI](https://tailwindui.com), as utility classes play really nice with reusable React components.
+
+In addition to all the cool tooling, I try to document all technological / architectural decisions in `docs/`, so it's easier
+to continue working on this project after large breaks.
 
 ## Getting started
 
