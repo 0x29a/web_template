@@ -5,7 +5,7 @@
 Template for a quick web services prototyping. It's intended to speed up bootstrapping
 of production-ready applications, with Django-based backend, and Next.js-based frontend.
 In attempt to reduce boilerplate to the absolute possible minimum, it utilizes technologies such as:
- 
+
 - [drf-spectacular](https://github.com/tfranzel/drf-spectacular) to generate OpenAPI 3 schema.
 - [redux-toolkit](https://github.com/reduxjs/redux-toolkit) and [@rtk-query/codegen-openapi](https://redux-toolkit.js.org/rtk-query/usage/code-generation#openapi) to generate API client based on RTK Query.
 - [pip-tools](https://github.com/jazzband/pip-tools) to manage dependencies.
