@@ -8,7 +8,7 @@ export default function Header() {
     const [top, setTop] = useState(true);
 
     const trigger = useRef<HTMLButtonElement>(null);
-    const mobileNav = useRef<HTMLElement>(null);
+    const mobileNav = useRef<HTMLDivElement>(null);
 
     // close the mobile menu on click outside
     useEffect(() => {
@@ -79,13 +79,13 @@ export default function Header() {
                             </li>
                             <Dropdown title="Resources">
                                 <li>
-                                    <Link href="/documentation" className="font-medium text-sm text-gray-600 hover:text-gray-900 flex py-2 px-5 leading-tight">Documentation</Link>
+                                    <Link href="/" className="font-medium text-sm text-gray-600 hover:text-gray-900 flex py-2 px-5 leading-tight">Documentation</Link>
                                 </li>
                                 <li>
-                                    <Link href="/support" className="font-medium text-sm text-gray-600 hover:text-gray-900 flex py-2 px-5 leading-tight">Support center</Link>
+                                    <Link href="/" className="font-medium text-sm text-gray-600 hover:text-gray-900 flex py-2 px-5 leading-tight">Support center</Link>
                                 </li>
                                 <li>
-                                    <Link href="/404" className="font-medium text-sm text-gray-600 hover:text-gray-900 flex py-2 px-5 leading-tight">404</Link>
+                                    <Link href="/" className="font-medium text-sm text-gray-600 hover:text-gray-900 flex py-2 px-5 leading-tight">404</Link>
                                 </li>
                             </Dropdown>
                         </ul>
@@ -93,10 +93,10 @@ export default function Header() {
                         {/* Desktop sign in links */}
                         <ul className="flex grow justify-end flex-wrap items-center">
                             <li>
-                                <Link href="/signin" className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out">Sign in</Link>
+                                <Link href="/" className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out">Sign in</Link>
                             </li>
                             <li>
-                                <Link href="/signup" className="btn-sm text-gray-200 bg-gray-900 hover:bg-gray-800 ml-3">
+                                <Link href="/" className="btn-sm text-gray-200 bg-gray-900 hover:bg-gray-800 ml-3">
                                     <span>Sign up</span>
                                     <svg className="w-3 h-3 fill-current text-gray-400 shrink-0 ml-2 -mr-1" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M11.707 5.293L7 .586 5.586 2l3 3H0v2h8.586l-3 3L7 11.414l4.707-4.707a1 1 0 000-1.414z" fillRule="nonzero" />
@@ -105,6 +105,74 @@ export default function Header() {
                             </li>
                         </ul>
                     </nav>
+
+                    {/* Mobile menu */}
+                    <div className="flex md:hidden">
+
+                        {/* Hamburger button */}
+                        <button
+                            ref={trigger}
+                            className={`hamburger ${mobileNavOpen && "active"}`}
+                            aria-controls="mobile-nav"
+                            aria-expanded={mobileNavOpen}
+                            onClick={() => setMobileNavOpen(!mobileNavOpen)}
+                        >
+                            <span className="sr-only">Menu</span>
+                            <svg className="w-6 h-6 fill-current text-gray-900" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <rect y="4" width="24" height="2" />
+                                <rect y="11" width="24" height="2" />
+                                <rect y="18" width="24" height="2" />
+                            </svg>
+                        </button>
+
+                        {/*Mobile navigation */}
+                        <div ref={mobileNav}>
+                            <nav
+                                id="mobile-nav"
+                                className={`absolute top-full h-screen pb-16 z-20 left-0 w-full overflow-scroll bg-white ${!mobileNavOpen && "hidden"}`}
+                            >
+                                <ul className="px-5 py-2">
+                                    <li>
+                                        <Link href="/" className="flex text-gray-600 hover:text-gray-900 py-2">Pricing</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/" className="flex text-gray-600 hover:text-gray-900 py-2">About us</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/" className="flex text-gray-600 hover:text-gray-900 py-2">Tutorials</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/" className="flex text-gray-600 hover:text-gray-900 py-2">Blog</Link>
+                                    </li>
+                                    <li className="py-2 my-2 border-t border-b border-gray-200">
+                                        <span className="flex text-gray-600 hover:text-gray-900 py-2">Resources</span>
+                                        <ul className="pl-4">
+                                            <li>
+                                                <Link href="/" className="text-sm flex font-medium text-gray-600 hover:text-gray-900 py-2">Documentation</Link>
+                                            </li>
+                                            <li>
+                                                <Link href="/" className="text-sm flex font-medium text-gray-600 hover:text-gray-900 py-2">Support center</Link>
+                                            </li>
+                                            <li>
+                                                <Link href="/" className="text-sm flex font-medium text-gray-600 hover:text-gray-900 py-2">404</Link>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <Link href="/" className="flex font-medium w-full text-gray-600 hover:text-gray-900 py-2 justify-center">Sign in</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/" className="btn-sm text-gray-200 bg-gray-900 hover:bg-gray-800 w-full my-2">
+                                            <span>Sign up</span>
+                                            <svg className="w-3 h-3 fill-current text-gray-400 shrink-0 ml-2 -mr-1" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M11.707 5.293L7 .586 5.586 2l3 3H0v2h8.586l-3 3L7 11.414l4.707-4.707a1 1 0 000-1.414z" fill="#999" fillRule="nonzero" />
+                                            </svg>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
                 </div>
             </div>
         </header>
