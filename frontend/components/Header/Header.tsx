@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from "react";
 
 import Link from "next/link";
-import Dropdown from '../Dropdown/Dropdown';
+import Dropdown from "../Dropdown/Dropdown";
 
 export default function Header() {
     const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -17,8 +17,8 @@ export default function Header() {
             if (!mobileNavOpen || mobileNav.current.contains(target as Node) || trigger.current.contains(target as Node)) return;
             setMobileNavOpen(false);
         };
-        document.addEventListener('click', clickHandler);
-        return () => document.removeEventListener('click', clickHandler);
+        document.addEventListener("click", clickHandler);
+        return () => document.removeEventListener("click", clickHandler);
     });
 
     // close the mobile menu if the esc key is pressed
@@ -27,8 +27,8 @@ export default function Header() {
             if (!mobileNavOpen || key !== "Escape") return;
             setMobileNavOpen(false);
         };
-        document.addEventListener('keydown', keyHandler);
-        return () => document.removeEventListener('keydown', keyHandler);
+        document.addEventListener("keydown", keyHandler);
+        return () => document.removeEventListener("keydown", keyHandler);
     });
 
     // detect whether user has scrolled the page down by 10px 
@@ -36,12 +36,12 @@ export default function Header() {
         const scrollHandler = () => {
             window.pageYOffset > 10 ? setTop(false) : setTop(true)
         };
-        window.addEventListener('scroll', scrollHandler);
-        return () => window.removeEventListener('scroll', scrollHandler);
+        window.addEventListener("scroll", scrollHandler);
+        return () => window.removeEventListener("scroll", scrollHandler);
     }, [top]);
 
     return (
-        <header className={`fixed w-full z-30 md:bg-opacity-90 ${!top && 'bg-white backdrop-blur-sm shadow-lg'}`}>
+        <header className={`fixed w-full z-30 md:bg-opacity-90 ${!top && "bg-white backdrop-blur-sm shadow-lg"}`}>
             <div className="max-w-6xl mx-auto px-5 sm:px-6">
                 <div className="flex items-center justify-between h-16 md:h-20">
                     {/* Site branding */}

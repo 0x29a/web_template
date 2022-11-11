@@ -1,7 +1,8 @@
-import type { ReactElement } from 'react'
+import type { ReactElement } from "react"
 import Head from "next/head";
 
-import Header from '../Header/Header';
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 export default function Layout({
     children
@@ -17,6 +18,7 @@ export default function Layout({
                     <main className="grow">
                         {children}
                     </main>
+                    <Footer />
                 </div>
             </div>
         </>

@@ -3,20 +3,20 @@ const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
     loginCreate: build.mutation<LoginCreateApiResponse, LoginCreateApiArg>({
       query: (queryArg) => ({
-        url: `/auth/login/`,
+        url: "/auth/login/",
         method: "POST",
         body: queryArg.login,
       }),
     }),
     logoutCreate: build.mutation<LogoutCreateApiResponse, LogoutCreateApiArg>({
-      query: () => ({ url: `/auth/logout/`, method: "POST" }),
+      query: () => ({ url: "/auth/logout/", method: "POST" }),
     }),
     passwordChangeCreate: build.mutation<
       PasswordChangeCreateApiResponse,
       PasswordChangeCreateApiArg
     >({
       query: (queryArg) => ({
-        url: `/auth/password/change/`,
+        url: "/auth/password/change/",
         method: "POST",
         body: queryArg.passwordChange,
       }),
@@ -26,7 +26,7 @@ const injectedRtkApi = api.injectEndpoints({
       PasswordResetCreateApiArg
     >({
       query: (queryArg) => ({
-        url: `/auth/password/reset/`,
+        url: "/auth/password/reset/",
         method: "POST",
         body: queryArg.passwordReset,
       }),
@@ -36,7 +36,7 @@ const injectedRtkApi = api.injectEndpoints({
       PasswordResetConfirmCreateApiArg
     >({
       query: (queryArg) => ({
-        url: `/auth/password/reset/confirm/`,
+        url: "/auth/password/reset/confirm/",
         method: "POST",
         body: queryArg.passwordResetConfirm,
       }),
@@ -46,7 +46,7 @@ const injectedRtkApi = api.injectEndpoints({
       RegistrationCreateApiArg
     >({
       query: (queryArg) => ({
-        url: `/auth/registration/`,
+        url: "/auth/registration/",
         method: "POST",
         body: queryArg.register,
       }),
@@ -56,7 +56,7 @@ const injectedRtkApi = api.injectEndpoints({
       RegistrationResendEmailCreateApiArg
     >({
       query: (queryArg) => ({
-        url: `/auth/registration/resend-email/`,
+        url: "/auth/registration/resend-email/",
         method: "POST",
         body: queryArg.resendEmailVerification,
       }),
@@ -66,17 +66,17 @@ const injectedRtkApi = api.injectEndpoints({
       RegistrationVerifyEmailCreateApiArg
     >({
       query: (queryArg) => ({
-        url: `/auth/registration/verify-email/`,
+        url: "/auth/registration/verify-email/",
         method: "POST",
         body: queryArg.verifyEmail,
       }),
     }),
     userRetrieve: build.query<UserRetrieveApiResponse, UserRetrieveApiArg>({
-      query: () => ({ url: `/auth/user/` }),
+      query: () => ({ url: "/auth/user/" }),
     }),
     userUpdate: build.mutation<UserUpdateApiResponse, UserUpdateApiArg>({
       query: (queryArg) => ({
-        url: `/auth/user/`,
+        url: "/auth/user/",
         method: "PUT",
         body: queryArg.userDetails,
       }),
@@ -86,7 +86,7 @@ const injectedRtkApi = api.injectEndpoints({
       UserPartialUpdateApiArg
     >({
       query: (queryArg) => ({
-        url: `/auth/user/`,
+        url: "/auth/user/",
         method: "PATCH",
         body: queryArg.patchedUserDetails,
       }),
