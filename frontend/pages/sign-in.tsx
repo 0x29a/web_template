@@ -1,7 +1,7 @@
 import Link from "next/link";
-import FirebaseAuth from "../components/FirebaseAuth/FirebaseAuth";
 
-import { getApps, initializeApp, getApp } from "@firebase/app";
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { getApps, initializeApp, getApp } from "firebase/app";
 import {
   GoogleAuthProvider,
   FacebookAuthProvider,
@@ -9,7 +9,6 @@ import {
   getAuth,
   connectAuthEmulator,
 } from "firebase/auth";
-import { auth as firebaseuiAuth } from "firebaseui";
 
 // Configure FirebaseUI.
 const uiConfig = {
@@ -20,14 +19,9 @@ const uiConfig = {
   // We will display Google and Facebook as auth providers.
   signInOptions: [
     GoogleAuthProvider.PROVIDER_ID,
+    FacebookAuthProvider.PROVIDER_ID,
     EmailAuthProvider.PROVIDER_ID,
   ],
-  autoUpgradeAnonymousUsers: true,
-  callbacks: {
-    signInFailure: (error: firebaseuiAuth.AuthUIError) => {
-      console.error(error);
-    },
-  },
 };
 
 const firebaseConfig = {
@@ -45,11 +39,13 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 const SignIn = () => {
+  const [user, loading, error] = useAuthState(auth);
+  console.error(user, loading, error);
+
   return (
     <div className="mt-20 max-w-6xl mx-auto px-4 sm:px-6">
       <p>Sign-in</p>
       <Link href="/">See the homepage.</Link>
-      <FirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
       <button
         onClick={() => {
           console.error(auth.currentUser);
