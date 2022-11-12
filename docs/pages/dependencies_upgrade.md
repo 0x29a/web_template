@@ -17,4 +17,4 @@ To upgrade python dependencies:
         make up
 
 4. Test that everything works.
-5. Commit changes to the `requirements/*`.
+5. Commit changes to the `backend/requirements/*`.

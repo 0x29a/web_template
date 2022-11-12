@@ -26,7 +26,7 @@ markdownlint:
   cache:
     key:
       files:
-        - requirements/quality.txt
+        - backend/requirements/quality.txt
     paths:
       - .cache/pip
       - venv/
@@ -36,7 +36,7 @@ markdownlint:
     - pip install virtualenv
     - virtualenv venv
     - source venv/bin/activate
-    - pip install -r requirements/quality.txt
+    - pip install -r backend/requirements/quality.txt
 
 flake8:
   extends: .python

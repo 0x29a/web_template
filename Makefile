@@ -4,14 +4,14 @@ BACKEND_USER_ID = $(shell docker-compose run --rm backend id -u)
 FRONTEND_USER_ID = $(shell docker-compose run --rm frontend id -u)
 
 upgrade: export CUSTOM_COMPILE_COMMAND=make upgrade
-upgrade: ## update the requirements/*.txt files with the latest packages satisfying requirements/*.in
-	pip install -qr requirements/pip-tools.txt
+upgrade: ## update the backend/requirements/*.txt files with the latest packages satisfying backend/requirements/*.in
+	pip install -qr backend/requirements/pip-tools.txt
 	# Make sure to compile files after any other files they include!
-	$(PIP_COMPILE) -o requirements/pip-tools.txt requirements/pip-tools.in
-	$(PIP_COMPILE) -o requirements/production.txt requirements/production.in
-	$(PIP_COMPILE) -o requirements/test.txt requirements/test.in
-	$(PIP_COMPILE) -o requirements/quality.txt requirements/quality.in
-	$(PIP_COMPILE) -o requirements/development.txt requirements/development.in
+	$(PIP_COMPILE) -o backend/requirements/pip-tools.txt backend/requirements/pip-tools.in
+	$(PIP_COMPILE) -o backend/requirements/production.txt backend/requirements/production.in
+	$(PIP_COMPILE) -o backend/requirements/test.txt backend/requirements/test.in
+	$(PIP_COMPILE) -o backend/requirements/quality.txt backend/requirements/quality.in
+	$(PIP_COMPILE) -o backend/requirements/development.txt backend/requirements/development.in
 
 format: ## use black to reformat all files
 	black backend && isort backend
