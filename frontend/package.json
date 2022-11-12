@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write pages/ lib/",
-    "format-check": "prettier --check pages/ lib/"
+    "format": "prettier --write pages/ components/ lib/",
+    "format-check": "prettier --check pages/ components/ lib/"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.4",
