@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { useAuthState } from "react-firebase-hooks/auth";
 import { getApps, initializeApp, getApp } from "firebase/app";
 import {
   GoogleAuthProvider,
