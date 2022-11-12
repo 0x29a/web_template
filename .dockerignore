@@ -1,7 +1,5 @@
 .git/
-.pytest_cache/
-.webpack_cache/
-__pycache__/
+backend/.pytest_cache/
 frontend/node_modules/
 frontend/build
 frontend/.next/
@@ -9,8 +7,6 @@ frontend/yarn-error.log
 
 .coverage
 .dockerignore
-.env*
-.fenv*
-!.env.example
-celerybeat-schedule
+.env
+.fenv
 docker-compose.override.yml

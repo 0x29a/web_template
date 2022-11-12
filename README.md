@@ -29,6 +29,12 @@ to continue working on this project after large breaks.
 1. Create `docker-compose.override.yml`:
 
     ```bash
+    cp docker-compose.override.yml.local docker-compose.override.yml
+    ```
+
+1. Start containers:
+
+    ```bash
     make up
     ```
 
