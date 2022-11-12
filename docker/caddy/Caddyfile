@@ -1,6 +1,6 @@
 {$SITE_ADDRESS} {
 	handle /backend/* {
-		reverse_proxy django:5000
+		reverse_proxy backend:5000
 	}
 
 	handle {

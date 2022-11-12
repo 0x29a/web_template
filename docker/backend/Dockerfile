@@ -29,7 +29,7 @@ RUN pip wheel --wheel-dir /usr/src/app/wheels  \
 FROM python as python-run-stage
 
 ARG BUILD_ENVIRONMENT=production
-ARG APP_HOME=/application
+ARG APP_HOME=/backend
 
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -37,8 +37,8 @@ ENV BUILD_ENV ${BUILD_ENVIRONMENT}
 
 WORKDIR ${APP_HOME}
 
-RUN addgroup --system django \
-    && adduser --system --ingroup django django
+RUN addgroup --system backend \
+    && adduser --system --ingroup backend backend
 
 
 # Install required system dependencies
@@ -59,20 +59,20 @@ COPY --from=python-build-stage /usr/src/app/wheels  /wheels/
 RUN pip install --no-cache-dir --no-index --find-links=/wheels/ /wheels/* \
   && rm -rf /wheels/
 
-COPY --chown=django:django ./docker/django/entrypoint /entrypoint
+COPY --chown=backend:backend ./docker/backend/entrypoint /entrypoint
 RUN sed -i 's/\r$//g' /entrypoint
 RUN chmod +x /entrypoint
 
-COPY --chown=django:django ./docker/django/start_${BUILD_ENV} /start
+COPY --chown=backend:backend ./docker/backend/start_${BUILD_ENV} /start
 RUN sed -i 's/\r$//g' /start
 RUN chmod +x /start
 
-# copy application code to WORKDIR
-COPY --chown=django:django ./${APP_HOME} ${APP_HOME}
+# copy the application code to WORKDIR
+COPY --chown=backend:backend ./${APP_HOME} ${APP_HOME}
 
-# make django owner of the WORKDIR directory as well.
-RUN chown -R django:django ${APP_HOME}
+# set "backend" user as owner of the WORKDIR directory too
+RUN chown -R backend:backend ${APP_HOME}
 
-USER django
+USER backend
 
 ENTRYPOINT ["/entrypoint"]

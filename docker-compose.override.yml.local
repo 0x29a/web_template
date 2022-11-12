@@ -3,11 +3,11 @@ services:
     volumes:
       - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile
 
-  django:
+  backend:
     depends_on:
       - mailhog
     volumes:
-      - ./application:/application:z
+      - ./backend:/backend:z
 
   frontend:
     volumes:

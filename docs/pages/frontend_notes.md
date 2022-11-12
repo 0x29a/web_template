@@ -57,7 +57,7 @@
 
         // initialize an empty api service that we'll inject endpoints into later as needed
         export const api = createApi({
-          baseQuery: fetchBaseQuery({ baseUrl: "http://django:5000" }),
+          baseQuery: fetchBaseQuery({ baseUrl: "http://backend:5000" }),
           extractRehydrationInfo(action, { reducerPath }) {
             if (action.type === HYDRATE) {
               return action.payload[reducerPath];

@@ -10,7 +10,7 @@ WORKDIR ${APP_HOME}
 RUN addgroup --system frontend \
     && adduser --system --ingroup frontend frontend
 
-# copy application code to WORKDIR
+# copy the application code to WORKDIR
 COPY --chown=frontend:frontend ./${APP_HOME} ${APP_HOME}
 
 COPY --chown=frontend:frontend ./docker/frontend/start_${BUILD_ENV} /start

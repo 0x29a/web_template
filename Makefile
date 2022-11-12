@@ -1,6 +1,6 @@
 # Define PIP_COMPILE_OPTS=-v to get more information during make upgrade.
 PIP_COMPILE = pip-compile --rebuild --upgrade $(PIP_COMPILE_OPTS)
-DJANGO_USER_ID = $(shell docker-compose run --rm django id -u)
+BACKEND_USER_ID = $(shell docker-compose run --rm backend id -u)
 FRONTEND_USER_ID = $(shell docker-compose run --rm frontend id -u)
 
 upgrade: export CUSTOM_COMPILE_COMMAND=make upgrade
@@ -15,10 +15,10 @@ upgrade: ## update the requirements/*.txt files with the latest packages satisfy
 	$(PIP_COMPILE) -o requirements/docs.txt requirements/docs.in
 
 format: ## use black to reformat all files
-	black application && isort application
+	black backend && isort backend
 
 flake8: ## black handles line-length already
-	flake8 application --max-line-length=120
+	flake8 backend --max-line-length=120
 
 build: ## build docker containers
 	docker-compose build
@@ -51,17 +51,17 @@ restart:
 %.restart:
 	docker-compose restart $*
 
-django-restart:
-	docker-compose restart django
+backend-restart:
+	docker-compose restart backend
 
 %.bash:
 	docker-compose exec $* bash
 
-django-shell:
-	docker-compose exec django bash -c 'python manage.py shell_plus'
+backend-shell:
+	docker-compose exec backend bash -c 'python manage.py shell_plus'
 
-django-urls:
-	docker-compose exec django bash -c 'python manage.py show_urls'
+backend-urls:
+	docker-compose exec backend bash -c 'python manage.py show_urls'
 
 frontend-client:
 	sudo chown -R $(FRONTEND_USER_ID) frontend/lib
@@ -94,30 +94,30 @@ set_frontend_permissions_podman:
 set_frontend_permissions_back:
 	sudo chown -R $(USER):$(USER) frontend/.next frontend/node_modules frontend/package.json frontend/yarn.lock frontend/yarn-error.log
 
-set_django_permissions:
-	sudo chown -R $(DJANGO_USER_ID) application
+set_backend_permissions:
+	sudo chown -R $(BACKEND_USER_ID) backend
 
-set_django_permissions_podman:
-	sudo chown -R $(DJANGO_USER_ID) application
+set_backend_permissions_podman:
+	sudo chown -R $(BACKEND_USER_ID) backend
 
-set_django_permissions_back:
-	sudo chown -R $(USER):$(USER) application
+set_backend_permissions_back:
+	sudo chown -R $(USER):$(USER) backend
 
 schema:
-	touch application/schema.yml
-	sudo chown 101:101 application/schema.yml
-	docker-compose run --rm django python manage.py spectacular --file schema.yml --validate
-	sudo chown $(USER):$(USER) application/schema.yml
-	mv application/schema.yml frontend/backend_api_schema.yml
+	touch backend/schema.yml
+	sudo chown 101:101 backend/schema.yml
+	docker-compose run --rm backend python manage.py spectacular --file schema.yml --validate
+	sudo chown $(USER):$(USER) backend/schema.yml
+	mv backend/schema.yml frontend/backend_api_schema.yml
 
 migrations:
-	docker-compose run --rm django python manage.py makemigrations
+	docker-compose run --rm backend python manage.py makemigrations
 
 migrate:
-	docker-compose run --rm django python manage.py migrate
+	docker-compose run --rm backend python manage.py migrate
 
 mypy:
-	docker-compose run --rm django mypy .
+	docker-compose run --rm backend mypy .
 
 test:
-	docker-compose run --rm django pytest
+	docker-compose run --rm backend pytest

@@ -1,13 +1,13 @@
 x-app: &default-app
   build:
     context: .
-    dockerfile: ./docker/django/Dockerfile
+    dockerfile: ./docker/backend/Dockerfile
     args:
       BUILD_ENVIRONMENT: "${DOCKER_BUILD_ENVIRONMENT:-production}"
     cache_from:
-      - "${DOCKER_BUILD_IMAGE_PREFIX}/django:latest"
+      - "${DOCKER_BUILD_IMAGE_PREFIX}/backend:latest"
 
-  image: "${DOCKER_BUILD_IMAGE_PREFIX}/django"
+  image: "${DOCKER_BUILD_IMAGE_PREFIX}/backend"
   depends_on:
     - postgres
   environment:
@@ -33,7 +33,7 @@ services:
     image: "${DOCKER_BUILD_IMAGE_PREFIX}/caddy"
     restart: unless-stopped
     depends_on:
-      - django
+      - backend
     ports:
       - "${DOCKER_CADDY_PORT_FORWARD:-80}:80"
     volumes:
@@ -42,7 +42,7 @@ services:
     environment:
       - SITE_ADDRESS
 
-  django:
+  backend:
     <<: *default-app
     command: /start
 

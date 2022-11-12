@@ -41,27 +41,27 @@ markdownlint:
 flake8:
   extends: .python
   script:
-    - flake8 application --max-line-length=120
+    - flake8 backend --max-line-length=120
 
 black:
   extends: .python
   script:
-    - black application --diff --check
+    - black backend --diff --check
 
 isort:
   extends: .python
   script:
-    - isort application --check-only --diff
+    - isort backend --check-only --diff
 
 pytest:
   extends: .python
   script:
-    - pytest application
+    - pytest backend
 
 mypy:
   extends: .python
   script:
-    - mypy --config-file application/mypy.ini application
+    - mypy --config-file backend/mypy.ini backend
 
 # Frontend ####################################################################
 
