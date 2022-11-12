@@ -93,7 +93,7 @@ export default function Header() {
                         {/* Desktop sign in links */}
                         <ul className="flex grow justify-end flex-wrap items-center">
                             <li>
-                                <Link href="/" className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out">Sign in</Link>
+                                <Link href="/sign-in" className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out">Sign in</Link>
                             </li>
                             <li>
                                 <Link href="/" className="btn-sm text-gray-200 bg-gray-900 hover:bg-gray-800 ml-3">
@@ -159,7 +159,7 @@ export default function Header() {
                                         </ul>
                                     </li>
                                     <li>
-                                        <Link href="/" className="flex font-medium w-full text-gray-600 hover:text-gray-900 py-2 justify-center">Sign in</Link>
+                                        <Link href="/sign-in" className="flex font-medium w-full text-gray-600 hover:text-gray-900 py-2 justify-center">Sign in</Link>
                                     </li>
                                     <li>
                                         <Link href="/" className="btn-sm text-gray-200 bg-gray-900 hover:bg-gray-800 w-full my-2">

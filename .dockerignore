@@ -4,10 +4,12 @@
 __pycache__/
 frontend/node_modules/
 frontend/build
+frontend/.next
 
 .coverage
 .dockerignore
 .env*
+.fenv*
 !.env.example
 celerybeat-schedule
 docker-compose.override.yml
