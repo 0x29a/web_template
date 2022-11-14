@@ -12,8 +12,9 @@ In attempt to reduce boilerplate to the absolute possible minimum, it utilizes t
 - [Next.js](https://nextjs.org/) for its file-based routing, nice static pages handling and dozens of other optimizations.
 - [Tailwind UI](https://tailwindui.com), as utility classes play really nice with reusable React components.
 - [GitLab CI](https://docs.gitlab.com/ee/ci/), which, in addition to quality checking, is used to build and host OCI images.
+- ...and many other.
 
-By default, the template can be deployed to a DigitalOcean droplet, but since the images are pre-built continuously, it's easy to switch to fly.io, AWS ECS or Kubernetes.
+By default, the template is intended be deployed to a DigitalOcean droplet, but since the images are pre-built continuously, it's trivial to switch to fly.io, AWS ECS or Kubernetes.
 
 In addition to all the cool tooling, I try to document all technological / architectural decisions in `docs/`, so it's easier
 to continue working on this project after large breaks.
