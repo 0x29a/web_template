@@ -1,12 +1,11 @@
 import Link from "next/link";
 
-import firebaseAuth from "../lib/firebaseAuth";
+import { firebaseAuth } from "../lib/firebaseAuth";
 import { useSignInWithGithub } from "react-firebase-hooks/auth";
 
 const SignIn = () => {
   const [signInWithGithub, user, loading, error] =
     useSignInWithGithub(firebaseAuth);
-  console.error(user, loading, error);
 
   return (
     <div className="mt-20 max-w-6xl mx-auto px-4 sm:px-6">

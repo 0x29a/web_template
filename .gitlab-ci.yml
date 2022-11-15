@@ -98,7 +98,6 @@ prettier:
   services:
     - docker:dind
   before_script:
-    - apk update && apk add make
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   variables:
     # Docker
@@ -120,7 +119,6 @@ prettier:
     DOCKER_BUILD_IMAGE_PREFIX: $CI_REGISTRY_IMAGE
   only:
     - master
-
 
 build:
   extends: .builder
