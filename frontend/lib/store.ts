@@ -1,12 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
 import { backendApi } from "./backendApi";
-import { firebaseUserReducer } from "./firebaseAuth";
 
 const makeStore = () => {
   const store = configureStore({
     reducer: {
-      firebaseUserReducer: firebaseUserReducer,
       [backendApi.reducerPath]: backendApi.reducer,
     },
     devTools: process.env.NODE_ENV !== "production",

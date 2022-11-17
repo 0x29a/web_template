@@ -11,8 +11,6 @@ import type { AppProps } from "next/app";
 
 import Layout from "../components/Layout/Layout";
 
-import { useTrackFirebaseUser } from "../lib/firebaseAuth";
-
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
@@ -32,8 +30,6 @@ function defaultGetLayout(page: ReactElement) {
 }
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
-  useTrackFirebaseUser();
-
   const getLayout = Component.getLayout ?? defaultGetLayout;
   return getLayout(<Component {...pageProps} />);
 }

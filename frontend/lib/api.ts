@@ -4,12 +4,12 @@ import { RootState } from "./store";
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://backend:5000",
+    baseUrl: process.env.NEXT_PUBLIC_BACKEND_URL,
     prepareHeaders: (headers, { getState }) => {
       const state = getState() as RootState;
-      if (state.firebaseUserReducer.loginStatus) {
-        headers.set("Authorization", `Bearer ${state.firebaseUserReducer.accessToken})`);
-      }
+      console.log(state);
+      // TODO: fetch an authorization token here and configure headers
+      // headers.set("Authorization", `Bearer ${state.reducer.token})`);
       return headers;
     },
   }),
