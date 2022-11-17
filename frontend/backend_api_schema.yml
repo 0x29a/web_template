@@ -3,7 +3,7 @@ info:
   title: ''
   version: 0.0.0
 paths:
-  /auth/login/:
+  /backend/auth/login/:
     post:
       operationId: login_create
       description: |-
@@ -39,7 +39,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Token'
           description: ''
-  /auth/logout/:
+  /backend/auth/logout/:
     post:
       operationId: logout_create
       description: |-
@@ -60,7 +60,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/RestAuthDetail'
           description: ''
-  /auth/password/change/:
+  /backend/auth/password/change/:
     post:
       operationId: password_change_create
       description: |-
@@ -92,7 +92,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/RestAuthDetail'
           description: ''
-  /auth/password/reset/:
+  /backend/auth/password/reset/:
     post:
       operationId: password_reset_create
       description: |-
@@ -125,7 +125,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/RestAuthDetail'
           description: ''
-  /auth/password/reset/confirm/:
+  /backend/auth/password/reset/confirm/:
     post:
       operationId: password_reset_confirm_create
       description: |-
@@ -160,7 +160,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/RestAuthDetail'
           description: ''
-  /auth/registration/:
+  /backend/auth/registration/:
     post:
       operationId: registration_create
       tags:
@@ -188,7 +188,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Token'
           description: ''
-  /auth/registration/resend-email/:
+  /backend/auth/registration/resend-email/:
     post:
       operationId: registration_resend_email_create
       tags:
@@ -215,7 +215,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/RestAuthDetail'
           description: ''
-  /auth/registration/verify-email/:
+  /backend/auth/registration/verify-email/:
     post:
       operationId: registration_verify_email_create
       tags:
@@ -243,7 +243,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/RestAuthDetail'
           description: ''
-  /auth/user/:
+  /backend/auth/user/:
     get:
       operationId: user_retrieve
       description: |-

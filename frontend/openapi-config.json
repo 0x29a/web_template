@@ -4,5 +4,9 @@
     "apiImport": "api",
     "outputFile": "./lib/backendApi.ts",
     "exportName": "backendApi",
-    "hooks": true
+    "hooks": {
+        "queries": true,
+        "lazyQueries": true,
+        "mutations": true
+    }
 }
