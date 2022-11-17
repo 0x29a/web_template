@@ -55,7 +55,7 @@ djangorestframework==3.13.1
     #   drf-spectacular
 drf-spectacular==0.24.2
     # via -r backend/requirements/production.txt
-exceptiongroup==1.0.1
+exceptiongroup==1.0.4
     # via pytest
 gunicorn==20.1.0
     # via -r backend/requirements/production.txt

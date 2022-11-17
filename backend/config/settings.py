@@ -30,10 +30,12 @@ THIRD_PARTY_APPS = [
     "drf_spectacular",
 ]
 
+LOCAL_APPS = []
+
 if DEBUG:
     THIRD_PARTY_APPS.append("django_extensions")
 
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

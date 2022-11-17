@@ -57,6 +57,8 @@ services:
 
     image: "${DOCKER_BUILD_IMAGE_PREFIX}/frontend"
     command: /start
+    environment:
+      - NEXT_PUBLIC_BACKEND_URL
 
   postgres:
     image: docker.io/postgres:12.6

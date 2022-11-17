@@ -76,7 +76,7 @@ djangorestframework==3.13.1
     #   drf-spectacular
 drf-spectacular==0.24.2
     # via -r backend/requirements/quality.txt
-exceptiongroup==1.0.1
+exceptiongroup==1.0.4
     # via
     #   -r backend/requirements/quality.txt
     #   pytest
@@ -114,7 +114,7 @@ mccabe==0.7.0
     # via
     #   -r backend/requirements/quality.txt
     #   flake8
-mypy==0.990
+mypy==0.991
     # via -r backend/requirements/quality.txt
 mypy-extensions==0.4.3
     # via
@@ -133,7 +133,7 @@ packaging==21.3
     #   pytest
 parso==0.8.3
     # via jedi
-pathspec==0.10.1
+pathspec==0.10.2
     # via
     #   -r backend/requirements/quality.txt
     #   black
@@ -145,9 +145,9 @@ pexpect==4.8.0
     # via ipython
 pickleshare==0.7.5
     # via ipython
-pip-tools==6.9.0
+pip-tools==6.10.0
     # via -r backend/requirements/pip-tools.txt
-platformdirs==2.5.3
+platformdirs==2.5.4
     # via
     #   -r backend/requirements/quality.txt
     #   black
