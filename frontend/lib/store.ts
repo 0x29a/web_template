@@ -8,8 +8,7 @@ const makeStore = () => {
       [backendApi.reducerPath]: backendApi.reducer,
     },
     devTools: process.env.NODE_ENV !== "production",
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(backendApi.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(backendApi.middleware),
   });
   return store;
 };

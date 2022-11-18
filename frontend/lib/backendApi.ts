@@ -11,40 +11,30 @@ const injectedRtkApi = api.injectEndpoints({
     logoutCreate: build.mutation<LogoutCreateApiResponse, LogoutCreateApiArg>({
       query: () => ({ url: "/backend/auth/logout/", method: "POST" }),
     }),
-    passwordChangeCreate: build.mutation<
-      PasswordChangeCreateApiResponse,
-      PasswordChangeCreateApiArg
-    >({
+    passwordChangeCreate: build.mutation<PasswordChangeCreateApiResponse, PasswordChangeCreateApiArg>({
       query: (queryArg) => ({
         url: "/backend/auth/password/change/",
         method: "POST",
         body: queryArg.passwordChange,
       }),
     }),
-    passwordResetCreate: build.mutation<
-      PasswordResetCreateApiResponse,
-      PasswordResetCreateApiArg
-    >({
+    passwordResetCreate: build.mutation<PasswordResetCreateApiResponse, PasswordResetCreateApiArg>({
       query: (queryArg) => ({
         url: "/backend/auth/password/reset/",
         method: "POST",
         body: queryArg.passwordReset,
       }),
     }),
-    passwordResetConfirmCreate: build.mutation<
-      PasswordResetConfirmCreateApiResponse,
-      PasswordResetConfirmCreateApiArg
-    >({
-      query: (queryArg) => ({
-        url: "/backend/auth/password/reset/confirm/",
-        method: "POST",
-        body: queryArg.passwordResetConfirm,
-      }),
-    }),
-    registrationCreate: build.mutation<
-      RegistrationCreateApiResponse,
-      RegistrationCreateApiArg
-    >({
+    passwordResetConfirmCreate: build.mutation<PasswordResetConfirmCreateApiResponse, PasswordResetConfirmCreateApiArg>(
+      {
+        query: (queryArg) => ({
+          url: "/backend/auth/password/reset/confirm/",
+          method: "POST",
+          body: queryArg.passwordResetConfirm,
+        }),
+      }
+    ),
+    registrationCreate: build.mutation<RegistrationCreateApiResponse, RegistrationCreateApiArg>({
       query: (queryArg) => ({
         url: "/backend/auth/registration/",
         method: "POST",
@@ -81,10 +71,7 @@ const injectedRtkApi = api.injectEndpoints({
         body: queryArg.userDetails,
       }),
     }),
-    userPartialUpdate: build.mutation<
-      UserPartialUpdateApiResponse,
-      UserPartialUpdateApiArg
-    >({
+    userPartialUpdate: build.mutation<UserPartialUpdateApiResponse, UserPartialUpdateApiArg>({
       query: (queryArg) => ({
         url: "/backend/auth/user/",
         method: "PATCH",
@@ -109,8 +96,7 @@ export type PasswordResetCreateApiResponse = /** status 200  */ RestAuthDetail;
 export type PasswordResetCreateApiArg = {
   passwordReset: PasswordReset;
 };
-export type PasswordResetConfirmCreateApiResponse =
-  /** status 200  */ RestAuthDetail;
+export type PasswordResetConfirmCreateApiResponse = /** status 200  */ RestAuthDetail;
 export type PasswordResetConfirmCreateApiArg = {
   passwordResetConfirm: PasswordResetConfirm;
 };
@@ -118,13 +104,11 @@ export type RegistrationCreateApiResponse = /** status 201  */ Token;
 export type RegistrationCreateApiArg = {
   register: Register;
 };
-export type RegistrationResendEmailCreateApiResponse =
-  /** status 201  */ RestAuthDetail;
+export type RegistrationResendEmailCreateApiResponse = /** status 201  */ RestAuthDetail;
 export type RegistrationResendEmailCreateApiArg = {
   resendEmailVerification: ResendEmailVerification;
 };
-export type RegistrationVerifyEmailCreateApiResponse =
-  /** status 200  */ RestAuthDetail;
+export type RegistrationVerifyEmailCreateApiResponse = /** status 200  */ RestAuthDetail;
 export type RegistrationVerifyEmailCreateApiArg = {
   verifyEmail: VerifyEmail;
 };

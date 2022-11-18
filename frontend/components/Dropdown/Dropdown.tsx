@@ -1,12 +1,6 @@
 import type { ReactElement } from "react";
 
-export default function Dropdown({
-  children,
-  title,
-}: {
-  children: ReactElement[];
-  title: string;
-}) {
+export default function Dropdown({ children, title }: { children: ReactElement[]; title: string }) {
   return (
     <li className="relative group">
       <a

@@ -128,7 +128,8 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-REST_USE_JWT = False
-# JWT_AUTH_COOKIE = "jwt-auth"
-
 SITE_ID = 1
+
+# django-allauth settings
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_REQUIRED = True

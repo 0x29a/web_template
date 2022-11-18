@@ -16,23 +16,17 @@ export default function HeroHome() {
             </h1>
             <div className="max-w-3xl mx-auto">
               <p className="text-xl text-gray-600 mb-8">
-                Our landing page template works on all devices, so you only have
-                to set it up once, and get beautiful results forever.
+                Our landing page template works on all devices, so you only have to set it up once, and get beautiful
+                results forever.
               </p>
               <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center">
                 <div>
-                  <a
-                    className="btn text-white bg-blue-600 hover:bg-blue-700 w-full mb-4 sm:w-auto sm:mb-0"
-                    href="#0"
-                  >
+                  <a className="btn text-white bg-blue-600 hover:bg-blue-700 w-full mb-4 sm:w-auto sm:mb-0" href="#0">
                     Start free trial
                   </a>
                 </div>
                 <div>
-                  <a
-                    className="btn text-white bg-gray-900 hover:bg-gray-800 w-full sm:w-auto sm:ml-4"
-                    href="#0"
-                  >
+                  <a className="btn text-white bg-gray-900 hover:bg-gray-800 w-full sm:w-auto sm:ml-4" href="#0">
                     Learn more
                   </a>
                 </div>
