@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { useEffect } from "react";
 
 import { useForm, FieldValues } from "react-hook-form";
-import Spinner from "../components/Spinner/Spinner";
+import ButtonWithSpinner from "../components/ButtonWithSpinner/ButtonWithSpinner";
 import { Token, useLoginCreateMutation } from "../lib/backendApi";
 import { setFieldErrorsCallback, invalid } from "../lib/utils";
 
@@ -32,8 +31,8 @@ const SignIn = () => {
       },
     }).then(setFieldErrorsCallback<FormInputs, Token>(setError));
 
-  const emailField = register("email");
-  const passwordField = register("password");
+  const emailField = register("email", {required: true});
+  const passwordField = register("password", {required: true});
   register("non_field_errors");
 
   return (
@@ -55,10 +54,9 @@ const SignIn = () => {
                   </label>
                   <input
                     id="email"
-                    // type="email"
+                    type="email"
                     className={`form-input w-full text-gray-800 outline-none ${errors.email && invalid}`}
                     placeholder="Enter your email address"
-                    // required
                     {...emailField}
                   />
                   {errors.email && <p className="mt-2 text-center text-red-500">{errors.email.message}</p>}
@@ -79,27 +77,16 @@ const SignIn = () => {
                     type="password"
                     className={`form-input w-full text-gray-800 outline-none ${errors.password && invalid}`}
                     placeholder="Enter your password"
-                    required
                     {...passwordField}
                   />
                   {errors.password && <p className="mt-2 text-center text-red-500">{errors.password.message}</p>}
                 </div>
               </div>
-              <div className="flex flex-wrap -mx-3 mb-4">
-                <div className="w-full px-3">
-                  <div className="flex justify-between">
-                    <label className="flex items-center">
-                      <input type="checkbox" className="form-checkbox" />
-                      <span className="text-gray-600 ml-2">Keep me signed in</span>
-                    </label>
-                  </div>
-                </div>
-              </div>
               <div className="flex flex-wrap -mx-3 mt-6">
                 <div className="w-full px-3">
-                  <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full">
-                    {mutationResult.isLoading ? <Spinner size="w-5 h-5" /> : "Sign In"}
-                  </button>
+                  <ButtonWithSpinner loading={mutationResult.isLoading}>
+                    Sign In
+                  </ButtonWithSpinner>
                 </div>
               </div>
               {errors.non_field_errors && (
