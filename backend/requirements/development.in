@@ -6,4 +6,5 @@
 
 django-extensions
 ipython
+ipdb
 Werkzeug

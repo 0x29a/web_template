@@ -1,9 +1,11 @@
 import Link from "next/link";
 
+import { useDispatch } from "react-redux";
 import { useForm, FieldValues } from "react-hook-form";
 import ButtonWithSpinner from "../components/ButtonWithSpinner/ButtonWithSpinner";
 import { Token, useLoginCreateMutation } from "../lib/backendApi";
-import { setFieldErrorsCallback, invalid } from "../lib/utils";
+import { setFieldErrors, invalid } from "../lib/utils";
+import { setToken } from "../lib/slices/authSlice";
 
 type FormInputs = {
   email: string;
@@ -22,6 +24,7 @@ const SignIn = () => {
     shouldUseNativeValidation: true,
   });
 
+  const dispatch = useDispatch();
   const [login, mutationResult] = useLoginCreateMutation();
   const onSubmit = (data: FieldValues) =>
     login({
@@ -29,10 +32,15 @@ const SignIn = () => {
         email: data.email,
         password: data.password,
       },
-    }).then(setFieldErrorsCallback<FormInputs, Token>(setError));
+    }).then((result) => {
+      setFieldErrors<FormInputs, Token>(setError, result);
+      if ("data" in result) {
+        dispatch(setToken(result.data.key));
+      }
+    });
 
-  const emailField = register("email", {required: true});
-  const passwordField = register("password", {required: true});
+  const emailField = register("email", { required: true });
+  const passwordField = register("password", { required: true });
   register("non_field_errors");
 
   return (
@@ -84,9 +92,7 @@ const SignIn = () => {
               </div>
               <div className="flex flex-wrap -mx-3 mt-6">
                 <div className="w-full px-3">
-                  <ButtonWithSpinner loading={mutationResult.isLoading}>
-                    Sign In
-                  </ButtonWithSpinner>
+                  <ButtonWithSpinner loading={mutationResult.isLoading}>Sign In</ButtonWithSpinner>
                 </div>
               </div>
               {errors.non_field_errors && (

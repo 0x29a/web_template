@@ -72,7 +72,7 @@ export default function Header() {
                 </Link>
               </li>
               <li>
-                <Link href="/" className="text-gray-600 hover:text-gray-900 px-3 lg:px-5 py-2 flex items-center">
+                <Link href="/about" className="text-gray-600 hover:text-gray-900 px-3 lg:px-5 py-2 flex items-center">
                   About us
                 </Link>
               </li>
@@ -179,7 +179,7 @@ export default function Header() {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/" className="flex text-gray-600 hover:text-gray-900 py-2">
+                    <Link href="/about" className="flex text-gray-600 hover:text-gray-900 py-2">
                       About us
                     </Link>
                   </li>

@@ -7,7 +7,7 @@ type ButtonWithSpinnerProps = {
   loadingText?: string;
   spinnerClasses?: string;
   buttonClasses?: string;
-}
+};
 
 const ButtonWithSpinner = ({
   children,

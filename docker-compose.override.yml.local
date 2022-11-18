@@ -8,6 +8,9 @@ services:
       - mailhog
     volumes:
       - ./backend:/backend:z
+    # this is needed for ipdb & docker attach
+    stdin_open: true
+    tty: true
 
   frontend:
     volumes:

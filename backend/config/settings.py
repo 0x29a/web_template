@@ -26,6 +26,7 @@ THIRD_PARTY_APPS = [
     "dj_rest_auth",
     "allauth",
     "allauth.account",
+    "allauth.socialaccount",
     "dj_rest_auth.registration",
     "drf_spectacular",
 ]
@@ -130,6 +131,16 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 SITE_ID = 1
 
-# django-allauth settings
+
+# django-allauth
+# ------------------------------------------------------------------------------
+# https://django-allauth.readthedocs.io/en/latest/installation.html
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend",
+]

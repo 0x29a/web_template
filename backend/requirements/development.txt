@@ -46,7 +46,9 @@ cryptography==38.0.3
     #   -r backend/requirements/quality.txt
     #   pyjwt
 decorator==5.1.1
-    # via ipython
+    # via
+    #   ipdb
+    #   ipython
 defusedxml==0.7.1
     # via
     #   -r backend/requirements/quality.txt
@@ -98,8 +100,12 @@ iniconfig==1.1.1
     # via
     #   -r backend/requirements/quality.txt
     #   pytest
-ipython==8.6.0
+ipdb==0.13.9
     # via -r backend/requirements/development.in
+ipython==8.6.0
+    # via
+    #   -r backend/requirements/development.in
+    #   ipdb
 isort==5.10.1
     # via -r backend/requirements/quality.txt
 jedi==0.18.1
@@ -221,6 +227,8 @@ sqlparse==0.4.3
     #   django
 stack-data==0.6.1
     # via ipython
+toml==0.10.2
+    # via ipdb
 tomli==1.2.3
     # via
     #   -c backend/requirements/constraints.txt
