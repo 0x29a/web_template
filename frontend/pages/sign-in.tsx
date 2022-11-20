@@ -47,14 +47,14 @@ const SignIn = () => {
   const passwordField = register("password", { required: true });
   register("non_field_errors");
 
-  const [googleLogin, googleLoginResult] = useGoogleCreateMutation()
+  const [googleLogin, googleLoginResult] = useGoogleCreateMutation();
   const triggerGoogleLogin = useGoogleLogin({
     // TODO: process onError
-    onSuccess: tokenResponse => {
+    onSuccess: (tokenResponse) => {
       googleLogin({
         socialLogin: {
-          access_token: tokenResponse.access_token
-        }
+          access_token: tokenResponse.access_token,
+        },
       }).then((result) => {
         setFieldErrors<FormInputs, SocialLogin>(setError, result);
         if ("data" in result) {
@@ -128,7 +128,12 @@ const SignIn = () => {
             <form>
               <div className="flex flex-wrap -mx-3">
                 <div className="w-full px-3">
-                  <button className="btn px-0 text-white bg-red-600 hover:bg-red-700 w-full relative flex items-center" onClick={() => {triggerGoogleLogin()}}>
+                  <button
+                    className="btn px-0 text-white bg-red-600 hover:bg-red-700 w-full relative flex items-center"
+                    onClick={() => {
+                      triggerGoogleLogin();
+                    }}
+                  >
                     <svg
                       className="w-4 h-4 fill-current text-white opacity-75 shrink-0 mx-4"
                       viewBox="0 0 16 16"
@@ -142,15 +147,15 @@ const SignIn = () => {
               </div>
             </form>
 
-<GoogleLogin
-  onSuccess={credentialResponse => {
-    console.log(credentialResponse);
-  }}
-  onError={() => {
-    console.log("Login Failed");
-  }}
-  ux_mode="redirect"
-/>
+            <GoogleLogin
+              onSuccess={(credentialResponse) => {
+                console.log(credentialResponse);
+              }}
+              onError={() => {
+                console.log("Login Failed");
+              }}
+              ux_mode="redirect"
+            />
             <div className="text-gray-600 text-center mt-6">
               Don’t you have an account?{" "}
               <Link href="/signup" className="text-blue-600 hover:underline transition duration-150 ease-in-out">

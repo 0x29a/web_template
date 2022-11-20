@@ -2,3 +2,8 @@
 line-length = 88
 target-version = ['py39']
 include = '\.pyi?$'
+exclude = '''
+/(
+  | migrations
+)/
+'''

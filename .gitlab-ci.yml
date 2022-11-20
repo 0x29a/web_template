@@ -41,7 +41,7 @@ markdownlint:
 flake8:
   extends: .python
   script:
-    - flake8 backend --max-line-length=120
+    - flake8 backend --max-line-length=120 --exclude=*/migrations/*
 
 black:
   extends: .python

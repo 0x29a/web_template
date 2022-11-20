@@ -14,19 +14,25 @@ endif
 
 upgrade: export CUSTOM_COMPILE_COMMAND=make upgrade
 upgrade: ## update the backend/requirements/*.txt files with the latest packages satisfying backend/requirements/*.in
-	pip install -qr backend/requirements/pip-tools.txt
+	sudo chown -R $(BACKEND_USER_ID) backend
 	# Make sure to compile files after any other files they include!
-	$(PIP_COMPILE) -o backend/requirements/pip-tools.txt backend/requirements/pip-tools.in
-	$(PIP_COMPILE) -o backend/requirements/production.txt backend/requirements/production.in
-	$(PIP_COMPILE) -o backend/requirements/test.txt backend/requirements/test.in
-	$(PIP_COMPILE) -o backend/requirements/quality.txt backend/requirements/quality.in
-	$(PIP_COMPILE) -o backend/requirements/development.txt backend/requirements/development.in
+	$(DOCKER_COMPOSE) run --rm backend bash -c 'pip install -qr requirements/pip-tools.txt && \
+	$(PIP_COMPILE) -o requirements/pip-tools.txt requirements/pip-tools.in && \
+	$(PIP_COMPILE) -o requirements/production.txt requirements/production.in && \
+	$(PIP_COMPILE) -o requirements/test.txt requirements/test.in && \
+	$(PIP_COMPILE) -o requirements/quality.txt requirements/quality.in && \
+	$(PIP_COMPILE) -o requirements/development.txt requirements/development.in' || true
+	sudo chown -R $(USER):$(USER) backend
 
 format: ## use black to reformat all files
-	black backend && isort backend
+	sudo chown -R $(BACKEND_USER_ID) backend
+	$(DOCKER_COMPOSE) run --rm backend bash -c 'black . && isort .' || true
+	sudo chown -R $(USER):$(USER) backend
 
 flake8: ## black handles line-length already
-	flake8 backend --max-line-length=120
+	sudo chown -R $(BACKEND_USER_ID) backend
+	$(DOCKER_COMPOSE) run --rm backend flake8 . --max-line-length=120 --exclude=*/migrations/* || true
+	sudo chown -R $(USER):$(USER) backend
 
 pull: ## pull docker containers
 	$(DOCKER_COMPOSE) pull
@@ -78,7 +84,7 @@ backend-urls:
 
 frontend-client:
 	sudo chown -R $(FRONTEND_USER_ID) frontend/lib
-	$(DOCKER_COMPOSE) exec frontend bash -c 'npx @rtk-query/codegen-openapi openapi-config.json'
+	$(DOCKER_COMPOSE) run --rm frontend bash -c 'npx @rtk-query/codegen-openapi openapi-config.json'
 	sudo chown -R $(USER):$(USER) frontend/lib
 
 frontend.lint:
@@ -89,7 +95,7 @@ frontend.format-check:
 
 frontend.fix:
 	sudo chown -R $(FRONTEND_USER_ID) frontend/pages frontend/lib frontend/components
-	$(DOCKER_COMPOSE) exec frontend bash -c 'yarn lint --fix && yarn format' || true
+	$(DOCKER_COMPOSE) run --rm frontend bash -c 'yarn lint --fix && yarn format' || true
 	sudo chown -R $(USER):$(USER) frontend/pages frontend/lib frontend/components
 
 set_frontend_permissions:

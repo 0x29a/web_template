@@ -12,7 +12,7 @@ urlpatterns = [
                 path(settings.ADMIN_URL, admin.site.urls),
                 path("auth/", include("dj_rest_auth.urls")),
                 path("auth/registration/", include("dj_rest_auth.registration.urls")),
-                path("auth/google", GoogleLogin.as_view())
+                path("auth/google", GoogleLogin.as_view()),
             ]
         ),
     )
