@@ -1,6 +1,6 @@
-import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
 import { SerializedError } from "@reduxjs/toolkit";
-import { UseFormSetError, Path } from "react-hook-form";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
+import { Path, UseFormSetError } from "react-hook-form";
 
 type DjangoFieldsErrorData = {
   [key: string]: string[];

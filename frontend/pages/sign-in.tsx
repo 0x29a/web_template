@@ -1,15 +1,11 @@
 import Link from "next/link";
-
+import { FieldValues, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { useForm, FieldValues } from "react-hook-form";
-import { useGoogleLogin } from "@react-oauth/google";
 
 import ButtonWithSpinner from "../components/ButtonWithSpinner/ButtonWithSpinner";
-import { Token, useLoginCreateMutation, useGoogleCreateMutation, SocialLogin } from "../lib/backendApi";
-import { setFieldErrors, invalid } from "../lib/utils";
+import { Token, useLoginCreateMutation } from "../lib/backendApi";
 import { setToken } from "../lib/slices/authSlice";
-
-import { GoogleLogin } from "@react-oauth/google";
+import { invalid, setFieldErrors } from "../lib/utils";
 
 type FormInputs = {
   email: string;
@@ -47,23 +43,6 @@ const SignIn = () => {
   const passwordField = register("password", { required: true });
   register("non_field_errors");
 
-  const [googleLogin, googleLoginResult] = useGoogleCreateMutation();
-  const triggerGoogleLogin = useGoogleLogin({
-    // TODO: process onError
-    onSuccess: (tokenResponse) => {
-      googleLogin({
-        socialLogin: {
-          access_token: tokenResponse.access_token,
-        },
-      }).then((result) => {
-        setFieldErrors<FormInputs, SocialLogin>(setError, result);
-        if ("data" in result) {
-          // @ts-ignore
-          dispatch(setToken(result.data.key));
-        }
-      });
-    },
-  });
   return (
     <section className="bg-gradient-to-b from-gray-100 to-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -128,12 +107,7 @@ const SignIn = () => {
             <form>
               <div className="flex flex-wrap -mx-3">
                 <div className="w-full px-3">
-                  <button
-                    className="btn px-0 text-white bg-red-600 hover:bg-red-700 w-full relative flex items-center"
-                    onClick={() => {
-                      triggerGoogleLogin();
-                    }}
-                  >
+                  <button className="btn px-0 text-white bg-red-600 hover:bg-red-700 w-full relative flex items-center">
                     <svg
                       className="w-4 h-4 fill-current text-white opacity-75 shrink-0 mx-4"
                       viewBox="0 0 16 16"
@@ -146,16 +120,6 @@ const SignIn = () => {
                 </div>
               </div>
             </form>
-
-            <GoogleLogin
-              onSuccess={(credentialResponse) => {
-                console.log(credentialResponse);
-              }}
-              onError={() => {
-                console.log("Login Failed");
-              }}
-              ux_mode="redirect"
-            />
             <div className="text-gray-600 text-center mt-6">
               Don’t you have an account?{" "}
               <Link href="/signup" className="text-blue-600 hover:underline transition duration-150 ease-in-out">

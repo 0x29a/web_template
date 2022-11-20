@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
-
 import Link from "next/link";
+import React, { useEffect, useRef, useState } from "react";
+
 import Dropdown from "../Dropdown/Dropdown";
 
 export default function Header() {

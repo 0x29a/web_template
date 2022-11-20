@@ -1,6 +1,5 @@
-import type { NextPageWithLayout } from "./_app";
-
 import HeroHome from "../components/HeroHome/HeroHome";
+import type { NextPageWithLayout } from "./_app";
 
 const Home: NextPageWithLayout = () => {
   return (

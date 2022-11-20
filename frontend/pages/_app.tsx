@@ -1,17 +1,13 @@
-import "nprogress/nprogress.css";
-import "../styles/globals.css";
-
-import Router from "next/router";
-import NProgress from "nprogress";
-
-import { wrapper } from "../lib/store";
-import type { ReactElement, ReactNode } from "react";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
-
-import { GoogleOAuthProvider } from "@react-oauth/google";
+import Router from "next/router";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
+import type { ReactElement, ReactNode } from "react";
 
 import Layout from "../components/Layout/Layout";
+import { wrapper } from "../lib/store";
+import "../styles/globals.css";
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -33,11 +29,7 @@ function defaultGetLayout(page: ReactElement) {
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? defaultGetLayout;
-  return getLayout(
-    <GoogleOAuthProvider clientId="29591926416-enioc4fsreu64a1pfti8obj9n7s1sarh.apps.googleusercontent.com">
-      <Component {...pageProps} />
-    </GoogleOAuthProvider>
-  );
+  return getLayout(<Component {...pageProps} />);
 }
 
 const wrappedApp = wrapper.withRedux(MyApp);

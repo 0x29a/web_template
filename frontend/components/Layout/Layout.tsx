@@ -1,8 +1,8 @@
-import type { ReactElement } from "react";
 import Head from "next/head";
+import type { ReactElement } from "react";
 
-import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
 
 export default function Layout({ children }: { children: ReactElement }) {
   return (

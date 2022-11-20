@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
-import { backendApi } from "./backendApi";
 
+import { backendApi } from "./backendApi";
 import authReducer from "./slices/authSlice";
 
 const makeStore = () => {
