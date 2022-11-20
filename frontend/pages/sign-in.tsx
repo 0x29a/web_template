@@ -1,9 +1,12 @@
 import Link from "next/link";
+import { useRouter } from 'next/router';
 import { FieldValues, useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import ButtonWithSpinner from "../components/ButtonWithSpinner/ButtonWithSpinner";
-import { Token, useLoginCreateMutation } from "../lib/backendApi";
+import { Token, useAuthLoginCreateMutation } from "../lib/backendApi";
+import { signInWithGoogleRedirect } from "../lib/firebaseAuth";
+import { isLoggedIn } from '../lib/selectors';
 import { setToken } from "../lib/slices/authSlice";
 import { invalid, setFieldErrors } from "../lib/utils";
 
@@ -14,18 +17,13 @@ type FormInputs = {
 };
 
 const SignIn = () => {
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors },
-  } = useForm<FormInputs>({
+  const { register, handleSubmit, setError, formState: { errors } } = useForm<FormInputs>({
     reValidateMode: "onSubmit",
     shouldUseNativeValidation: true,
   });
 
   const dispatch = useDispatch();
-  const [login, loginResult] = useLoginCreateMutation();
+  const [login, loginResult] = useAuthLoginCreateMutation();
   const onSubmit = (data: FieldValues) =>
     login({
       login: {
@@ -43,6 +41,10 @@ const SignIn = () => {
   const passwordField = register("password", { required: true });
   register("non_field_errors");
 
+  const router = useRouter();
+  if(useSelector(isLoggedIn)) {
+    router.push("/about")
+  }
   return (
     <section className="bg-gradient-to-b from-gray-100 to-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -107,7 +109,10 @@ const SignIn = () => {
             <form>
               <div className="flex flex-wrap -mx-3">
                 <div className="w-full px-3">
-                  <button className="btn px-0 text-white bg-red-600 hover:bg-red-700 w-full relative flex items-center">
+                  <button
+                    onClick={() => signInWithGoogleRedirect()}
+                    className="btn px-0 text-white bg-red-600 hover:bg-red-700 w-full relative flex items-center"
+                  >
                     <svg
                       className="w-4 h-4 fill-current text-white opacity-75 shrink-0 mx-4"
                       viewBox="0 0 16 16"

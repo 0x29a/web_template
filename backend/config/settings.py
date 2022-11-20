@@ -28,7 +28,6 @@ THIRD_PARTY_APPS = [
     "allauth.account",
     "dj_rest_auth.registration",
     "allauth.socialaccount",
-    "allauth.socialaccount.providers.google",
     "drf_spectacular",
 ]
 
@@ -107,6 +106,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication",
+        "users.authentication.FirebaseAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
@@ -149,3 +149,6 @@ AUTHENTICATION_BACKENDS = [
     # `allauth` specific authentication methods, such as login by e-mail
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
+
+# firebase
+GOOGLE_CREDENTIALS = env.json("GOOGLE_CREDENTIALS")

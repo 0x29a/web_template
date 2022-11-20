@@ -88,10 +88,10 @@ frontend-client:
 	sudo chown -R $(USER):$(USER) frontend/lib
 
 frontend.lint:
-	$(DOCKER_COMPOSE) exec frontend bash -c 'yarn lint'
+	$(DOCKER_COMPOSE) run --rm frontend yarn lint
 
 frontend.format-check:
-	$(DOCKER_COMPOSE) exec frontend bash -c 'yarn format-check'
+	$(DOCKER_COMPOSE) run --rm frontend yarn format-check
 
 frontend.fix:
 	sudo chown -R $(FRONTEND_USER_ID) frontend/pages frontend/lib frontend/components

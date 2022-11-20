@@ -21,6 +21,9 @@ x-app: &default-app
     - POSTGRES_PASSWORD
     - DEBUG
     - SECRET_KEY
+    - GOOGLE_CLOUD_PROJECT
+    - GOOGLE_CREDENTIALS
+    - FIREBASE_AUTH_EMULATOR_HOST
 
 services:
   caddy:
@@ -59,6 +62,9 @@ services:
     command: /start
     environment:
       - NEXT_PUBLIC_BACKEND_URL
+      - NEXT_PUBLIC_FIREBASE_AUTH_API_KEY
+      - NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+      - NEXT_PUBLIC_FIREBASE_AUTH_EMULATOR_URL
 
   postgres:
     image: docker.io/postgres:12.6

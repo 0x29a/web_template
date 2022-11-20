@@ -21,6 +21,17 @@ services:
     ports:
       - 8025:8025
 
+  firebase:
+    build:
+      context: .
+      dockerfile: ./docker/firebase/Dockerfile
+    command: firebase emulators:start --project web-template
+    ports:
+      - 9098:9098
+      - 9099:9099
+    volumes:
+      - firebase_data:/home/node
+
   docs:
     build:
       context: .
@@ -40,3 +51,6 @@ services:
       - SWAGGER_JSON=/backend_api_schema.yml
     volumes:
       - ./frontend/backend_api_schema.yml:/backend_api_schema.yml
+
+volumes:
+  firebase_data:

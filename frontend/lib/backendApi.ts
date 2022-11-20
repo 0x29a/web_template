@@ -2,36 +2,34 @@ import { api } from "./api";
 
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
-    googleCreate: build.mutation<GoogleCreateApiResponse, GoogleCreateApiArg>({
-      query: (queryArg) => ({ url: "/backend/auth/google", method: "POST", body: queryArg.socialLogin }),
-    }),
-    loginCreate: build.mutation<LoginCreateApiResponse, LoginCreateApiArg>({
+    authLoginCreate: build.mutation<AuthLoginCreateApiResponse, AuthLoginCreateApiArg>({
       query: (queryArg) => ({ url: "/backend/auth/login/", method: "POST", body: queryArg.login }),
     }),
-    logoutCreate: build.mutation<LogoutCreateApiResponse, LogoutCreateApiArg>({
+    authLogoutCreate: build.mutation<AuthLogoutCreateApiResponse, AuthLogoutCreateApiArg>({
       query: () => ({ url: "/backend/auth/logout/", method: "POST" }),
     }),
-    passwordChangeCreate: build.mutation<PasswordChangeCreateApiResponse, PasswordChangeCreateApiArg>({
+    authPasswordChangeCreate: build.mutation<AuthPasswordChangeCreateApiResponse, AuthPasswordChangeCreateApiArg>({
       query: (queryArg) => ({ url: "/backend/auth/password/change/", method: "POST", body: queryArg.passwordChange }),
     }),
-    passwordResetCreate: build.mutation<PasswordResetCreateApiResponse, PasswordResetCreateApiArg>({
+    authPasswordResetCreate: build.mutation<AuthPasswordResetCreateApiResponse, AuthPasswordResetCreateApiArg>({
       query: (queryArg) => ({ url: "/backend/auth/password/reset/", method: "POST", body: queryArg.passwordReset }),
     }),
-    passwordResetConfirmCreate: build.mutation<PasswordResetConfirmCreateApiResponse, PasswordResetConfirmCreateApiArg>(
-      {
-        query: (queryArg) => ({
-          url: "/backend/auth/password/reset/confirm/",
-          method: "POST",
-          body: queryArg.passwordResetConfirm,
-        }),
-      }
-    ),
-    registrationCreate: build.mutation<RegistrationCreateApiResponse, RegistrationCreateApiArg>({
+    authPasswordResetConfirmCreate: build.mutation<
+      AuthPasswordResetConfirmCreateApiResponse,
+      AuthPasswordResetConfirmCreateApiArg
+    >({
+      query: (queryArg) => ({
+        url: "/backend/auth/password/reset/confirm/",
+        method: "POST",
+        body: queryArg.passwordResetConfirm,
+      }),
+    }),
+    authRegistrationCreate: build.mutation<AuthRegistrationCreateApiResponse, AuthRegistrationCreateApiArg>({
       query: (queryArg) => ({ url: "/backend/auth/registration/", method: "POST", body: queryArg.register }),
     }),
-    registrationResendEmailCreate: build.mutation<
-      RegistrationResendEmailCreateApiResponse,
-      RegistrationResendEmailCreateApiArg
+    authRegistrationResendEmailCreate: build.mutation<
+      AuthRegistrationResendEmailCreateApiResponse,
+      AuthRegistrationResendEmailCreateApiArg
     >({
       query: (queryArg) => ({
         url: "/backend/auth/registration/resend-email/",
@@ -39,9 +37,9 @@ const injectedRtkApi = api.injectEndpoints({
         body: queryArg.resendEmailVerification,
       }),
     }),
-    registrationVerifyEmailCreate: build.mutation<
-      RegistrationVerifyEmailCreateApiResponse,
-      RegistrationVerifyEmailCreateApiArg
+    authRegistrationVerifyEmailCreate: build.mutation<
+      AuthRegistrationVerifyEmailCreateApiResponse,
+      AuthRegistrationVerifyEmailCreateApiArg
     >({
       query: (queryArg) => ({
         url: "/backend/auth/registration/verify-email/",
@@ -49,68 +47,64 @@ const injectedRtkApi = api.injectEndpoints({
         body: queryArg.verifyEmail,
       }),
     }),
-    userRetrieve: build.query<UserRetrieveApiResponse, UserRetrieveApiArg>({
+    authUserRetrieve: build.query<AuthUserRetrieveApiResponse, AuthUserRetrieveApiArg>({
       query: () => ({ url: "/backend/auth/user/" }),
     }),
-    userUpdate: build.mutation<UserUpdateApiResponse, UserUpdateApiArg>({
+    authUserUpdate: build.mutation<AuthUserUpdateApiResponse, AuthUserUpdateApiArg>({
       query: (queryArg) => ({ url: "/backend/auth/user/", method: "PUT", body: queryArg.userDetails }),
     }),
-    userPartialUpdate: build.mutation<UserPartialUpdateApiResponse, UserPartialUpdateApiArg>({
+    authUserPartialUpdate: build.mutation<AuthUserPartialUpdateApiResponse, AuthUserPartialUpdateApiArg>({
       query: (queryArg) => ({ url: "/backend/auth/user/", method: "PATCH", body: queryArg.patchedUserDetails }),
+    }),
+    usersExampleList: build.query<UsersExampleListApiResponse, UsersExampleListApiArg>({
+      query: () => ({ url: "/backend/users/example" }),
     }),
   }),
   overrideExisting: false,
 });
 export { injectedRtkApi as backendApi };
-export type GoogleCreateApiResponse = /** status 200  */ SocialLogin;
-export type GoogleCreateApiArg = {
-  socialLogin: SocialLogin;
-};
-export type LoginCreateApiResponse = /** status 200  */ Token;
-export type LoginCreateApiArg = {
+export type AuthLoginCreateApiResponse = /** status 200  */ Token;
+export type AuthLoginCreateApiArg = {
   login: Login;
 };
-export type LogoutCreateApiResponse = /** status 200  */ RestAuthDetail;
-export type LogoutCreateApiArg = void;
-export type PasswordChangeCreateApiResponse = /** status 200  */ RestAuthDetail;
-export type PasswordChangeCreateApiArg = {
+export type AuthLogoutCreateApiResponse = /** status 200  */ RestAuthDetail;
+export type AuthLogoutCreateApiArg = void;
+export type AuthPasswordChangeCreateApiResponse = /** status 200  */ RestAuthDetail;
+export type AuthPasswordChangeCreateApiArg = {
   passwordChange: PasswordChange;
 };
-export type PasswordResetCreateApiResponse = /** status 200  */ RestAuthDetail;
-export type PasswordResetCreateApiArg = {
+export type AuthPasswordResetCreateApiResponse = /** status 200  */ RestAuthDetail;
+export type AuthPasswordResetCreateApiArg = {
   passwordReset: PasswordReset;
 };
-export type PasswordResetConfirmCreateApiResponse = /** status 200  */ RestAuthDetail;
-export type PasswordResetConfirmCreateApiArg = {
+export type AuthPasswordResetConfirmCreateApiResponse = /** status 200  */ RestAuthDetail;
+export type AuthPasswordResetConfirmCreateApiArg = {
   passwordResetConfirm: PasswordResetConfirm;
 };
-export type RegistrationCreateApiResponse = /** status 201  */ Token;
-export type RegistrationCreateApiArg = {
+export type AuthRegistrationCreateApiResponse = /** status 201  */ Token;
+export type AuthRegistrationCreateApiArg = {
   register: Register;
 };
-export type RegistrationResendEmailCreateApiResponse = /** status 201  */ RestAuthDetail;
-export type RegistrationResendEmailCreateApiArg = {
+export type AuthRegistrationResendEmailCreateApiResponse = /** status 201  */ RestAuthDetail;
+export type AuthRegistrationResendEmailCreateApiArg = {
   resendEmailVerification: ResendEmailVerification;
 };
-export type RegistrationVerifyEmailCreateApiResponse = /** status 200  */ RestAuthDetail;
-export type RegistrationVerifyEmailCreateApiArg = {
+export type AuthRegistrationVerifyEmailCreateApiResponse = /** status 200  */ RestAuthDetail;
+export type AuthRegistrationVerifyEmailCreateApiArg = {
   verifyEmail: VerifyEmail;
 };
-export type UserRetrieveApiResponse = /** status 200  */ UserDetails;
-export type UserRetrieveApiArg = void;
-export type UserUpdateApiResponse = /** status 200  */ UserDetails;
-export type UserUpdateApiArg = {
+export type AuthUserRetrieveApiResponse = /** status 200  */ UserDetails;
+export type AuthUserRetrieveApiArg = void;
+export type AuthUserUpdateApiResponse = /** status 200  */ UserDetails;
+export type AuthUserUpdateApiArg = {
   userDetails: UserDetails;
 };
-export type UserPartialUpdateApiResponse = /** status 200  */ UserDetails;
-export type UserPartialUpdateApiArg = {
+export type AuthUserPartialUpdateApiResponse = /** status 200  */ UserDetails;
+export type AuthUserPartialUpdateApiArg = {
   patchedUserDetails: PatchedUserDetails;
 };
-export type SocialLogin = {
-  access_token?: string;
-  code?: string;
-  id_token?: string;
-};
+export type UsersExampleListApiResponse = /** status 200  */ User[];
+export type UsersExampleListApiArg = void;
 export type Token = {
   key: string;
 };
@@ -161,18 +155,22 @@ export type PatchedUserDetails = {
   first_name?: string;
   last_name?: string;
 };
+export type User = {
+  email?: string;
+};
 export const {
-  useGoogleCreateMutation,
-  useLoginCreateMutation,
-  useLogoutCreateMutation,
-  usePasswordChangeCreateMutation,
-  usePasswordResetCreateMutation,
-  usePasswordResetConfirmCreateMutation,
-  useRegistrationCreateMutation,
-  useRegistrationResendEmailCreateMutation,
-  useRegistrationVerifyEmailCreateMutation,
-  useUserRetrieveQuery,
-  useLazyUserRetrieveQuery,
-  useUserUpdateMutation,
-  useUserPartialUpdateMutation,
+  useAuthLoginCreateMutation,
+  useAuthLogoutCreateMutation,
+  useAuthPasswordChangeCreateMutation,
+  useAuthPasswordResetCreateMutation,
+  useAuthPasswordResetConfirmCreateMutation,
+  useAuthRegistrationCreateMutation,
+  useAuthRegistrationResendEmailCreateMutation,
+  useAuthRegistrationVerifyEmailCreateMutation,
+  useAuthUserRetrieveQuery,
+  useLazyAuthUserRetrieveQuery,
+  useAuthUserUpdateMutation,
+  useAuthUserPartialUpdateMutation,
+  useUsersExampleListQuery,
+  useLazyUsersExampleListQuery,
 } = injectedRtkApi;

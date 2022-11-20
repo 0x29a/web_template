@@ -3,57 +3,9 @@ info:
   title: ''
   version: 0.0.0
 paths:
-  /backend/auth/google:
-    post:
-      operationId: google_create
-      description: |-
-        class used for social authentications
-        example usage for facebook with access_token
-        -------------
-        from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
-
-        class FacebookLogin(SocialLoginView):
-            adapter_class = FacebookOAuth2Adapter
-        -------------
-
-        example usage for facebook with code
-
-        -------------
-        from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
-        from allauth.socialaccount.providers.oauth2.client import OAuth2Client
-
-        class FacebookLogin(SocialLoginView):
-            adapter_class = FacebookOAuth2Adapter
-            client_class = OAuth2Client
-            callback_url = 'localhost:8000'
-        -------------
-      tags:
-      - google
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SocialLogin'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/SocialLogin'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/SocialLogin'
-      security:
-      - cookieAuth: []
-      - tokenAuth: []
-      - {}
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SocialLogin'
-          description: ''
   /backend/auth/login/:
     post:
-      operationId: login_create
+      operationId: auth_login_create
       description: |-
         Check the credentials and return the REST Token
         if the credentials are valid and authenticated.
@@ -63,7 +15,7 @@ paths:
         Accept the following POST parameters: username, password
         Return the REST Framework Token Object's key.
       tags:
-      - login
+      - auth
       requestBody:
         content:
           application/json:
@@ -89,14 +41,14 @@ paths:
           description: ''
   /backend/auth/logout/:
     post:
-      operationId: logout_create
+      operationId: auth_logout_create
       description: |-
         Calls Django logout method and delete the Token object
         assigned to the current User object.
 
         Accepts/Returns nothing.
       tags:
-      - logout
+      - auth
       security:
       - cookieAuth: []
       - tokenAuth: []
@@ -110,14 +62,14 @@ paths:
           description: ''
   /backend/auth/password/change/:
     post:
-      operationId: password_change_create
+      operationId: auth_password_change_create
       description: |-
         Calls Django Auth SetPasswordForm save method.
 
         Accepts the following POST parameters: new_password1, new_password2
         Returns the success/fail message.
       tags:
-      - password
+      - auth
       requestBody:
         content:
           application/json:
@@ -142,14 +94,14 @@ paths:
           description: ''
   /backend/auth/password/reset/:
     post:
-      operationId: password_reset_create
+      operationId: auth_password_reset_create
       description: |-
         Calls Django Auth PasswordResetForm save method.
 
         Accepts the following POST parameters: email
         Returns the success/fail message.
       tags:
-      - password
+      - auth
       requestBody:
         content:
           application/json:
@@ -175,7 +127,7 @@ paths:
           description: ''
   /backend/auth/password/reset/confirm/:
     post:
-      operationId: password_reset_confirm_create
+      operationId: auth_password_reset_confirm_create
       description: |-
         Password reset e-mail link is confirmed, therefore
         this resets the user's password.
@@ -184,7 +136,7 @@ paths:
             new_password1, new_password2
         Returns the success/fail message.
       tags:
-      - password
+      - auth
       requestBody:
         content:
           application/json:
@@ -210,9 +162,9 @@ paths:
           description: ''
   /backend/auth/registration/:
     post:
-      operationId: registration_create
+      operationId: auth_registration_create
       tags:
-      - registration
+      - auth
       requestBody:
         content:
           application/json:
@@ -238,9 +190,9 @@ paths:
           description: ''
   /backend/auth/registration/resend-email/:
     post:
-      operationId: registration_resend_email_create
+      operationId: auth_registration_resend_email_create
       tags:
-      - registration
+      - auth
       requestBody:
         content:
           application/json:
@@ -266,9 +218,9 @@ paths:
           description: ''
   /backend/auth/registration/verify-email/:
     post:
-      operationId: registration_verify_email_create
+      operationId: auth_registration_verify_email_create
       tags:
-      - registration
+      - auth
       requestBody:
         content:
           application/json:
@@ -294,7 +246,7 @@ paths:
           description: ''
   /backend/auth/user/:
     get:
-      operationId: user_retrieve
+      operationId: auth_user_retrieve
       description: |-
         Reads and updates UserModel fields
         Accepts GET, PUT, PATCH methods.
@@ -305,7 +257,7 @@ paths:
 
         Returns UserModel fields.
       tags:
-      - user
+      - auth
       security:
       - cookieAuth: []
       - tokenAuth: []
@@ -317,7 +269,7 @@ paths:
                 $ref: '#/components/schemas/UserDetails'
           description: ''
     put:
-      operationId: user_update
+      operationId: auth_user_update
       description: |-
         Reads and updates UserModel fields
         Accepts GET, PUT, PATCH methods.
@@ -328,7 +280,7 @@ paths:
 
         Returns UserModel fields.
       tags:
-      - user
+      - auth
       requestBody:
         content:
           application/json:
@@ -352,7 +304,7 @@ paths:
                 $ref: '#/components/schemas/UserDetails'
           description: ''
     patch:
-      operationId: user_partial_update
+      operationId: auth_user_partial_update
       description: |-
         Reads and updates UserModel fields
         Accepts GET, PUT, PATCH methods.
@@ -363,7 +315,7 @@ paths:
 
         Returns UserModel fields.
       tags:
-      - user
+      - auth
       requestBody:
         content:
           application/json:
@@ -384,6 +336,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserDetails'
+          description: ''
+  /backend/users/example:
+    get:
+      operationId: users_example_list
+      tags:
+      - users
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
           description: ''
 components:
   schemas:
@@ -501,15 +470,6 @@ components:
           readOnly: true
       required:
       - detail
-    SocialLogin:
-      type: object
-      properties:
-        access_token:
-          type: string
-        code:
-          type: string
-        id_token:
-          type: string
     Token:
       type: object
       description: Serializer for Token model.
@@ -519,6 +479,14 @@ components:
           maxLength: 40
       required:
       - key
+    User:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
     UserDetails:
       type: object
       description: User model w/o password
