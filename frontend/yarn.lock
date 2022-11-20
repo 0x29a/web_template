@@ -193,6 +193,11 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@react-oauth/google@^0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@react-oauth/google/-/google-0.5.0.tgz#1c8aff6b6914a61ba3df505cdb126026db2e3cad"
+  integrity sha512-3bS+DmKjynzdn3dwdNFdiIybRTOhF2siVI+gjSZrsYI52oWKVqb8mkxsV3YbU/EnL/c5g9zBinGcbzTNUHq/eg==
+
 "@reduxjs/toolkit@^1.8.4":
   version "1.8.4"
   resolved "https://registry.yarnpkg.com/@reduxjs/toolkit/-/toolkit-1.8.4.tgz#8f226acff22adf539d078b64fa2eafc3f8d1d045"

@@ -9,6 +9,8 @@ import type { ReactElement, ReactNode } from "react";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 
+import { GoogleOAuthProvider } from "@react-oauth/google";
+
 import Layout from "../components/Layout/Layout";
 
 export type NextPageWithLayout = NextPage & {
@@ -31,7 +33,11 @@ function defaultGetLayout(page: ReactElement) {
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? defaultGetLayout;
-  return getLayout(<Component {...pageProps} />);
+  return getLayout(
+    <GoogleOAuthProvider clientId="29591926416-enioc4fsreu64a1pfti8obj9n7s1sarh.apps.googleusercontent.com">
+      <Component {...pageProps} />
+    </GoogleOAuthProvider>
+  );
 }
 
 const wrappedApp = wrapper.withRedux(MyApp);

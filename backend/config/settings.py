@@ -26,15 +26,20 @@ THIRD_PARTY_APPS = [
     "dj_rest_auth",
     "allauth",
     "allauth.account",
-    "allauth.socialaccount",
     "dj_rest_auth.registration",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
     "drf_spectacular",
+]
+
+LOCAL_APPS = [
+    "users.apps.UsersConfig",
 ]
 
 if DEBUG:
     THIRD_PARTY_APPS.append("django_extensions")
 
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -135,9 +140,9 @@ SITE_ID = 1
 # django-allauth
 # ------------------------------------------------------------------------------
 # https://django-allauth.readthedocs.io/en/latest/installation.html
+AUTH_USER_MODEL = "users.User"
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
-
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     "django.contrib.auth.backends.ModelBackend",

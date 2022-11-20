@@ -8,5 +8,6 @@ nav:
     - API client upgrade: api_client_upgrade.md
     - Frontend upgrade: frontend_upgrade.md
     - Frontend notes: frontend_notes.md
+    - Google OAuth configuration: google_oauth.md
 theme:
     name: material

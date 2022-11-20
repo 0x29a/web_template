@@ -37,20 +37,21 @@ defusedxml==0.7.1
     # via
     #   -r backend/requirements/test.txt
     #   python3-openid
-dj-rest-auth[with_social]==2.2.5
+dj-rest-auth @ git+https://github.com/0x29a/dj-rest-auth
     # via -r backend/requirements/test.txt
 django==4.0.4
     # via
     #   -r backend/requirements/test.txt
     #   dj-rest-auth
     #   django-allauth
+    #   django-model-utils
     #   djangorestframework
     #   drf-spectacular
 django-allauth==0.50.0
-    # via
-    #   -r backend/requirements/test.txt
-    #   dj-rest-auth
+    # via -r backend/requirements/test.txt
 django-environ==0.9.0
+    # via -r backend/requirements/test.txt
+django-model-utils==4.3.1
     # via -r backend/requirements/test.txt
 djangorestframework==3.13.1
     # via

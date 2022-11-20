@@ -18,18 +18,21 @@ cryptography==38.0.3
     # via pyjwt
 defusedxml==0.7.1
     # via python3-openid
-dj-rest-auth[with_social]==2.2.5
+dj-rest-auth @ git+https://github.com/0x29a/dj-rest-auth
     # via -r backend/requirements/production.in
 django==4.0.4
     # via
     #   -r backend/requirements/production.in
     #   dj-rest-auth
     #   django-allauth
+    #   django-model-utils
     #   djangorestframework
     #   drf-spectacular
 django-allauth==0.50.0
     # via dj-rest-auth
 django-environ==0.9.0
+    # via -r backend/requirements/production.in
+django-model-utils==4.3.1
     # via -r backend/requirements/production.in
 djangorestframework==3.13.1
     # via

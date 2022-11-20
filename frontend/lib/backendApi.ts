@@ -1,29 +1,20 @@
 import { api } from "./api";
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
+    googleCreate: build.mutation<GoogleCreateApiResponse, GoogleCreateApiArg>({
+      query: (queryArg) => ({ url: "/backend/auth/google", method: "POST", body: queryArg.socialLogin }),
+    }),
     loginCreate: build.mutation<LoginCreateApiResponse, LoginCreateApiArg>({
-      query: (queryArg) => ({
-        url: "/backend/auth/login/",
-        method: "POST",
-        body: queryArg.login,
-      }),
+      query: (queryArg) => ({ url: "/backend/auth/login/", method: "POST", body: queryArg.login }),
     }),
     logoutCreate: build.mutation<LogoutCreateApiResponse, LogoutCreateApiArg>({
       query: () => ({ url: "/backend/auth/logout/", method: "POST" }),
     }),
     passwordChangeCreate: build.mutation<PasswordChangeCreateApiResponse, PasswordChangeCreateApiArg>({
-      query: (queryArg) => ({
-        url: "/backend/auth/password/change/",
-        method: "POST",
-        body: queryArg.passwordChange,
-      }),
+      query: (queryArg) => ({ url: "/backend/auth/password/change/", method: "POST", body: queryArg.passwordChange }),
     }),
     passwordResetCreate: build.mutation<PasswordResetCreateApiResponse, PasswordResetCreateApiArg>({
-      query: (queryArg) => ({
-        url: "/backend/auth/password/reset/",
-        method: "POST",
-        body: queryArg.passwordReset,
-      }),
+      query: (queryArg) => ({ url: "/backend/auth/password/reset/", method: "POST", body: queryArg.passwordReset }),
     }),
     passwordResetConfirmCreate: build.mutation<PasswordResetConfirmCreateApiResponse, PasswordResetConfirmCreateApiArg>(
       {
@@ -35,11 +26,7 @@ const injectedRtkApi = api.injectEndpoints({
       }
     ),
     registrationCreate: build.mutation<RegistrationCreateApiResponse, RegistrationCreateApiArg>({
-      query: (queryArg) => ({
-        url: "/backend/auth/registration/",
-        method: "POST",
-        body: queryArg.register,
-      }),
+      query: (queryArg) => ({ url: "/backend/auth/registration/", method: "POST", body: queryArg.register }),
     }),
     registrationResendEmailCreate: build.mutation<
       RegistrationResendEmailCreateApiResponse,
@@ -65,23 +52,19 @@ const injectedRtkApi = api.injectEndpoints({
       query: () => ({ url: "/backend/auth/user/" }),
     }),
     userUpdate: build.mutation<UserUpdateApiResponse, UserUpdateApiArg>({
-      query: (queryArg) => ({
-        url: "/backend/auth/user/",
-        method: "PUT",
-        body: queryArg.userDetails,
-      }),
+      query: (queryArg) => ({ url: "/backend/auth/user/", method: "PUT", body: queryArg.userDetails }),
     }),
     userPartialUpdate: build.mutation<UserPartialUpdateApiResponse, UserPartialUpdateApiArg>({
-      query: (queryArg) => ({
-        url: "/backend/auth/user/",
-        method: "PATCH",
-        body: queryArg.patchedUserDetails,
-      }),
+      query: (queryArg) => ({ url: "/backend/auth/user/", method: "PATCH", body: queryArg.patchedUserDetails }),
     }),
   }),
   overrideExisting: false,
 });
 export { injectedRtkApi as backendApi };
+export type GoogleCreateApiResponse = /** status 200  */ SocialLogin;
+export type GoogleCreateApiArg = {
+  socialLogin: SocialLogin;
+};
 export type LoginCreateApiResponse = /** status 200  */ Token;
 export type LoginCreateApiArg = {
   login: Login;
@@ -122,6 +105,11 @@ export type UserPartialUpdateApiResponse = /** status 200  */ UserDetails;
 export type UserPartialUpdateApiArg = {
   patchedUserDetails: PatchedUserDetails;
 };
+export type SocialLogin = {
+  access_token?: string;
+  code?: string;
+  id_token?: string;
+};
 export type Token = {
   key: string;
 };
@@ -148,12 +136,12 @@ export type PasswordResetConfirm = {
 };
 export type Register = {
   username: string;
-  email?: string;
+  email: string;
   password1: string;
   password2: string;
 };
 export type ResendEmailVerification = {
-  email?: string;
+  email: string;
 };
 export type VerifyEmail = {
   key: string;
@@ -173,6 +161,7 @@ export type PatchedUserDetails = {
   last_name?: string;
 };
 export const {
+  useGoogleCreateMutation,
   useLoginCreateMutation,
   useLogoutCreateMutation,
   usePasswordChangeCreateMutation,

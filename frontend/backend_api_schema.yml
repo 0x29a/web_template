@@ -3,6 +3,54 @@ info:
   title: ''
   version: 0.0.0
 paths:
+  /backend/auth/google:
+    post:
+      operationId: google_create
+      description: |-
+        class used for social authentications
+        example usage for facebook with access_token
+        -------------
+        from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
+
+        class FacebookLogin(SocialLoginView):
+            adapter_class = FacebookOAuth2Adapter
+        -------------
+
+        example usage for facebook with code
+
+        -------------
+        from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
+        from allauth.socialaccount.providers.oauth2.client import OAuth2Client
+
+        class FacebookLogin(SocialLoginView):
+            adapter_class = FacebookOAuth2Adapter
+            client_class = OAuth2Client
+            callback_url = 'localhost:8000'
+        -------------
+      tags:
+      - google
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SocialLogin'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SocialLogin'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SocialLogin'
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SocialLogin'
+          description: ''
   /backend/auth/login/:
     post:
       operationId: login_create
@@ -204,6 +252,7 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/ResendEmailVerification'
+        required: true
       security:
       - cookieAuth: []
       - tokenAuth: []
@@ -432,6 +481,7 @@ components:
           type: string
           writeOnly: true
       required:
+      - email
       - password1
       - password2
       - username
@@ -441,6 +491,8 @@ components:
         email:
           type: string
           format: email
+      required:
+      - email
     RestAuthDetail:
       type: object
       properties:
@@ -449,6 +501,15 @@ components:
           readOnly: true
       required:
       - detail
+    SocialLogin:
+      type: object
+      properties:
+        access_token:
+          type: string
+        code:
+          type: string
+        id_token:
+          type: string
     Token:
       type: object
       description: Serializer for Token model.
