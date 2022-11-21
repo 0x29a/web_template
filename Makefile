@@ -76,13 +76,16 @@ backend-restart:
 %.bash:
 	$(DOCKER_COMPOSE) exec $* bash
 
-backend-shell:
+backend.shell:
 	$(DOCKER_COMPOSE) exec backend bash -c 'python manage.py shell_plus'
 
-backend-urls:
+backend.debugsqlshell:
+	$(DOCKER_COMPOSE) exec backend bash -c 'python manage.py debugsqlshell'
+
+backend.urls:
 	$(DOCKER_COMPOSE) exec backend bash -c 'python manage.py show_urls'
 
-frontend-client:
+frontend.client:
 	sudo chown -R $(FRONTEND_USER_ID) frontend/lib
 	$(DOCKER_COMPOSE) run --rm frontend bash -c 'npx @rtk-query/codegen-openapi openapi-config.json'
 	sudo chown -R $(USER):$(USER) frontend/lib

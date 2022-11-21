@@ -31,16 +31,20 @@ THIRD_PARTY_APPS = [
     "drf_spectacular",
 ]
 
-LOCAL_APPS = [
+CUSTOM_APPS = [
     "users.apps.UsersConfig",
 ]
 
+
 if DEBUG:
-    THIRD_PARTY_APPS.append("django_extensions")
+    THIRD_PARTY_APPS += [
+        "debug_toolbar",
+        "django_extensions",
+    ]
 
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + CUSTOM_APPS
 
-MIDDLEWARE = [
+DJANGO_MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -50,6 +54,12 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+THIRD_PARTY_MIDDLEWARE = []
+if DEBUG:
+    THIRD_PARTY_MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
+
+MIDDLEWARE = DJANGO_MIDDLEWARE + THIRD_PARTY_MIDDLEWARE
 
 ROOT_URLCONF = "config.urls"
 
@@ -150,5 +160,26 @@ AUTHENTICATION_BACKENDS = [
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
+
 # firebase
+# ------------------------------------------------------------------------------
+# https://firebase.google.com/docs/admin/setup/#python
 GOOGLE_CREDENTIALS = env.json("GOOGLE_CREDENTIALS")
+
+
+# django-debug-toolbar
+# ------------------------------------------------------------------------------
+# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
+if DEBUG:
+    import socket  # only if you haven't already imported this
+
+    hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+    INTERNAL_IPS = [ip[: ip.rfind(".")] + ".1" for ip in ips] + [
+        "127.0.0.1",
+        "10.0.2.2",
+    ]
+
+# https://stackoverflow.com/a/60078702
+DEBUG_TOOLBAR_CONFIG = {
+    "SHOW_TOOLBAR_CALLBACK": lambda request: True,
+}
