@@ -1,6 +1,6 @@
 # Based on https://github.com/pydanny/cookiecutter-django/blob/master/%7B%7Bcookiecutter.project_slug%7D%7D/compose/production/django/Dockerfile
 
-ARG PYTHON_VERSION=3.9-slim-buster
+ARG PYTHON_VERSION=3.10-slim-buster
 
 # define an alias for the specfic python version used in this file.
 FROM python:${PYTHON_VERSION} as python
