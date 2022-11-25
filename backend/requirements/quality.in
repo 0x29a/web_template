@@ -7,3 +7,10 @@ flake8
 black
 isort
 mypy
+
+django-stubs[compatible-mypy]
+djangorestframework-stubs
+# TOOD: include [complatible-mypy] once this issue is resolved:
+# https://github.com/typeddjango/djangorestframework-stubs/issues/298#issuecomment-1321889134
+# Also, remove mypy from constraints.txt
+# djangorestframework-stubs[compatible-mypy]
