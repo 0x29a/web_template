@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 import { FieldValues, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 
 import ButtonWithSpinner from "../components/ButtonWithSpinner/ButtonWithSpinner";
 import { Token, useAuthLoginCreateMutation } from "../lib/backendApi";
 import { signInWithGoogleRedirect } from "../lib/firebaseAuth";
-import { isLoggedIn } from '../lib/selectors';
+import { isLoggedIn } from "../lib/selectors";
 import { setToken } from "../lib/slices/authSlice";
 import { invalid, setFieldErrors } from "../lib/utils";
 
@@ -17,7 +17,12 @@ type FormInputs = {
 };
 
 const SignIn = () => {
-  const { register, handleSubmit, setError, formState: { errors } } = useForm<FormInputs>({
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm<FormInputs>({
     reValidateMode: "onSubmit",
     shouldUseNativeValidation: true,
   });
@@ -42,8 +47,8 @@ const SignIn = () => {
   register("non_field_errors");
 
   const router = useRouter();
-  if(useSelector(isLoggedIn)) {
-    router.push("/about")
+  if (useSelector(isLoggedIn)) {
+    router.push("/about");
   }
   return (
     <section className="bg-gradient-to-b from-gray-100 to-white">

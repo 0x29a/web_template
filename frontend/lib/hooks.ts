@@ -14,7 +14,7 @@ export const useTrackFirebaseUser = () => {
       if (user) {
         dispatch(firebaseLogin());
       } else {
-        console.log('logout!!!')
+        console.log("logout!!!");
         dispatch(firebaseLogout());
       }
     });
@@ -23,15 +23,12 @@ export const useTrackFirebaseUser = () => {
   }, []);
 };
 
-
 export const useHandleFirebaseRedirect = () => {
   const dispatch = useDispatch();
 
-  getRedirectResult(firebaseAuth).then(
-    result => {
-      if (result) {
-        dispatch(firebaseLogin());
-      }
+  getRedirectResult(firebaseAuth).then((result) => {
+    if (result) {
+      dispatch(firebaseLogin());
     }
-  )
-}
+  });
+};
