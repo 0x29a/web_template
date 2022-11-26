@@ -61,7 +61,8 @@ pytest:
 mypy:
   extends: .python
   script:
-    - mypy --config-file backend/mypy.ini backend
+    - cd backend
+    - mypy .
 
 # Frontend ####################################################################
 

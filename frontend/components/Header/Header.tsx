@@ -1,11 +1,13 @@
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 
+import { useLogout } from "../../lib/firebaseAuth";
 import Dropdown from "../Dropdown/Dropdown";
 
 export default function Header() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [top, setTop] = useState(true);
+  const { logout } = useLogout();
 
   const trigger = useRef<HTMLButtonElement>(null);
   const mobileNav = useRef<HTMLDivElement>(null);
@@ -107,6 +109,9 @@ export default function Header() {
                   <Link
                     href="/"
                     className="font-medium text-sm text-gray-600 hover:text-gray-900 flex py-2 px-5 leading-tight"
+                    onClick={() => {
+                      logout();
+                    }}
                   >
                     404
                   </Link>
