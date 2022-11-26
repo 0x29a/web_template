@@ -43,7 +43,7 @@ markdownlint:
     paths:
       - .cache/pip
       - venv/
-  variables:
+  variables: &backend_variables
     PIP_CACHE_DIR: $CI_PROJECT_DIR/.cache/pip
   before_script:
     - pip install virtualenv
