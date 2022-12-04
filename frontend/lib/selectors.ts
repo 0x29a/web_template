@@ -4,4 +4,12 @@ import { RootState } from "./store";
 
 const selectAuth = (state: RootState) => state.auth;
 
-export const isLoggedIn = createSelector(selectAuth, (auth) => auth.isLoggedIn);
+export const isAuthenticatedSelector = createSelector(
+  selectAuth,
+  (auth) => auth.isAuthenticatedDjango || auth.isAuthenticatedFirebase
+);
+
+export const isAuthLoadingSelector = createSelector(
+  selectAuth,
+  (auth) => auth.isDjangoLoading || auth.isFirebaseLoading
+);

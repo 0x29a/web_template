@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 
 import ButtonWithSpinner from "../components/ButtonWithSpinner/ButtonWithSpinner";
 import { Token, useAuthLoginCreateMutation } from "../lib/backendApi";
 import { signInWithGoogleRedirect } from "../lib/firebaseAuth";
-import { isLoggedIn } from "../lib/selectors";
-import { setToken } from "../lib/slices/authSlice";
+import { isAuthLoadingSelector, isAuthenticatedSelector } from "../lib/selectors";
+import { djangoLogin } from "../lib/slices/authSlice";
 import { invalid, setFieldErrors } from "../lib/utils";
 
 type FormInputs = {
@@ -38,7 +39,7 @@ const SignIn = () => {
     }).then((result) => {
       setFieldErrors<FormInputs, Token>(setError, result);
       if ("data" in result) {
-        dispatch(setToken(result.data.key));
+        dispatch(djangoLogin());
       }
     });
 
@@ -47,13 +48,20 @@ const SignIn = () => {
   register("non_field_errors");
 
   const router = useRouter();
-  if (useSelector(isLoggedIn)) {
-    router.push("/about");
-  }
+  const isAuthLoading = useSelector(isAuthLoadingSelector);
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push("/");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated]);
+
   return (
     <section className="bg-gradient-to-b from-gray-100 to-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="pt-32 pb-12 md:pt-40 md:pb-20">
+        <div className={`pt-32 pb-12 md:pt-40 md:pb-20 ${(isAuthLoading || isAuthenticated) && "blur-sm"}`}>
           {/* Page header */}
           <div className="max-3-xl mx-auto text-center pb-12 md:pb-20">
             <h1 className="h1">Welcome back. Some pathetic quote.</h1>

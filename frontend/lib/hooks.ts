@@ -1,34 +1,36 @@
-import { getRedirectResult, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
+import { backendApi } from "./backendApi";
 import { firebaseAuth } from "./firebaseAuth";
-import { firebaseLogin, firebaseLogout } from "./slices/authSlice";
+import { djangoLogin, djangoLogout, firebaseLogin, firebaseLogout } from "./slices/authSlice";
+import { AppDispatch } from "./store";
 
 // Tracks if a firebase user is logged in. It's useful when the redirect flow is
 // enabled, as the login action is dispatched almost instantly after the page loads.
-export const useTrackFirebaseUser = () => {
-  const dispatch = useDispatch();
+export function useFirebaseAuthentication() {
+  const dispatch: AppDispatch = useDispatch();
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(firebaseAuth, (user) => {
+    onAuthStateChanged(firebaseAuth, (user) => {
       if (user) {
         dispatch(firebaseLogin());
       } else {
-        console.log("logout!!!");
         dispatch(firebaseLogout());
       }
     });
-    return unsubscribe;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-};
+  }, [dispatch]);
+}
 
-export const useHandleFirebaseRedirect = () => {
-  const dispatch = useDispatch();
-
-  getRedirectResult(firebaseAuth).then((result) => {
-    if (result) {
-      dispatch(firebaseLogin());
-    }
-  });
-};
+export function useDjangoAuthentication() {
+  const dispatch: AppDispatch = useDispatch();
+  useEffect(() => {
+    dispatch(backendApi.endpoints.authUserRetrieve.initiate()).then((result) => {
+      if (result.isSuccess) {
+        dispatch(djangoLogin());
+      } else if (result.isError) {
+        dispatch(djangoLogout());
+      }
+    });
+  }, [dispatch]);
+}

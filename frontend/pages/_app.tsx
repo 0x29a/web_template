@@ -6,7 +6,7 @@ import "nprogress/nprogress.css";
 import type { ReactElement, ReactNode } from "react";
 
 import Layout from "../components/Layout/Layout";
-import { useTrackFirebaseUser } from "../lib/hooks";
+import { useCheckIfAuthenticated, useTrackFirebaseUser } from "../lib/hooks";
 import { wrapper } from "../lib/store";
 import "../styles/globals.css";
 
@@ -30,6 +30,7 @@ function defaultGetLayout(page: ReactElement) {
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   useTrackFirebaseUser();
+  useCheckIfAuthenticated();
   const getLayout = Component.getLayout ?? defaultGetLayout;
   return getLayout(<Component {...pageProps} />);
 }
