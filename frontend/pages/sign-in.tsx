@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -51,12 +50,9 @@ const SignIn = () => {
   const isAuthLoading = useSelector(isAuthLoadingSelector);
   const isAuthenticated = useSelector(isAuthenticatedSelector);
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      router.push("/");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAuthenticated]);
+  if (isAuthenticated) {
+    router.push("/");
+  }
 
   return (
     <section className="bg-gradient-to-b from-gray-100 to-white">
