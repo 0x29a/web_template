@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const localStorageTokenKey = "token";
-
 type AuthState = {
   isAuthenticatedDjango: boolean;
   isAuthenticatedFirebase: boolean;
