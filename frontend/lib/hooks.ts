@@ -66,6 +66,6 @@ export function useLogout() {
       logout();
       trigger().then(() => dispatch(djangoLogout()));
     },
-    isLoading: mutationResult.isLoading || isPending
-  }
+    isLoading: mutationResult.isLoading || isPending,
+  };
 }
