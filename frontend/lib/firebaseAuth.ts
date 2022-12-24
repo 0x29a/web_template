@@ -1,6 +1,5 @@
 import { getApp, getApps, initializeApp } from "firebase/app";
-import { GoogleAuthProvider, connectAuthEmulator, getAuth, signInWithRedirect, signOut } from "firebase/auth";
-import { useState } from "react";
+import { GoogleAuthProvider, connectAuthEmulator, getAuth, signInWithRedirect } from "firebase/auth";
 
 // Initializing firebase app
 const firebaseConfig = {
@@ -23,23 +22,4 @@ export function signInWithGoogleRedirect() {
     redirectUri: "/about",
   });
   signInWithRedirect(firebaseAuth, provider);
-}
-
-export function useLogout() {
-  const [error, setError] = useState<string>("");
-  const [isPending, setIsPending] = useState(false);
-
-  const logout = () => {
-    setError("");
-    setIsPending(true);
-    signOut(firebaseAuth)
-      .then(() => {
-        setError("");
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
-  };
-
-  return { isPending, error, logout };
 }
