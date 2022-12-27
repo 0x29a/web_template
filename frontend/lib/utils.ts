@@ -1,6 +1,6 @@
 import { SerializedError } from "@reduxjs/toolkit";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
-import { Path, UseFormSetError } from "react-hook-form";
+import { FieldValues, Path, UseFormSetError } from "react-hook-form";
 
 type DjangoFieldsErrorData = {
   [key: string]: string[];
@@ -11,7 +11,7 @@ type MutationResult<ValidResult> =
   | { error?: FetchBaseQueryError | SerializedError | undefined };
 
 // Processes errors in Django's format and sets errors for the respective fields.
-export function setFieldErrors<FormInputs, ValidResult>(
+export function setFieldErrors<FormInputs extends FieldValues, ValidResult>(
   setError: UseFormSetError<FormInputs>,
   result: MutationResult<ValidResult>
 ) {
@@ -31,7 +31,9 @@ export function setFieldErrors<FormInputs, ValidResult>(
   }
 }
 
-export const setFieldErrorsCallback = <FormInputs, ValidResult>(setError: UseFormSetError<FormInputs>) => {
+export const setFieldErrorsCallback = <FormInputs extends FieldValues, ValidResult>(
+  setError: UseFormSetError<FormInputs>
+) => {
   return (result: MutationResult<ValidResult>) => {
     setFieldErrors<FormInputs, ValidResult>(setError, result);
   };
