@@ -1,4 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
+import { QueryStatus } from "@reduxjs/toolkit/dist/query";
 
 import { RootState } from "./store";
 
@@ -12,4 +13,13 @@ export const isAuthenticatedSelector = createSelector(
 export const isAuthInitializedSelector = createSelector(
   selectAuth,
   (auth) => auth.isDjangoInitialized && auth.isFirebaInitialized
+);
+
+export const isAnyRequestPendingSelector = createSelector(
+  (state: RootState) => state.api.queries,
+  (queries) => {
+    return Object.values(queries).some((query) => {
+      return query && query.status === QueryStatus.pending;
+    });
+  }
 );

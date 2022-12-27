@@ -1,11 +1,9 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import NProgress from "nprogress";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { backendApi, useAuthLogoutCreateMutation } from "./backendApi";
 import { firebaseAuth } from "./firebaseAuth";
-import { isAuthInitializedSelector } from "./selectors";
 import { login, logout } from "./slices/authSlice";
 import { AppDispatch } from "./store";
 
@@ -76,16 +74,4 @@ export function useLogout() {
     },
     isLoading: mutationResult.isLoading || firebaseLogout.isPending,
   };
-}
-
-// hook that starts NProgress immediately and stops it when isAuthInitializedSelector is true
-export function useNProgress() {
-  const isAuthInitialized = useSelector(isAuthInitializedSelector);
-  useEffect(() => {
-    if (isAuthInitialized && NProgress.isStarted()) {
-      NProgress.done();
-    } else if (!isAuthInitialized && !NProgress.isStarted()) {
-      NProgress.start();
-    }
-  }, [isAuthInitialized]);
 }

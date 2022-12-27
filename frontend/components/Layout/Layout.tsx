@@ -3,6 +3,7 @@ import type { ReactElement } from "react";
 
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
+import { ProgressBar } from "../ProgressBar/ProgressBar";
 
 export default function Layout({ children }: { children: ReactElement }) {
   return (
@@ -10,6 +11,7 @@ export default function Layout({ children }: { children: ReactElement }) {
       <Head>
         <title>Web Template</title>
       </Head>
+      <ProgressBar />
       <div className="antialiased bg-white text-gray-900 tracking-light">
         <div className="flex flex-col min-h-screen overflow-hidden">
           <Header />
