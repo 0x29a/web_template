@@ -9,7 +9,7 @@ export const isAuthenticatedSelector = createSelector(
   (auth) => auth.isAuthenticatedDjango || auth.isAuthenticatedFirebase
 );
 
-export const isAuthLoadingSelector = createSelector(
+export const isAuthInitializedSelector = createSelector(
   selectAuth,
-  (auth) => auth.isDjangoLoading || auth.isFirebaseLoading
+  (auth) => auth.isDjangoInitialized && auth.isFirebaInitialized
 );

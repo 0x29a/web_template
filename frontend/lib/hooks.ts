@@ -1,10 +1,12 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import NProgress from "nprogress";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { backendApi, useAuthLogoutCreateMutation } from "./backendApi";
 import { firebaseAuth } from "./firebaseAuth";
-import { djangoLogin, djangoLogout, firebaseLogin, firebaseLogout } from "./slices/authSlice";
+import { isAuthInitializedSelector } from "./selectors";
+import { login, logout } from "./slices/authSlice";
 import { AppDispatch } from "./store";
 
 export function useDjangoAuthentication() {
@@ -12,9 +14,9 @@ export function useDjangoAuthentication() {
   useEffect(() => {
     dispatch(backendApi.endpoints.authUserRetrieve.initiate()).then((result) => {
       if (result.isSuccess) {
-        dispatch(djangoLogin());
+        dispatch(login("django"));
       } else if (result.isError) {
-        dispatch(djangoLogout());
+        dispatch(logout("django"));
       }
     });
   }, [dispatch]);
@@ -27,12 +29,17 @@ export function useFirebaseAuthentication() {
   useEffect(() => {
     onAuthStateChanged(firebaseAuth, (user) => {
       if (user) {
-        dispatch(firebaseLogin());
+        dispatch(login("firebase"));
       } else {
-        dispatch(firebaseLogout());
+        dispatch(logout("firebase"));
       }
     });
   }, [dispatch]);
+}
+
+export function useAuthentication() {
+  useDjangoAuthentication();
+  useFirebaseAuthentication();
 }
 
 export function useFirebaseLogout() {
@@ -59,13 +66,26 @@ export function useFirebaseLogout() {
 export function useLogout() {
   const dispatch: AppDispatch = useDispatch();
   const [trigger, mutationResult] = useAuthLogoutCreateMutation();
-  const { isPending, logout } = useFirebaseLogout();
+
+  const firebaseLogout = useFirebaseLogout();
 
   return {
     logout: () => {
-      logout();
-      trigger().then(() => dispatch(djangoLogout()));
+      firebaseLogout.logout();
+      trigger().then(() => dispatch(logout("django")));
     },
-    isLoading: mutationResult.isLoading || isPending,
+    isLoading: mutationResult.isLoading || firebaseLogout.isPending,
   };
+}
+
+// hook that starts NProgress immediately and stops it when isAuthInitializedSelector is true
+export function useNProgress() {
+  const isAuthInitialized = useSelector(isAuthInitializedSelector);
+  useEffect(() => {
+    if (isAuthInitialized && NProgress.isStarted()) {
+      NProgress.done();
+    } else if (!isAuthInitialized && !NProgress.isStarted()) {
+      NProgress.start();
+    }
+  }, [isAuthInitialized]);
 }

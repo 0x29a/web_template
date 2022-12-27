@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import ButtonWithSpinner from "../components/ButtonWithSpinner/ButtonWithSpinner";
 import { Token, useAuthLoginCreateMutation } from "../lib/backendApi";
 import { signInWithGoogleRedirect } from "../lib/firebaseAuth";
-import { isAuthLoadingSelector, isAuthenticatedSelector } from "../lib/selectors";
-import { djangoLogin } from "../lib/slices/authSlice";
+import { isAuthInitializedSelector, isAuthenticatedSelector } from "../lib/selectors";
+import { login as providerLogin } from "../lib/slices/authSlice";
 import { invalid, setFieldErrors } from "../lib/utils";
 
 type FormInputs = {
@@ -38,7 +38,7 @@ const SignIn = () => {
     }).then((result) => {
       setFieldErrors<FormInputs, Token>(setError, result);
       if ("data" in result) {
-        dispatch(djangoLogin());
+        dispatch(providerLogin("django"));
       }
     });
 
@@ -47,7 +47,7 @@ const SignIn = () => {
   register("non_field_errors");
 
   const router = useRouter();
-  const isAuthLoading = useSelector(isAuthLoadingSelector);
+  const isAuthInitialized = useSelector(isAuthInitializedSelector);
   const isAuthenticated = useSelector(isAuthenticatedSelector);
 
   if (isAuthenticated) {
@@ -57,7 +57,7 @@ const SignIn = () => {
   return (
     <section className="bg-gradient-to-b from-gray-100 to-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className={`pt-32 pb-12 md:pt-40 md:pb-20 ${(isAuthLoading || isAuthenticated) && "blur-sm"}`}>
+        <div className={`pt-32 pb-12 md:pt-40 md:pb-20 ${(!isAuthInitialized || isAuthenticated) && "blur-sm"}`}>
           {/* Page header */}
           <div className="max-3-xl mx-auto text-center pb-12 md:pb-20">
             <h1 className="h1">Welcome back. Some pathetic quote.</h1>
