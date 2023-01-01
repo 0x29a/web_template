@@ -1,10 +1,10 @@
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut as firebaseSignOut } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { backendApi, useAuthLogoutCreateMutation } from "./backendApi";
 import { firebaseAuth } from "./firebaseAuth";
-import { login, logout } from "./slices/authSlice";
+import { signIn as signInAction, signOut as signOutAction } from "./slices/authSlice";
 import { AppDispatch } from "./store";
 
 export function useDjangoAuthentication() {
@@ -12,24 +12,24 @@ export function useDjangoAuthentication() {
   useEffect(() => {
     dispatch(backendApi.endpoints.authUserRetrieve.initiate()).then((result) => {
       if (result.isSuccess) {
-        dispatch(login("django"));
+        dispatch(signInAction("django"));
       } else if (result.isError) {
-        dispatch(logout("django"));
+        dispatch(signOutAction("django"));
       }
     });
   }, [dispatch]);
 }
 
 // Tracks if a firebase user is logged in. It's useful when the redirect flow is
-// enabled, as the login action is dispatched almost instantly after the page loads.
+// enabled, as the signIn action is dispatched almost instantly after the page loads.
 export function useFirebaseAuthentication() {
   const dispatch: AppDispatch = useDispatch();
   useEffect(() => {
     onAuthStateChanged(firebaseAuth, (user) => {
       if (user) {
-        dispatch(login("firebase"));
+        dispatch(signInAction("firebase"));
       } else {
-        dispatch(logout("firebase"));
+        dispatch(signOutAction("firebase"));
       }
     });
   }, [dispatch]);
@@ -40,14 +40,14 @@ export function useAuthentication() {
   useFirebaseAuthentication();
 }
 
-export function useFirebaseLogout() {
+export function useFirebaseSignOut() {
   const [error, setError] = useState<string>("");
   const [isPending, setIsPending] = useState(false);
 
-  const logout = () => {
+  const signOut = () => {
     setError("");
     setIsPending(true);
-    signOut(firebaseAuth)
+    firebaseSignOut(firebaseAuth)
       .then(() => {
         setError("");
         setIsPending(false);
@@ -58,20 +58,20 @@ export function useFirebaseLogout() {
       });
   };
 
-  return { isPending, error, logout };
+  return { isPending, error, signOut };
 }
 
-export function useLogout() {
+export function useSignOut() {
   const dispatch: AppDispatch = useDispatch();
   const [trigger, mutationResult] = useAuthLogoutCreateMutation();
 
-  const firebaseLogout = useFirebaseLogout();
+  const firebaseSignOut = useFirebaseSignOut();
 
   return {
-    logout: () => {
-      firebaseLogout.logout();
-      trigger().then(() => dispatch(logout("django")));
+    signOut: () => {
+      firebaseSignOut.signOut();
+      trigger().then(() => dispatch(signOutAction("django")));
     },
-    isLoading: mutationResult.isLoading || firebaseLogout.isPending,
+    isLoading: mutationResult.isLoading || firebaseSignOut.isPending,
   };
 }

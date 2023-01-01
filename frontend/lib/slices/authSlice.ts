@@ -18,7 +18,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    login: (state, { payload }) => {
+    signIn: (state, { payload }) => {
       if (payload === "django") {
         state.isAuthenticatedDjango = true;
         state.isDjangoInitialized = true;
@@ -27,7 +27,7 @@ const authSlice = createSlice({
         state.isFirebaInitialized = true;
       }
     },
-    logout: (state, { payload }) => {
+    signOut: (state, { payload }) => {
       if (payload === "django") {
         state.isAuthenticatedDjango = false;
         state.isDjangoInitialized = true;
@@ -39,6 +39,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { signIn, signOut } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -2,7 +2,7 @@ import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
-import { useLogout } from "../../lib/hooks";
+import { useSignOut } from "../../lib/hooks";
 import { isAuthenticatedSelector } from "../../lib/selectors";
 import Dropdown from "../Dropdown/Dropdown";
 
@@ -11,7 +11,7 @@ export default function Header() {
   const [top, setTop] = useState(true);
 
   const isAuthenticated = useSelector(isAuthenticatedSelector);
-  const { logout } = useLogout();
+  const { signOut: logout } = useSignOut();
 
   const trigger = useRef<HTMLButtonElement>(null);
   const mobileNav = useRef<HTMLDivElement>(null);

@@ -7,7 +7,7 @@ import ButtonWithSpinner from "../components/ButtonWithSpinner/ButtonWithSpinner
 import { Token, useAuthLoginCreateMutation } from "../lib/backendApi";
 import { signInWithGoogleRedirect } from "../lib/firebaseAuth";
 import { isAuthInitializedSelector, isAuthenticatedSelector } from "../lib/selectors";
-import { login as providerLogin } from "../lib/slices/authSlice";
+import { signIn } from "../lib/slices/authSlice";
 import { invalid, setFieldErrors } from "../lib/utils";
 
 type FormInputs = {
@@ -38,7 +38,7 @@ const SignIn = () => {
     }).then((result) => {
       setFieldErrors<FormInputs, Token>(setError, result);
       if ("data" in result) {
-        dispatch(providerLogin("django"));
+        dispatch(signIn("django"));
       }
     });
 
