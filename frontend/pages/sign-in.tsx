@@ -1,12 +1,10 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { FieldValues, useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import ButtonWithSpinner from "../components/ButtonWithSpinner/ButtonWithSpinner";
 import { Token, useAuthLoginCreateMutation } from "../lib/backendApi";
 import { signInWithGoogleRedirect } from "../lib/firebaseAuth";
-import { isAuthInitializedSelector, isAuthenticatedSelector } from "../lib/selectors";
 import { signIn } from "../lib/slices/authSlice";
 import { invalid, setFieldErrors } from "../lib/utils";
 
@@ -46,18 +44,10 @@ export default function SignIn() {
   const passwordField = register("password", { required: true });
   register("non_field_errors");
 
-  const router = useRouter();
-  const isAuthInitialized = useSelector(isAuthInitializedSelector);
-  const isAuthenticated = useSelector(isAuthenticatedSelector);
-
-  if (isAuthenticated) {
-    router.push("/");
-  }
-
   return (
     <section className="bg-gradient-to-b from-gray-100 to-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className={`pt-32 pb-12 md:pt-40 md:pb-20 ${(!isAuthInitialized || isAuthenticated) && "blur-sm"}`}>
+        <div className="pt-32 pb-12 md:pt-40 md:pb-20">
           {/* Page header */}
           <div className="max-3-xl mx-auto text-center pb-12 md:pb-20">
             <h1 className="h1">Welcome back. Some pathetic quote.</h1>

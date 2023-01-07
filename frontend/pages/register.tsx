@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import { signInWithGoogleRedirect } from "../lib/firebaseAuth";
 
 export default function Register() {
@@ -16,27 +17,13 @@ export default function Register() {
             <form>
               <div className="flex flex-wrap -mx-3 mb-4">
                 <div className="w-full px-3">
-                  <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="name">
-                    Name <span className="text-red-600">*</span>
-                  </label>
-                  <input
-                    id="name"
-                    type="text"
-                    className="form-input w-full text-gray-800"
-                    placeholder="Enter your name"
-                    required
-                  />
-                </div>
-              </div>
-              <div className="flex flex-wrap -mx-3 mb-4">
-                <div className="w-full px-3">
                   <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="email">
                     Email <span className="text-red-600">*</span>
                   </label>
                   <input
                     id="email"
                     type="email"
-                    className="form-input w-full text-gray-800"
+                    className="form-input w-full text-gray-800 outline-none"
                     placeholder="Enter your email address"
                     required
                   />
@@ -44,13 +31,27 @@ export default function Register() {
               </div>
               <div className="flex flex-wrap -mx-3 mb-4">
                 <div className="w-full px-3">
-                  <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="password">
+                  <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="password1">
                     Password <span className="text-red-600">*</span>
                   </label>
                   <input
-                    id="password"
+                    id="password1"
                     type="password"
-                    className="form-input w-full text-gray-800"
+                    className="form-input w-full text-gray-800 outline-none"
+                    placeholder="Enter your password"
+                    required
+                  />
+                </div>
+              </div>
+              <div className="flex flex-wrap -mx-3 mb-4">
+                <div className="w-full px-3">
+                  <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="password2">
+                    Repeat password <span className="text-red-600">*</span>
+                  </label>
+                  <input
+                    id="password2"
+                    type="password"
+                    className="form-input w-full text-gray-800 outline-none"
                     placeholder="Enter your password"
                     required
                   />
@@ -82,8 +83,11 @@ export default function Register() {
               <div className="flex flex-wrap -mx-3">
                 <div className="w-full px-3">
                   <button
-                    onClick={() => {signInWithGoogleRedirect()}}
-                    className="btn px-0 text-white bg-red-600 hover:bg-red-700 w-full relative flex items-center">
+                    onClick={() => {
+                      signInWithGoogleRedirect();
+                    }}
+                    className="btn px-0 text-white bg-red-600 hover:bg-red-700 w-full relative flex items-center"
+                  >
                     <svg
                       className="w-4 h-4 fill-current text-white opacity-75 shrink-0 mx-4"
                       viewBox="0 0 16 16"

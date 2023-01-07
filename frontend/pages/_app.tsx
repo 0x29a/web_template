@@ -36,10 +36,8 @@ Router.events.on("routeChangeComplete", (url) => {
 });
 
 // stop progress bar on route change error if uri doesn't end with "?progress=disabled"
-Router.events.on("routeChangeError", (url) => {
-  if (!url.endsWith("?progress=disabled")) {
-    NProgress.done();
-  }
+Router.events.on("routeChangeError", () => {
+  NProgress.done();
 });
 
 function defaultGetLayout(page: ReactElement) {
