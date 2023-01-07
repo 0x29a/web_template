@@ -16,7 +16,7 @@ type FormInputs = {
   non_field_errors: string;
 };
 
-const SignIn = () => {
+export default function SignIn() {
   const {
     register,
     handleSubmit,
@@ -115,11 +115,11 @@ const SignIn = () => {
               <div className="text-gray-600 italic">Or</div>
               <div className="border-t border-gray-300 grow ml-3" aria-hidden="true"></div>
             </div>
-            <form>
+            <form onSubmit={(e) => e.preventDefault()}>
               <div className="flex flex-wrap -mx-3">
                 <div className="w-full px-3">
                   <button
-                    onClick={() => signInWithGoogleRedirect()}
+                    onClick={signInWithGoogleRedirect}
                     className="btn px-0 text-white bg-red-600 hover:bg-red-700 w-full relative flex items-center"
                   >
                     <svg
@@ -136,8 +136,8 @@ const SignIn = () => {
             </form>
             <div className="text-gray-600 text-center mt-6">
               Don’t you have an account?{" "}
-              <Link href="/signup" className="text-blue-600 hover:underline transition duration-150 ease-in-out">
-                Sign up
+              <Link href="/register" className="text-blue-600 hover:underline transition duration-150 ease-in-out">
+                Register
               </Link>
             </div>
           </div>
@@ -145,6 +145,4 @@ const SignIn = () => {
       </div>
     </section>
   );
-};
-
-export default SignIn;
+}

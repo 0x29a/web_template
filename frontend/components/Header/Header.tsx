@@ -142,8 +142,8 @@ export default function Header() {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/" className="btn-sm text-gray-200 bg-gray-900 hover:bg-gray-800 ml-3">
-                      <span>Sign up</span>
+                    <Link href="/register" className="btn-sm text-gray-200 bg-gray-900 hover:bg-gray-800 ml-3">
+                      <span>Register</span>
                       <svg
                         className="w-3 h-3 fill-current text-gray-400 shrink-0 ml-2 -mr-1"
                         viewBox="0 0 12 12"
@@ -241,8 +241,8 @@ export default function Header() {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/" className="btn-sm text-gray-200 bg-gray-900 hover:bg-gray-800 w-full my-2">
-                      <span>Sign up</span>
+                    <Link href="/register" className="btn-sm text-gray-200 bg-gray-900 hover:bg-gray-800 w-full my-2">
+                      <span>Register</span>
                       <svg
                         className="w-3 h-3 fill-current text-gray-400 shrink-0 ml-2 -mr-1"
                         viewBox="0 0 12 12"

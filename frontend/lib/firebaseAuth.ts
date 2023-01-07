@@ -18,8 +18,9 @@ if (process.env.NODE_ENV !== "production") {
 
 export function signInWithGoogleRedirect() {
   const provider = new GoogleAuthProvider();
-  provider.setCustomParameters({
-    redirectUri: "/about",
-  });
+
+  // Hack to specify URI for OAuth redirect
+  window.history.replaceState({}, "", window.location.origin + "/auth-success");
+
   signInWithRedirect(firebaseAuth, provider);
 }

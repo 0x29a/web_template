@@ -20,9 +20,27 @@ type AppPropsWithLayout = AppProps & {
 
 // Loading bar.
 NProgress.configure({ showSpinner: false });
-Router.events.on("routeChangeStart", () => NProgress.start());
-Router.events.on("routeChangeComplete", () => NProgress.done());
-Router.events.on("routeChangeError", () => NProgress.done());
+
+// start progress bar on route change if uri doesn't end with "?progress=disabled"
+Router.events.on("routeChangeStart", (url) => {
+  if (!url.endsWith("?progress=disabled")) {
+    NProgress.start();
+  }
+});
+
+// stop progress bar on route change complete if uri doesn't end with "?progress=disabled"
+Router.events.on("routeChangeComplete", (url) => {
+  if (!url.endsWith("?progress=disabled")) {
+    NProgress.done();
+  }
+});
+
+// stop progress bar on route change error if uri doesn't end with "?progress=disabled"
+Router.events.on("routeChangeError", (url) => {
+  if (!url.endsWith("?progress=disabled")) {
+    NProgress.done();
+  }
+});
 
 function defaultGetLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;

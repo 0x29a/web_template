@@ -1,4 +1,4 @@
-import { onAuthStateChanged, signOut as firebaseSignOut } from "firebase/auth";
+import { signOut as firebaseSignOut, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
