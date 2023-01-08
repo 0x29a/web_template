@@ -23,13 +23,12 @@ export default function ProtectedContent({
 
   const showSpinner = access === "private" ? !isAuthenticated : !isAuthInitialized || isAuthenticated;
 
-  // TODO: adjust spinner color, also add blur mode for sign-in and register pages
   return showSpinner ? (
-    <div className="text-center pt-80">
-      <div role="status">
+    <div className="h-96 relative">
+      <div role="status" className="absolute -translate-x-1/2 -translate-y-1/2 top-2/4 lg:top-3/4 left-1/2">
         <svg
           aria-hidden="true"
-          className="inline w-16 h-16 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+          className="w-16 h-16 text-gray-200 animate-spin dark:text-gray-600 fill-blue-400"
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
