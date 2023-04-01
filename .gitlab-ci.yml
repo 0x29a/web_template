@@ -141,13 +141,10 @@ build:
 
 deploy:
   extends: .deploy
-  image: alpine:latest
-  before_script:
-    - apk add openssh-client
-    - eval $(ssh-agent -s)
-    - echo "$DEPLOYMENT_SSH_KEY" | tr -d '\r' | ssh-add -
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+  image:
+    name: bitnami/kubectl:latest
+    entrypoint: ['']
   script:
-    - ssh -p $DEPLOYMENT_PORT $DEPLOYMENT_USER@$DEPLOYMENT_HOST "/bin/bash $DEPLOYMENT_WORKDIR/deploy.sh"
+    - kubectl config get-contexts
+    - kubectl config use-context 0x29a/k3s-agent-config:k3s-agent
+    - kubectl get pods
