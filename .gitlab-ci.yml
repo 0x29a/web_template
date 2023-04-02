@@ -146,5 +146,5 @@ deploy:
     entrypoint: ['']
   script:
     - kubectl config get-contexts
-    - kubectl config use-context 0x29a/k3s-agent-config:k3s-agent
+    - kubectl config use-context 0x29a/cide:k3s-agent
     - kubectl get pods
