@@ -132,6 +132,15 @@ build:
     - docker-compose build --build-arg BUILDKIT_INLINE_CACHE=1
     - docker-compose push
 
+kustomization:
+  stage: build
+  image: cmd.cat/envsubst
+  script:
+    - envsubst < kustomization_blank.yml > kustomization.yml
+  artifacts:
+    paths:
+      - kustomization.yml
+
 # Deploy ######################################################################
 
 .deploy:
@@ -148,3 +157,5 @@ deploy:
     - kubectl config get-contexts
     - kubectl config use-context 0x29a/cide:k3s-agent
     - kubectl get pods
+    - cat kustomization.yml
+    - kubectl apply -k .

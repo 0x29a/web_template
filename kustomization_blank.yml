@@ -1,0 +1,59 @@
+resources:
+  - k8s/namespace.yml
+  - k8s/deployments.yml
+  - k8s/jobs.yml
+  - k8s/services.yml
+  - k8s/volumes.yml
+  - k8s/ingress.yml
+
+namespace: web-template
+
+configMapGenerator:
+  - name: backend-config
+    literals:
+      - ALLOWED_HOSTS=$PROD_ALLOWED_HOSTS
+      - SITE_ADDRESS=$PROD_SITE_ADDRESS
+      - DEBUG=$PROD_DEBUG
+  - name: frontend-config
+    literals:
+      - NEXT_PUBLIC_BACKEND_URL=$PROD_NEXT_PUBLIC_BACKEND_URL
+      - NEXT_PUBLIC_FIREBASE_AUTH_API_KEY=$PROD_NEXT_PUBLIC_FIREBASE_AUTH_API_KEY
+      - NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=$PROD_NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+
+secretGenerator:
+  - name: backend-secrets
+    literals:
+      - ADMIN_URL=$PROD_ADMIN_URL
+      - STATIC_URL=$PROD_STATIC_URL
+      - POSTGRES_HOST=$PROD_POSTGRES_HOST
+      - POSTGRES_PORT=$PROD_POSTGRES_PORT
+      - POSTGRES_DB=$PROD_POSTGRES_DB
+      - POSTGRES_USER=$PROD_POSTGRES_USER
+      - POSTGRES_PASSWORD=$PROD_POSTGRES_PASSWORD
+      - SECRET_KEY=$PROD_SECRET_KEY
+      - GOOGLE_CLOUD_PROJECT=$PROD_GOOGLE_CLOUD_PROJECT
+      - GOOGLE_CREDENTIALS=$PROD_GOOGLE_CREDENTIALS
+  - name: postgres-secrets
+    literals:
+      - POSTGRES_DB=$PROD_POSTGRES_DB
+      - POSTGRES_USER=$PROD_POSTGRES_USER
+      - POSTGRES_PASSWORD=$PROD_POSTGRES_PASSWORD
+  - name: regcred
+    literals:
+      - .dockerconfigjson=$PROD_DOCKER_CONFIG_JSON
+    type: kubernetes.io/dockerconfigjson
+
+images:
+  - name: backend
+    newName: $CI_REGISTRY_IMAGE/backend
+  - name: frontend
+    newName: $CI_REGISTRY_IMAGE/frontend
+
+vars:
+  - name: SITE_ADDRESS
+    objref:
+      kind: ConfigMap
+      name: backend-config
+      apiVersion: v1
+    fieldref:
+      fieldpath: data.SITE_ADDRESS

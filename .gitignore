@@ -139,3 +139,6 @@ cython_debug/
 
 # docker-compose override
 docker-compose.override.yml
+
+# kustomization
+kustomization.yml

@@ -24,3 +24,5 @@ USER frontend
 
 # install dependencies for the production at build time
 RUN if [ "$BUILD_ENV" = "production" ]; then yarn; fi
+
+RUN if [ "$BUILD_ENV" = "production" ]; then yarn build; fi
