@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { HYDRATE } from "next-redux-wrapper";
 
-import { firebaseAuth } from "./firebaseAuth";
 import { getCookie } from "./utils";
 
 export const api = createApi({
@@ -11,11 +10,6 @@ export const api = createApi({
       const csrftoken = getCookie("csrftoken");
       if (csrftoken) {
         headers.set("X-CSRFToken", csrftoken);
-      }
-      const firebaseUser = firebaseAuth.currentUser;
-      if (firebaseUser) {
-        const token = await firebaseUser.getIdToken();
-        headers.set("Authorization", token);
       }
       return headers;
     },

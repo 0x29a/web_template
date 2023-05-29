@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 
 import ButtonWithSpinner from "../components/ButtonWithSpinner/ButtonWithSpinner";
 import { Token, useAuthLoginCreateMutation } from "../lib/backendApi";
-import { signInWithGoogleRedirect } from "../lib/firebaseAuth";
 import { signIn } from "../lib/slices/authSlice";
 import { invalid, setFieldErrors } from "../lib/utils";
 
@@ -36,7 +35,7 @@ export default function SignIn() {
     }).then((result) => {
       setFieldErrors<FormInputs, Token>(setError, result);
       if ("data" in result) {
-        dispatch(signIn("django"));
+        dispatch(signIn());
       }
     });
 
@@ -109,7 +108,7 @@ export default function SignIn() {
               <div className="flex flex-wrap -mx-3">
                 <div className="w-full px-3">
                   <button
-                    onClick={signInWithGoogleRedirect}
+                    onClick={() => {console.error("TBD")}}
                     className="btn px-0 text-white bg-red-600 hover:bg-red-700 w-full relative flex items-center"
                   >
                     <svg

@@ -6,13 +6,11 @@ import { RootState } from "./store";
 const selectAuth = (state: RootState) => state.auth;
 
 export const isAuthenticatedSelector = createSelector(
-  selectAuth,
-  (auth) => auth.isAuthenticatedDjango || auth.isAuthenticatedFirebase
+  selectAuth, (auth) => auth.isAuthenticated
 );
 
 export const isAuthInitializedSelector = createSelector(
-  selectAuth,
-  (auth) => auth.isDjangoInitialized && auth.isFirebaInitialized
+  selectAuth, (auth) => auth.isInitialized
 );
 
 export const isAnyRequestPendingSelector = createSelector(

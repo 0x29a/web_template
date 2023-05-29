@@ -1,7 +1,5 @@
 import Link from "next/link";
 
-import { signInWithGoogleRedirect } from "../lib/firebaseAuth";
-
 export default function Register() {
   return (
     <section className="bg-gradient-to-b from-gray-100 to-white">
@@ -84,7 +82,7 @@ export default function Register() {
                 <div className="w-full px-3">
                   <button
                     onClick={() => {
-                      signInWithGoogleRedirect();
+                      console.error("TBD");
                     }}
                     className="btn px-0 text-white bg-red-600 hover:bg-red-700 w-full relative flex items-center"
                   >

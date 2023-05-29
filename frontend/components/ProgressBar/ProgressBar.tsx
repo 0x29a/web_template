@@ -3,7 +3,8 @@ import { useSelector } from "react-redux";
 
 import { isAnyRequestPendingSelector, isAuthInitializedSelector } from "../../lib/selectors";
 
-// This component renders a progress bar at the top of the page when an RTK Query or firebase request is pending.
+// This component renders a progress bar at the top of the page when an RTK Query request is pending.
+// TODO: check if this is needed.
 export function ProgressBar() {
   const isAnyRequestPending = useSelector(isAnyRequestPendingSelector);
   const isAuthInitialized = useSelector(isAuthInitializedSelector);
