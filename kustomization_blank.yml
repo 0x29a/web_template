@@ -17,8 +17,6 @@ configMapGenerator:
   - name: frontend-config
     literals:
       - NEXT_PUBLIC_BACKEND_URL=$PROD_NEXT_PUBLIC_BACKEND_URL
-      - NEXT_PUBLIC_FIREBASE_AUTH_API_KEY=$PROD_NEXT_PUBLIC_FIREBASE_AUTH_API_KEY
-      - NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=$PROD_NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
 
 secretGenerator:
   - name: backend-secrets

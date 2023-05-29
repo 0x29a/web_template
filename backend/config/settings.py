@@ -116,7 +116,6 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication",
-        "users.authentication.FirebaseAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
@@ -159,12 +158,6 @@ AUTHENTICATION_BACKENDS = [
     # `allauth` specific authentication methods, such as login by e-mail
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
-
-
-# firebase
-# ------------------------------------------------------------------------------
-# https://firebase.google.com/docs/admin/setup/#python
-GOOGLE_CREDENTIALS = env.json("GOOGLE_CREDENTIALS")
 
 
 # django-debug-toolbar
