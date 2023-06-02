@@ -47,6 +47,9 @@ const injectedRtkApi = api.injectEndpoints({
         body: queryArg.verifyEmail,
       }),
     }),
+    authSocialGoogleCreate: build.mutation<AuthSocialGoogleCreateApiResponse, AuthSocialGoogleCreateApiArg>({
+      query: (queryArg) => ({ url: "/backend/auth/social/google/", method: "POST", body: queryArg.socialLogin }),
+    }),
     authUserRetrieve: build.query<AuthUserRetrieveApiResponse, AuthUserRetrieveApiArg>({
       query: () => ({ url: "/backend/auth/user/" }),
     }),
@@ -92,6 +95,10 @@ export type AuthRegistrationResendEmailCreateApiArg = {
 export type AuthRegistrationVerifyEmailCreateApiResponse = /** status 200  */ RestAuthDetail;
 export type AuthRegistrationVerifyEmailCreateApiArg = {
   verifyEmail: VerifyEmail;
+};
+export type AuthSocialGoogleCreateApiResponse = /** status 200  */ SocialLogin;
+export type AuthSocialGoogleCreateApiArg = {
+  socialLogin: SocialLogin;
 };
 export type AuthUserRetrieveApiResponse = /** status 200  */ UserDetails;
 export type AuthUserRetrieveApiArg = void;
@@ -141,6 +148,11 @@ export type ResendEmailVerification = {
 export type VerifyEmail = {
   key: string;
 };
+export type SocialLogin = {
+  access_token?: string;
+  code?: string;
+  id_token?: string;
+};
 export type UserDetails = {
   pk: number;
   username: string;
@@ -167,6 +179,7 @@ export const {
   useAuthRegistrationCreateMutation,
   useAuthRegistrationResendEmailCreateMutation,
   useAuthRegistrationVerifyEmailCreateMutation,
+  useAuthSocialGoogleCreateMutation,
   useAuthUserRetrieveQuery,
   useLazyAuthUserRetrieveQuery,
   useAuthUserUpdateMutation,

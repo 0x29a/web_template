@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
 import Router from "next/router";
 import NProgress from "nprogress";
@@ -44,11 +45,15 @@ function defaultGetLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 }
 
-function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppPropsWithLayout) {
   useAuthentication();
 
   const getLayout = Component.getLayout ?? defaultGetLayout;
-  return getLayout(<Component {...pageProps} />);
+  return getLayout(
+    <SessionProvider session={session}>
+      <Component {...pageProps} />
+    </SessionProvider>
+  );
 }
 
 const wrappedApp = wrapper.withRedux(MyApp);

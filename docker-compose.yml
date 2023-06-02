@@ -21,6 +21,8 @@ x-app: &default-app
     - POSTGRES_PASSWORD
     - DEBUG
     - SECRET_KEY
+    - GOOGLE_CLIENT_ID
+    - GOOGLE_CLIENT_SECRET
 
 services:
   caddy:
@@ -59,6 +61,9 @@ services:
     command: /start
     environment:
       - NEXT_PUBLIC_BACKEND_URL
+      - NEXTAUTH_GOOGLE_CLIENT_ID
+      - NEXTAUTH_GOOGLE_CLIENT_SECRET
+      - NEXTAUTH_URL
 
   postgres:
     image: docker.io/postgres:12.6

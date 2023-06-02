@@ -73,10 +73,10 @@ restart:
 backend-restart:
 	$(DOCKER_COMPOSE) restart backend
 
-%.bash:
+%.shell:
 	$(DOCKER_COMPOSE) exec $* bash
 
-backend.shell:
+backend.shell_plus:
 	$(DOCKER_COMPOSE) exec backend bash -c 'python manage.py shell_plus'
 
 backend.debugsqlshell:
@@ -107,19 +107,10 @@ set_frontend_permissions:
 	mkdir -p frontend/node_modules
 	sudo chown -R $(FRONTEND_USER_ID) frontend/.next frontend/node_modules frontend/package.json frontend/yarn.lock frontend/yarn-error.log
 
-set_frontend_permissions_podman:
-	touch frontend/yarn-error.log
-	mkdir -p frontend/.next
-	mkdir -p frontend/node_modules
-	podman unshare chown -R $(FRONTEND_USER_ID) frontend/.next frontend/node_modules frontend/package.json frontend/yarn.lock frontend/yarn-error.log
-
 set_frontend_permissions_back:
 	sudo chown -R $(USER):$(USER) frontend/.next frontend/node_modules frontend/package.json frontend/yarn.lock frontend/yarn-error.log
 
 set_backend_permissions:
-	sudo chown -R $(BACKEND_USER_ID) backend
-
-set_backend_permissions_podman:
 	sudo chown -R $(BACKEND_USER_ID) backend
 
 set_backend_permissions_back:

@@ -6,6 +6,7 @@ backend_urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     path("auth/", include("dj_rest_auth.urls")),
     path("auth/registration/", include("dj_rest_auth.registration.urls")),
+    path("auth/social/", include("authentication.urls")),
     path("users/", include("users.urls")),
 ]
 

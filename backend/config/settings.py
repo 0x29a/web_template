@@ -28,11 +28,13 @@ THIRD_PARTY_APPS = [
     "allauth.account",
     "dj_rest_auth.registration",
     "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
     "drf_spectacular",
 ]
 
 CUSTOM_APPS = [
     "users.apps.UsersConfig",
+    "authentication.apps.AuthenticationConfig",
 ]
 
 
