@@ -1,49 +1,9 @@
 import Link from "next/link";
-import { FieldValues, useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
 
-import ButtonWithSpinner from "../components/ButtonWithSpinner/ButtonWithSpinner";
 import GoogleForm from "../components/GoogleForm/GoogleForm";
-import { Token, useAuthLoginCreateMutation } from "../lib/backendApi";
-import { signIn } from "../lib/slices/authSlice";
-import { invalid, setFieldErrors } from "../lib/utils";
-
-type FormInputs = {
-  email: string;
-  password: string;
-  non_field_errors: string;
-};
+import SignInForm from "../components/SignInForm/SignInForm";
 
 export default function SignIn() {
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors },
-  } = useForm<FormInputs>({
-    reValidateMode: "onSubmit",
-    shouldUseNativeValidation: true,
-  });
-
-  const dispatch = useDispatch();
-  const [login, loginResult] = useAuthLoginCreateMutation();
-  const onSubmit = (data: FieldValues) =>
-    login({
-      login: {
-        email: data.email,
-        password: data.password,
-      },
-    }).then((result) => {
-      setFieldErrors<FormInputs, Token>(setError, result);
-      if ("data" in result) {
-        dispatch(signIn());
-      }
-    });
-
-  const emailField = register("email", { required: true });
-  const passwordField = register("password", { required: true });
-  register("non_field_errors");
-
   return (
     <section className="bg-gradient-to-b from-gray-100 to-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -53,53 +13,9 @@ export default function SignIn() {
             <h1 className="h1">Welcome back. Some pathetic quote.</h1>
           </div>
 
-          {/* Form */}
-          <div onSubmit={handleSubmit(onSubmit)} className="max-w-sm mx-auto">
-            <form>
-              <div className="flex flex-wrap -mx-3 mb-4">
-                <div className="w-full px-3">
-                  <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="email">
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    className={`form-input w-full text-gray-800 outline-none ${errors.email && invalid}`}
-                    placeholder="Enter your email address"
-                    {...emailField}
-                  />
-                  {errors.email && <p className="mt-2 text-center text-red-500">{errors.email.message}</p>}
-                </div>
-              </div>
-              <div className="flex flex-wrap -mx-3 mb-4">
-                <div className="w-full px-3">
-                  <div className="flex justify-between">
-                    <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="password">
-                      Password
-                    </label>
-                    <Link href="/" className="text-sm font-medium text-blue-600 hover:underline">
-                      Having trouble signing in?
-                    </Link>
-                  </div>
-                  <input
-                    id="password"
-                    type="password"
-                    className={`form-input w-full text-gray-800 outline-none ${errors.password && invalid}`}
-                    placeholder="Enter your password"
-                    {...passwordField}
-                  />
-                  {errors.password && <p className="mt-2 text-center text-red-500">{errors.password.message}</p>}
-                </div>
-              </div>
-              <div className="flex flex-wrap -mx-3 mt-6">
-                <div className="w-full px-3">
-                  <ButtonWithSpinner loading={loginResult.isLoading}>Sign In</ButtonWithSpinner>
-                </div>
-              </div>
-              {errors.non_field_errors && (
-                <p className="mt-6 text-center text-red-500">{errors.non_field_errors.message}</p>
-              )}
-            </form>
+          {/* Forms */}
+          <div className="max-w-sm mx-auto">
+            <SignInForm />
             <div className="flex items-center my-6">
               <div className="border-t border-gray-300 grow mr-3" aria-hidden="true"></div>
               <div className="text-gray-600 italic">Or</div>
