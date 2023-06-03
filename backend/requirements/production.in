@@ -9,3 +9,7 @@ django-environ
 gunicorn
 psycopg2
 whitenoise
+Celery < 6.0
+django-celery-beat
+django-redis
+flower

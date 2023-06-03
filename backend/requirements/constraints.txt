@@ -1,4 +1,4 @@
 tomli<2.0.0
 werkzeug<2.1
 
-mypy==1.2.0
+mypy<1.4

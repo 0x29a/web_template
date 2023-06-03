@@ -4,24 +4,41 @@
 #
 #    pip-compile --output-file=requirements/development.txt requirements/development.in
 #
+amqp==5.1.1
+    # via
+    #   -r requirements/quality.txt
+    #   kombu
 asgiref==3.7.2
     # via
     #   -r requirements/quality.txt
     #   django
 asttokens==2.2.1
     # via stack-data
+async-timeout==4.0.2
+    # via
+    #   -r requirements/quality.txt
+    #   redis
 attrs==23.1.0
     # via
     #   -r requirements/quality.txt
     #   jsonschema
 backcall==0.2.0
     # via ipython
+billiard==3.6.4.0
+    # via
+    #   -r requirements/quality.txt
+    #   celery
 black==23.3.0
     # via -r requirements/quality.txt
 build==0.10.0
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
+celery==5.2.7
+    # via
+    #   -r requirements/quality.txt
+    #   django-celery-beat
+    #   flower
 certifi==2023.5.7
     # via
     #   -r requirements/quality.txt
@@ -39,8 +56,28 @@ click==8.1.3
     #   -r requirements/pip-tools.txt
     #   -r requirements/quality.txt
     #   black
+    #   celery
+    #   click-didyoumean
+    #   click-plugins
+    #   click-repl
     #   pip-tools
-cryptography==40.0.2
+click-didyoumean==0.3.0
+    # via
+    #   -r requirements/quality.txt
+    #   celery
+click-plugins==1.1.1
+    # via
+    #   -r requirements/quality.txt
+    #   celery
+click-repl==0.2.0
+    # via
+    #   -r requirements/quality.txt
+    #   celery
+cron-descriptor==1.4.0
+    # via
+    #   -r requirements/quality.txt
+    #   django-celery-beat
+cryptography==41.0.1
     # via
     #   -r requirements/quality.txt
     #   pyjwt
@@ -59,9 +96,11 @@ django==4.1.3
     #   -r requirements/quality.txt
     #   dj-rest-auth
     #   django-allauth
+    #   django-celery-beat
     #   django-debug-toolbar
     #   django-extensions
     #   django-model-utils
+    #   django-redis
     #   django-stubs
     #   django-stubs-ext
     #   djangorestframework
@@ -70,6 +109,8 @@ django-allauth==0.54.0
     # via
     #   -r requirements/quality.txt
     #   dj-rest-auth
+django-celery-beat==2.5.0
+    # via -r requirements/quality.txt
 django-debug-toolbar==4.1.0
     # via -r requirements/development.in
 django-environ==0.10.0
@@ -78,20 +119,26 @@ django-extensions==3.2.1
     # via -r requirements/development.in
 django-model-utils==4.3.1
     # via -r requirements/quality.txt
-django-stubs[compatible-mypy]==4.2.0
+django-redis==5.2.0
+    # via -r requirements/quality.txt
+django-stubs[compatible-mypy]==4.2.1
     # via
     #   -r requirements/quality.txt
     #   djangorestframework-stubs
-django-stubs-ext==4.2.0
+django-stubs-ext==4.2.1
     # via
     #   -r requirements/quality.txt
     #   django-stubs
+django-timezone-field==5.0
+    # via
+    #   -r requirements/quality.txt
+    #   django-celery-beat
 djangorestframework==3.14.0
     # via
     #   -r requirements/quality.txt
     #   dj-rest-auth
     #   drf-spectacular
-djangorestframework-stubs==3.14.0
+djangorestframework-stubs==3.14.1
     # via -r requirements/quality.txt
 drf-spectacular==0.26.2
     # via -r requirements/quality.txt
@@ -103,8 +150,14 @@ executing==1.2.0
     # via stack-data
 flake8==6.0.0
     # via -r requirements/quality.txt
+flower==1.2.0
+    # via -r requirements/quality.txt
 gunicorn==20.1.0
     # via -r requirements/quality.txt
+humanize==4.6.0
+    # via
+    #   -r requirements/quality.txt
+    #   flower
 idna==3.4
     # via
     #   -r requirements/quality.txt
@@ -119,7 +172,7 @@ iniconfig==2.0.0
     #   pytest
 ipdb==0.13.13
     # via -r requirements/development.in
-ipython==8.13.2
+ipython==8.14.0
     # via
     #   -r requirements/development.in
     #   ipdb
@@ -131,13 +184,17 @@ jsonschema==4.17.3
     # via
     #   -r requirements/quality.txt
     #   drf-spectacular
+kombu==5.3.0
+    # via
+    #   -r requirements/quality.txt
+    #   celery
 matplotlib-inline==0.1.6
     # via ipython
 mccabe==0.7.0
     # via
     #   -r requirements/quality.txt
     #   flake8
-mypy==1.2.0
+mypy==1.3.0
     # via
     #   -c requirements/constraints.txt
     #   -r requirements/quality.txt
@@ -179,8 +236,15 @@ pluggy==1.0.0
     # via
     #   -r requirements/quality.txt
     #   pytest
+prometheus-client==0.17.0
+    # via
+    #   -r requirements/quality.txt
+    #   flower
 prompt-toolkit==3.0.38
-    # via ipython
+    # via
+    #   -r requirements/quality.txt
+    #   click-repl
+    #   ipython
 psycopg2==2.9.6
     # via -r requirements/quality.txt
 ptyprocess==0.7.0
@@ -215,6 +279,14 @@ pyrsistent==0.19.3
     #   jsonschema
 pytest==7.3.1
     # via -r requirements/quality.txt
+python-crontab==2.7.1
+    # via
+    #   -r requirements/quality.txt
+    #   django-celery-beat
+python-dateutil==2.8.2
+    # via
+    #   -r requirements/quality.txt
+    #   python-crontab
 python3-openid==3.2.0
     # via
     #   -r requirements/quality.txt
@@ -222,11 +294,18 @@ python3-openid==3.2.0
 pytz==2023.3
     # via
     #   -r requirements/quality.txt
+    #   celery
+    #   django-timezone-field
     #   djangorestframework
+    #   flower
 pyyaml==6.0
     # via
     #   -r requirements/quality.txt
     #   drf-spectacular
+redis==4.5.5
+    # via
+    #   -r requirements/quality.txt
+    #   django-redis
 requests==2.31.0
     # via
     #   -r requirements/quality.txt
@@ -238,7 +317,10 @@ requests-oauthlib==1.3.1
     #   -r requirements/quality.txt
     #   django-allauth
 six==1.16.0
-    # via asttokens
+    # via
+    #   -r requirements/quality.txt
+    #   click-repl
+    #   python-dateutil
 sqlparse==0.4.4
     # via
     #   -r requirements/quality.txt
@@ -258,6 +340,10 @@ tomli==1.2.3
     #   mypy
     #   pyproject-hooks
     #   pytest
+tornado==6.3.2
+    # via
+    #   -r requirements/quality.txt
+    #   flower
 traitlets==5.9.0
     # via
     #   ipython
@@ -279,7 +365,7 @@ types-urllib3==1.26.25.13
     # via
     #   -r requirements/quality.txt
     #   types-requests
-typing-extensions==4.6.2
+typing-extensions==4.6.3
     # via
     #   -r requirements/quality.txt
     #   asgiref
@@ -287,6 +373,10 @@ typing-extensions==4.6.2
     #   django-stubs-ext
     #   djangorestframework-stubs
     #   mypy
+tzdata==2023.3
+    # via
+    #   -r requirements/quality.txt
+    #   django-celery-beat
 uritemplate==4.1.1
     # via
     #   -r requirements/quality.txt
@@ -295,8 +385,16 @@ urllib3==2.0.2
     # via
     #   -r requirements/quality.txt
     #   requests
+vine==5.0.0
+    # via
+    #   -r requirements/quality.txt
+    #   amqp
+    #   celery
+    #   kombu
 wcwidth==0.2.6
-    # via prompt-toolkit
+    # via
+    #   -r requirements/quality.txt
+    #   prompt-toolkit
 werkzeug==2.0.3
     # via
     #   -c requirements/constraints.txt

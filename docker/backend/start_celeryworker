@@ -4,5 +4,5 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-yarn install
-yarn dev
+
+exec celery -A config.celery_app worker -l INFO

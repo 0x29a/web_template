@@ -23,6 +23,9 @@ x-app: &default-app
     - SECRET_KEY
     - GOOGLE_CLIENT_ID
     - GOOGLE_CLIENT_SECRET
+    - CELERY_FLOWER_USER
+    - CELERY_FLOWER_PASSWORD
+    - CELERY_BROKER_URL
 
 services:
   caddy:
@@ -46,7 +49,21 @@ services:
 
   backend:
     <<: *default-app
-    command: /start
+    command: /start_django
+
+  celery-worker:
+    <<: *default-app
+    command: /start_celeryworker
+
+  celery-beat:
+    <<: *default-app
+    depends_on:
+      - backend
+    command: /start_celerybeat
+
+  flower:
+    <<: *default-app
+    command: /start_flower
 
   frontend:
     build:
@@ -64,6 +81,7 @@ services:
       - NEXTAUTH_GOOGLE_CLIENT_ID
       - NEXTAUTH_GOOGLE_CLIENT_SECRET
       - NEXTAUTH_URL
+      - NODE_ENV
 
   postgres:
     image: docker.io/postgres:12.6
@@ -75,7 +93,7 @@ services:
       - POSTGRES_PASSWORD
 
   redis:
-    image: docker.io/redis:5.0
+    image: docker.io/redis:6.0
 
 volumes:
   caddy_data:

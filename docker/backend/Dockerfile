@@ -63,9 +63,21 @@ COPY --chown=backend:backend ./docker/backend/entrypoint /entrypoint
 RUN sed -i 's/\r$//g' /entrypoint
 RUN chmod +x /entrypoint
 
-COPY --chown=backend:backend ./docker/backend/start_${BUILD_ENV} /start
-RUN sed -i 's/\r$//g' /start
-RUN chmod +x /start
+COPY --chown=backend:backend ./docker/backend/start_${BUILD_ENV} /start_django
+RUN sed -i 's/\r$//g' /start_django
+RUN chmod +x /start_django
+
+COPY --chown=backend:backend ./docker/backend/start_celeryworker /start_celeryworker
+RUN sed -i 's/\r$//g' /start_celeryworker
+RUN chmod +x /start_celeryworker
+
+COPY --chown=backend:backend ./docker/backend/start_celerybeat /start_celerybeat
+RUN sed -i 's/\r$//g' /start_celerybeat
+RUN chmod +x /start_celerybeat
+
+COPY --chown=backend:backend ./docker/backend/start_flower /start_flower
+RUN sed -i 's/\r$//g' /start_flower
+RUN chmod +x /start_flower
 
 # copy the application code to WORKDIR
 COPY --chown=backend:backend ./${APP_HOME} ${APP_HOME}
