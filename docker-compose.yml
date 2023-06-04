@@ -81,6 +81,7 @@ services:
       - NEXTAUTH_GOOGLE_CLIENT_ID
       - NEXTAUTH_GOOGLE_CLIENT_SECRET
       - NEXTAUTH_URL
+      - NEXTAUTH_SECRET
 
   postgres:
     image: docker.io/postgres:12.6

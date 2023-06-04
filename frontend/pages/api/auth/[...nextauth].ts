@@ -14,7 +14,7 @@ declare module "next-auth/jwt" {
 }
 
 export default NextAuth({
-  secret: process.env.SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     GoogleProvider({
       clientId: process.env.NEXTAUTH_GOOGLE_CLIENT_ID || "",
