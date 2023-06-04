@@ -19,7 +19,7 @@ spec:
         runAsGroup: 1000
       containers:
         - name: frontend
-          image: frontend
+          image: frontend:latest
           command: ["/start"]
           envFrom:
             - configMapRef:
@@ -51,7 +51,7 @@ spec:
         runAsGroup: 1000
       containers:
         - name: backend
-          image: backend
+          image: backend:latest
           args: ["/start"]
           envFrom:
             - configMapRef:
