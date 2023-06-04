@@ -3,6 +3,7 @@ Creates allauth.socialaccount.models.SocialApp for Google OAuth2.
 """
 
 import os
+
 from django.db import migrations
 
 
