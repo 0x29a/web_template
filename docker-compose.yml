@@ -81,7 +81,6 @@ services:
       - NEXTAUTH_GOOGLE_CLIENT_ID
       - NEXTAUTH_GOOGLE_CLIENT_SECRET
       - NEXTAUTH_URL
-      - NODE_ENV
 
   postgres:
     image: docker.io/postgres:12.6

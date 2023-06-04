@@ -9,16 +9,24 @@ resources:
 namespace: web-template
 
 configMapGenerator:
+  - name: frontend-config
+    literals:
+      - NEXT_PUBLIC_BACKEND_URL=$PROD_NEXT_PUBLIC_BACKEND_URL
+      - NEXTAUTH_URL=$PROD_NEXTAUTH_URL
+
   - name: backend-config
     literals:
       - ALLOWED_HOSTS=$PROD_ALLOWED_HOSTS
       - SITE_ADDRESS=$PROD_SITE_ADDRESS
       - DEBUG=$PROD_DEBUG
-  - name: frontend-config
-    literals:
-      - NEXT_PUBLIC_BACKEND_URL=$PROD_NEXT_PUBLIC_BACKEND_URL
+      - CELERY_BROKER_URL=$PROD_CELERY_BROKER_URL
 
 secretGenerator:
+  - name: frontend-secrets
+    literals:
+      - NEXTAUTH_GOOGLE_CLIENT_ID=$PROD_NEXTAUTH_GOOGLE_CLIENT_ID
+      - NEXTAUTH_GOOGLE_CLIENT_SECRET=$PROD_NEXTAUTH_GOOGLE_CLIENT_SECRET
+
   - name: backend-secrets
     literals:
       - ADMIN_URL=$PROD_ADMIN_URL
@@ -29,11 +37,17 @@ secretGenerator:
       - POSTGRES_USER=$PROD_POSTGRES_USER
       - POSTGRES_PASSWORD=$PROD_POSTGRES_PASSWORD
       - SECRET_KEY=$PROD_SECRET_KEY
+      - GOOGLE_CLIENT_ID=$PROD_GOOGLE_CLIENT_ID
+      - GOOGLE_CLIENT_SECRET=$PROD_GOOGLE_CLIENT_SECRET
+      - CELERY_FLOWER_USER=$PROD_CELERY_FLOWER_USER
+      - CELERY_FLOWER_PASSWORD=$PROD_CELERY_FLOWER_PASSWORD
+
   - name: postgres-secrets
     literals:
       - POSTGRES_DB=$PROD_POSTGRES_DB
       - POSTGRES_USER=$PROD_POSTGRES_USER
       - POSTGRES_PASSWORD=$PROD_POSTGRES_PASSWORD
+
   - name: regcred
     literals:
       - .dockerconfigjson=$PROD_DOCKER_CONFIG_JSON
