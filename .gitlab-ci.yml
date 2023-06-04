@@ -17,6 +17,11 @@ stages:
   POSTGRES_PASSWORD: postgres
   ADMIN_URL: admin/
   STATIC_URL: /backend/static/
+  GOOGLE_CLIENT_ID: test
+  GOOGLE_CLIENT_SECRET: test
+  CELERY_FLOWER_USER: test
+  CELERY_FLOWER_PASSWORD: test
+  CELERY_BROKER_URL: redis://redis:6379/0
 
 # see https://gitlab.com/gitlab-org/gitlab/blob/master/lib/gitlab/ci/templates/Terraform/Base.gitlab-ci.yml
 .terraform:
