@@ -41,9 +41,9 @@ secretGenerator:
 
 images:
   - name: backend
-    newName: $CI_REGISTRY_IMAGE/backend
+    newName: $CI_REGISTRY_IMAGE/backend:latest
   - name: frontend
-    newName: $CI_REGISTRY_IMAGE/frontend
+    newName: $CI_REGISTRY_IMAGE/frontend:latest
 
 vars:
   - name: SITE_ADDRESS

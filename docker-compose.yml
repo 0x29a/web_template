@@ -7,7 +7,7 @@ x-app: &default-app
     cache_from:
       - "${DOCKER_BUILD_IMAGE_PREFIX}/backend:latest"
 
-  image: "${DOCKER_BUILD_IMAGE_PREFIX}/backend"
+  image: "${DOCKER_BUILD_IMAGE_PREFIX}/backend:${DOCKER_BUILD_IMAGE_TAG:-latest}"
   depends_on:
     - postgres
   environment:
@@ -35,7 +35,7 @@ services:
       cache_from:
         - "${DOCKER_BUILD_IMAGE_PREFIX}/caddy:latest"
 
-    image: "${DOCKER_BUILD_IMAGE_PREFIX}/caddy"
+    image: "${DOCKER_BUILD_IMAGE_PREFIX}/caddy:${DOCKER_BUILD_IMAGE_TAG:-latest}"
     restart: unless-stopped
     depends_on:
       - backend
@@ -74,7 +74,7 @@ services:
       cache_from:
         - "${DOCKER_BUILD_IMAGE_PREFIX}/frontend:latest"
 
-    image: "${DOCKER_BUILD_IMAGE_PREFIX}/frontend"
+    image: "${DOCKER_BUILD_IMAGE_PREFIX}/frontend:${DOCKER_BUILD_IMAGE_TAG:-latest}"
     command: /start
     environment:
       - NEXT_PUBLIC_BACKEND_URL

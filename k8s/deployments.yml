@@ -19,7 +19,8 @@ spec:
         runAsGroup: 1000
       containers:
         - name: frontend
-          image: frontend:latest
+          image: frontend
+          imagePullPolicy: Always
           command: ["/start"]
           envFrom:
             - configMapRef:
@@ -51,8 +52,9 @@ spec:
         runAsGroup: 1000
       containers:
         - name: backend
-          image: backend:latest
-          args: ["/start"]
+          image: backend
+          imagePullPolicy: Always
+          args: ["/start_django"]
           envFrom:
             - configMapRef:
                 name: backend-config

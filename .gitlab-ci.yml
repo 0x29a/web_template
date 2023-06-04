@@ -146,6 +146,7 @@ prettier:
     SITE_ADDRESS: localhost:80
     DOCKER_BUILD_ENVIRONMENT: production
     DOCKER_BUILD_IMAGE_PREFIX: $CI_REGISTRY_IMAGE
+    DOCKER_BUILD_IMAGE_TAG: latest
     <<: *backend_variables
   only:
     - master
