@@ -29,17 +29,18 @@ RUN pip wheel --wheel-dir /usr/src/app/wheels  \
 FROM python as python-run-stage
 
 ARG BUILD_ENVIRONMENT=production
+
 ARG APP_HOME=/backend
+ARG APP_USER_ID=1000
 
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV BUILD_ENV ${BUILD_ENVIRONMENT}
 
+RUN if [ "$APP_USER_ID" = 0 ]; then echo "backend user may not be root" && false; fi
+RUN useradd --home-dir ${APP_HOME} --create-home --shell /bin/bash --uid ${APP_USER_ID} backend
+
 WORKDIR ${APP_HOME}
-
-RUN addgroup --system backend \
-    && adduser --system --ingroup backend backend
-
 
 # Install required system dependencies
 RUN apt-get update && apt-get install --no-install-recommends -y \
