@@ -12,6 +12,7 @@ x-app: &default-app
     - postgres
   environment:
     - ALLOWED_HOSTS
+    - CSRF_TRUSTED_ORIGINS
     - ADMIN_URL
     - STATIC_URL
     - POSTGRES_HOST

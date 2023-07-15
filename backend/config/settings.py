@@ -9,6 +9,7 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = ["*"] if DEBUG else env.list("ALLOWED_HOSTS")
+CSRF_TRUSTED_ORIGINS = [] if DEBUG else env.list("CSRF_TRUSTED_ORIGINS")
 
 DJANGO_APPS = [
     "django.contrib.admin",
