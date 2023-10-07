@@ -1,4 +1,6 @@
 # General #####################################################################
+include:
+  - local: .gitlab/terraform.yml
 
 stages:
   - quality
@@ -23,17 +25,6 @@ stages:
   CELERY_FLOWER_USER: test
   CELERY_FLOWER_PASSWORD: test
   CELERY_BROKER_URL: redis://redis:6379/0
-
-# see https://gitlab.com/gitlab-org/gitlab/blob/master/lib/gitlab/ci/templates/Terraform/Base.gitlab-ci.yml
-.terraform:
-  image: "$CI_TEMPLATE_REGISTRY_HOST/gitlab-org/terraform-images/releases/1.4"
-  variables:
-    TF_ROOT: terraform
-    TF_STATE_NAME: default
-  cache:
-    key: "${TF_ROOT}"
-    paths:
-      - ${TF_ROOT}/.terraform/
 
 # Docs ########################################################################
 
@@ -95,14 +86,6 @@ mypy:
     - cd backend
     - mypy .
 
-terraform validate:
-  extends: .terraform
-  stage: quality
-  script:
-    - cd "${TF_ROOT}"
-    - gitlab-terraform fmt
-  allow_failure: true
-
 # Frontend ####################################################################
 
 .frontend:
@@ -158,53 +141,9 @@ build:
     - docker-compose build --build-arg BUILDKIT_INLINE_CACHE=1
     - docker-compose push
 
-kustomization:
-  stage: build
-  image: cmd.cat/envsubst
-  script:
-    - envsubst < kustomization_blank.yml > kustomization.yml
-  artifacts:
-    paths:
-      - kustomization.yml
-
-terraform plan:
-  extends: .terraform
-  stage: build
-  script:
-    - cd "${TF_ROOT}"
-    - gitlab-terraform plan
-    - gitlab-terraform plan-json
-  resource_group: ${TF_STATE_NAME}
-  artifacts:
-    paths:
-      - ${TF_ROOT}/plan.cache
-    reports:
-      terraform: ${TF_ROOT}/plan.json
-
 # Deploy ######################################################################
 
 .deploy:
   stage: deploy
   only:
     - master
-
-terraform apply:
-  extends: .terraform
-  stage: deploy
-  script:
-    - cd "${TF_ROOT}"
-    - gitlab-terraform apply
-  resource_group: ${TF_STATE_NAME}
-  when: manual
-
-# Cleanup #####################################################################
-# Uncomment only if needed ####################################################
-
-# terraform destroy:
-#   extends: .terraform
-#   stage: cleanup
-#   script:
-#     - cd "${TF_ROOT}"
-#     - gitlab-terraform destroy
-#   resource_group: ${TF_STATE_NAME}
-#   when: manual

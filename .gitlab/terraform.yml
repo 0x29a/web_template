@@ -1,0 +1,50 @@
+# see https://gitlab.com/gitlab-org/gitlab/blob/master/lib/gitlab/ci/templates/Terraform/Base.gitlab-ci.yml
+.terraform:
+  image: "$CI_TEMPLATE_REGISTRY_HOST/gitlab-org/terraform-images/releases/1.4"
+  variables:
+    TF_ROOT: terraform
+    TF_STATE_NAME: default
+  cache:
+    key: "${TF_ROOT}"
+    paths:
+      - ${TF_ROOT}/.terraform/
+
+terraform validate:
+  extends: .terraform
+  stage: quality
+  script:
+    - cd "${TF_ROOT}"
+    - gitlab-terraform fmt
+  allow_failure: true
+
+terraform plan:
+  extends: .terraform
+  stage: build
+  script:
+    - cd "${TF_ROOT}"
+    - gitlab-terraform plan
+    - gitlab-terraform plan-json
+  resource_group: ${TF_STATE_NAME}
+  artifacts:
+    paths:
+      - ${TF_ROOT}/plan.cache
+    reports:
+      terraform: ${TF_ROOT}/plan.json
+
+terraform apply:
+  extends: .terraform
+  stage: deploy
+  script:
+    - cd "${TF_ROOT}"
+    - gitlab-terraform apply
+  resource_group: ${TF_STATE_NAME}
+  when: manual
+
+# terraform destroy:
+#   extends: .terraform
+#   stage: cleanup
+#   script:
+#     - cd "${TF_ROOT}"
+#     - gitlab-terraform destroy
+#   resource_group: ${TF_STATE_NAME}
+#   when: manual
