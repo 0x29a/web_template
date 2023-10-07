@@ -87,7 +87,7 @@ backend.urls:
 
 frontend.client:
 	sudo chown -R $(FRONTEND_USER_ID) frontend/lib
-	$(DOCKER_COMPOSE) run --rm frontend bash -c 'npx @rtk-query/codegen-openapi openapi-config.json'
+	$(DOCKER_COMPOSE) run --rm frontend sh -c 'npx @rtk-query/codegen-openapi openapi-config.json'
 	sudo chown -R $(USER):$(USER) frontend/lib
 
 frontend.lint:
@@ -98,7 +98,7 @@ frontend.format-check:
 
 frontend.fix:
 	sudo chown -R $(FRONTEND_USER_ID) frontend/pages frontend/lib frontend/components
-	$(DOCKER_COMPOSE) run --rm frontend bash -c 'yarn lint --fix && yarn format' || true
+	$(DOCKER_COMPOSE) run --rm frontend sh -c 'yarn lint --fix && yarn format' || true
 	sudo chown -R $(USER):$(USER) frontend/pages frontend/lib frontend/components
 
 set_frontend_permissions:
@@ -118,7 +118,7 @@ set_backend_permissions_back:
 
 schema:
 	touch backend/schema.yml
-	sudo chown 101:101 backend/schema.yml
+	sudo chown $(BACKEND_USER_ID):$(BACKEND_USER_ID) backend/schema.yml
 	$(DOCKER_COMPOSE) run --rm backend python manage.py spectacular --file schema.yml --validate
 	sudo chown $(USER):$(USER) backend/schema.yml
 	mv backend/schema.yml frontend/backend_api_schema.yml

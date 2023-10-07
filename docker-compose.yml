@@ -1,7 +1,7 @@
 x-app: &default-app
   build:
-    context: .
-    dockerfile: ./docker/backend/Dockerfile
+    context: ./backend
+    dockerfile: Dockerfile
     args:
       BUILD_ENVIRONMENT: "${DOCKER_BUILD_ENVIRONMENT:-production}"
     cache_from:
@@ -31,8 +31,8 @@ x-app: &default-app
 services:
   caddy:
     build:
-      context: .
-      dockerfile: ./docker/caddy/Dockerfile
+      context: ./caddy
+      dockerfile: Dockerfile
       cache_from:
         - "${DOCKER_BUILD_IMAGE_PREFIX}/caddy:latest"
 
@@ -68,15 +68,15 @@ services:
 
   frontend:
     build:
-      context: .
-      dockerfile: ./docker/frontend/Dockerfile
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: production
       args:
         BUILD_ENVIRONMENT: "${DOCKER_BUILD_ENVIRONMENT:-production}"
       cache_from:
         - "${DOCKER_BUILD_IMAGE_PREFIX}/frontend:latest"
 
     image: "${DOCKER_BUILD_IMAGE_PREFIX}/frontend:${DOCKER_BUILD_IMAGE_TAG:-latest}"
-    command: /start
     environment:
       - NEXT_PUBLIC_BACKEND_URL
       - NEXTAUTH_GOOGLE_CLIENT_ID

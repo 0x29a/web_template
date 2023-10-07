@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   libpq-dev
 
 # Requirements are installed here to ensure they will be cached.
-COPY ./backend/requirements .
+COPY ./requirements .
 
 # Create Python Dependency and Sub-Dependency Wheels.
 RUN pip wheel --wheel-dir /usr/src/app/wheels  \
@@ -60,31 +60,28 @@ COPY --from=python-build-stage /usr/src/app/wheels  /wheels/
 RUN pip install --no-cache-dir --no-index --find-links=/wheels/ /wheels/* \
   && rm -rf /wheels/
 
-COPY --chown=backend:backend ./docker/backend/entrypoint /entrypoint
+COPY --chown=backend:backend entrypoint /entrypoint
 RUN sed -i 's/\r$//g' /entrypoint
 RUN chmod +x /entrypoint
 
-COPY --chown=backend:backend ./docker/backend/start_${BUILD_ENV} /start_django
+COPY --chown=backend:backend start_${BUILD_ENV} /start_django
 RUN sed -i 's/\r$//g' /start_django
 RUN chmod +x /start_django
 
-COPY --chown=backend:backend ./docker/backend/start_celeryworker /start_celeryworker
+COPY --chown=backend:backend start_celeryworker /start_celeryworker
 RUN sed -i 's/\r$//g' /start_celeryworker
 RUN chmod +x /start_celeryworker
 
-COPY --chown=backend:backend ./docker/backend/start_celerybeat /start_celerybeat
+COPY --chown=backend:backend start_celerybeat /start_celerybeat
 RUN sed -i 's/\r$//g' /start_celerybeat
 RUN chmod +x /start_celerybeat
 
-COPY --chown=backend:backend ./docker/backend/start_flower /start_flower
+COPY --chown=backend:backend start_flower /start_flower
 RUN sed -i 's/\r$//g' /start_flower
 RUN chmod +x /start_flower
 
 # copy the application code to WORKDIR
-COPY --chown=backend:backend ./${APP_HOME} ${APP_HOME}
-
-# set "backend" user as owner of the WORKDIR directory too
-RUN chown -R backend:backend ${APP_HOME}
+COPY --chown=backend:backend . ${APP_HOME}
 
 USER backend
 
