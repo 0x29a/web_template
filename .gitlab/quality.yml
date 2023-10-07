@@ -1,0 +1,84 @@
+# Docs ########################################################################
+
+markdownlint:
+  stage: quality
+  image: node:latest
+  cache:
+    paths:
+      - node_modules
+  before_script:
+    - npm install markdownlint-cli
+  script:
+    - npx markdownlint README.md docs
+
+# flake8, black, isort, pytest, mypy ##########################################
+
+.python:
+  stage: quality
+  image: python:3.9
+  cache:
+    key:
+      files:
+        - backend/requirements/development.txt
+    paths:
+      - .cache/pip
+      - venv/
+  variables:
+    PIP_CACHE_DIR: $CI_PROJECT_DIR/.cache/pip
+  before_script:
+    - source .env.local && source .gitlab/environment
+    - pip install virtualenv
+    - virtualenv venv
+    - source venv/bin/activate
+    - pip install -r backend/requirements/development.txt
+
+flake8:
+  extends: .python
+  script:
+    - flake8 backend --max-line-length=120 --exclude=*/migrations/*
+
+black:
+  extends: .python
+  script:
+    - black backend --diff --check
+
+isort:
+  extends: .python
+  script:
+    - isort backend --check-only --diff
+
+pytest:
+  extends: .python
+  script:
+    - pytest backend
+
+mypy:
+  extends: .python
+  script:
+    - cd backend
+    - mypy .
+
+# Frontend ####################################################################
+
+.frontend:
+  stage: quality
+  image: node:18-alpine
+  cache:
+    key:
+      files:
+        - frontend/yarn.lock
+    paths:
+      - frontend/node_modules
+  before_script:
+    - cd frontend
+    - yarn
+
+eslint:
+  extends: .frontend
+  script:
+    - yarn lint
+
+prettier:
+  extends: .frontend
+  script:
+    - yarn format-check

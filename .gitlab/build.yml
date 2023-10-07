@@ -1,0 +1,16 @@
+.builder:
+  stage: build
+  image: docker
+  services:
+    - docker:dind
+  before_script:
+    - source .env.local && source .gitlab/environment
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  only:
+    - master
+
+build:
+  extends: .builder
+  script:
+    - docker compose build --build-arg BUILDKIT_INLINE_CACHE=1 caddy backend frontend
+    - docker compose push caddy backend frontend

@@ -5,7 +5,7 @@
 ### create-next-app
 
 1. `sudo chown 101:101 frontend`
-2. `docker-compose run frontend bash`
+2. `docker compose run frontend bash`
 3. `npx create-next-app@latest --ts` (type `web_template`)
 4. `cp -r web_template/* .`
 5. `rm -r web_template/`

@@ -2,14 +2,14 @@ include .env
 
 # Define PIP_COMPILE_OPTS=-v to get more information during make upgrade.
 PIP_COMPILE = pip-compile --rebuild --upgrade $(PIP_COMPILE_OPTS)
-BACKEND_USER_ID = $(shell docker-compose run --rm backend id -u)
-FRONTEND_USER_ID = $(shell docker-compose run --rm frontend id -u)
+BACKEND_USER_ID = $(shell docker compose run --rm backend id -u)
+FRONTEND_USER_ID = $(shell docker compose run --rm frontend id -u)
 
 # TODO: modify when docker-compose.override.yml file is got rid of in favor
 # of multiple config files.
-DOCKER_COMPOSE = docker-compose
+DOCKER_COMPOSE = docker compose
 ifeq ($(DOCKER_BUILD_ENVIRONMENT),production)
-    DOCKER_COMPOSE = docker-compose
+    DOCKER_COMPOSE = docker compose
 endif
 
 upgrade: export CUSTOM_COMPILE_COMMAND=make upgrade

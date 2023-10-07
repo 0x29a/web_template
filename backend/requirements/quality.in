@@ -1,7 +1,7 @@
 # Requirements for code quality checks
 -c constraints.txt
 
--r test.txt               # Core and testing dependencies for this package
+-r test.txt # Core and testing dependencies for this package
 
 flake8
 black
