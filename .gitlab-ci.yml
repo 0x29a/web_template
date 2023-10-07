@@ -197,25 +197,14 @@ terraform apply:
   resource_group: ${TF_STATE_NAME}
   when: manual
 
-deploy:
-  extends: .deploy
-  image:
-    name: bitnami/kubectl:latest
-    entrypoint: ['']
-  script:
-    - kubectl config get-contexts
-    - kubectl config use-context 0x29a/cide:k3s-agent
-    - kubectl get pods
-    - cat kustomization.yml
-    - kubectl apply -k .
-
 # Cleanup #####################################################################
+# Uncomment only if needed ####################################################
 
-terraform destroy:
-  extends: .terraform
-  stage: cleanup
-  script:
-    - cd "${TF_ROOT}"
-    - gitlab-terraform destroy
-  resource_group: ${TF_STATE_NAME}
-  when: manual
+# terraform destroy:
+#   extends: .terraform
+#   stage: cleanup
+#   script:
+#     - cd "${TF_ROOT}"
+#     - gitlab-terraform destroy
+#   resource_group: ${TF_STATE_NAME}
+#   when: manual
