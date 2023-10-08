@@ -47,19 +47,19 @@ resource "digitalocean_firewall" "web" {
   }
 
   outbound_rule {
-    protocol = "tcp"
-    port_range = "all"
+    protocol              = "tcp"
+    port_range            = "all"
     destination_addresses = ["0.0.0.0/0", "::/0"]
   }
 
   outbound_rule {
-    protocol = "udp"
-    port_range = "all"
+    protocol              = "udp"
+    port_range            = "all"
     destination_addresses = ["0.0.0.0/0", "::/0"]
   }
 
   outbound_rule {
-    protocol = "icmp"
+    protocol              = "icmp"
     destination_addresses = ["0.0.0.0/0", "::/0"]
   }
 }

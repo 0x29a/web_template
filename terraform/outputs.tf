@@ -8,7 +8,7 @@ output "server_ip" {
 }
 
 output "ansible_inventory" {
-  value = <<-EOT
+  value     = <<-EOT
     [web_template]
     ${digitalocean_droplet.web_template.ipv6_address} ansible_ssh_user=root ansible_python_interpreter=/usr/bin/python3
 
