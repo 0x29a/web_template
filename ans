@@ -27,4 +27,9 @@ then
     terraform -chdir=terraform output -raw ansible_inventory > ansible/hosts
 fi
 
+if [ ! -f "ansible/variables.yml" ]
+then
+    terraform -chdir=terraform output -raw ansible_variables > ansible/variables.yml
+fi
+
 ANSIBLE_ROLES_PATH=ansible/roles:ansible/.cache/ansible venv/bin/ansible-playbook -i ansible/hosts "$@"

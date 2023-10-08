@@ -148,3 +148,7 @@ secret.auto.tfvars
 
 # SSH
 private_key
+
+# Ansible variables
+ansible/variables.yml
+ansible/hosts

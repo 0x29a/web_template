@@ -19,7 +19,7 @@ resource "digitalocean_droplet" "web_template" {
 }
 
 resource "digitalocean_firewall" "web" {
-  name = "only-22-80-and-443"
+  name = "only-22-80-443-and-icmp"
 
   droplet_ids = [digitalocean_droplet.web_template.id]
 

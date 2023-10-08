@@ -17,3 +17,10 @@ output "ansible_inventory" {
   EOT
   sensitive = true
 }
+
+output "ansible_variables" {
+  value = <<-EOT
+    username: web_template
+  EOT
+  sensitive = true
+}

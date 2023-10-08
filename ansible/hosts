@@ -1,5 +1,0 @@
-[web_template]
-2a03:b0c0:3:d0::27e:e001 ansible_ssh_user=root ansible_python_interpreter=/usr/bin/python3
-
-[all:vars]
-ansible_ssh_private_key_file=private_key

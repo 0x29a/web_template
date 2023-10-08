@@ -1,12 +1,13 @@
 - name: Commons
   hosts: web_template
-  # vars_files:
-  #   - ansible/variables.yml
+  vars_files:
+    - ../variables.yml
   roles:
     - role: caddy
       become: true
-  tasks:
-    # echo
-    - name: echo
-      ansible.builtin.shell: echo "hello world"
-      register: echo_result
+      tags: caddy
+    - role: geerlingguy.docker
+      become: true
+      tags: docker
+    - role: docker_user
+      tags: docker_user
