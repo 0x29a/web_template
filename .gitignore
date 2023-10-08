@@ -140,9 +140,11 @@ cython_debug/
 # docker-compose override
 docker-compose.override.yml
 
-# kustomization
-kustomization.yml
-
-# terraform
+# Terraform
 *.tfstate
 *.tfstate.*
+secret.auto.tfvars
+.terraform/
+
+# SSH
+private_key

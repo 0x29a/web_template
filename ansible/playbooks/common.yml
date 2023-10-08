@@ -1,0 +1,12 @@
+- name: Commons
+  hosts: web_template
+  # vars_files:
+  #   - ansible/variables.yml
+  roles:
+    - role: caddy
+      become: true
+  tasks:
+    # echo
+    - name: echo
+      ansible.builtin.shell: echo "hello world"
+      register: echo_result

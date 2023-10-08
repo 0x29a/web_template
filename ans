@@ -1,0 +1,30 @@
+#! /bin/sh
+
+export LC_ALL=C.UTF-8
+
+if [ ! -d "venv" ]
+then
+    virtualenv -p python3 venv
+fi
+
+if [ ! -f venv/bin/ansible-galaxy ]
+then
+    PIP_CACHE_DIR=ansible/.cache/pip venv/bin/pip install -r ansible/requirements.txt
+fi
+
+if [ ! -d ansible/.cache/ansible/ ]
+    then venv/bin/ansible-galaxy install --roles-path=ansible/.cache/ansible -r ansible/requirements.yml
+fi
+
+if [ ! -f "private_key" ]
+then
+    terraform -chdir=terraform output -raw private_key > private_key
+    chmod 400 private_key
+fi
+
+if [ ! -f "ansible/hosts" ]
+then
+    terraform -chdir=terraform output -raw ansible_inventory > ansible/hosts
+fi
+
+ANSIBLE_ROLES_PATH=ansible/roles:ansible/.cache/ansible venv/bin/ansible-playbook -i ansible/hosts "$@"
