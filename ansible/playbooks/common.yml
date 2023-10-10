@@ -1,13 +1,11 @@
 - name: Commons
   hosts: web_template
-  any_errors_fatal: true
   vars_files:
     - ../variables.yml
   roles:
-    - role: konstruktoid.docker_rootless
+    - role: geerlingguy.docker
+      become: true
       tags: docker
       vars:
-        docker_user: "{{ username }}"
-        docker_allow_privileged_ports: true
-        docker_compose: true
-        docker_rootful: true
+        docker_users:
+          - ubuntu

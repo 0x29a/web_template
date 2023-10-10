@@ -7,38 +7,9 @@ users:
     groups:
       - sudo
     shell: /bin/bash
-
-disable_root: true
-
-write_files:
-  - path: /etc/ssh/sshd_config
-    content: |
-         Port 4444
-         Protocol 2
-         UsePrivilegeSeparation yes
-         KeyRegenerationInterval 3600
-         ServerKeyBits 1024
-         SyslogFacility AUTH
-         LogLevel INFO
-         LoginGraceTime 120
-         PermitRootLogin no
-         StrictModes yes
-         RSAAuthentication yes
-         PubkeyAuthentication yes
-         PasswordAuthentication no
-         IgnoreRhosts yes
-         RhostsRSAAuthentication no
-         HostbasedAuthentication no
-         PermitEmptyPasswords no
-         ChallengeResponseAuthentication no
-         X11Forwarding no
-         X11DisplayOffset 10
-         PrintMotd no
-         PrintLastLog yes
-         TCPKeepAlive yes
-         AcceptEnv LANG LC_*
-         UsePAM yes
-         AllowUsers ubuntu
  
 runcmd:
+  - sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
+  - echo "Port 4444" >> /etc/ssh/sshd_config
+  - echo "AllowUsers ubuntu" >> /etc/ssh/sshd_config
   - systemctl restart ssh

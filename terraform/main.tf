@@ -17,8 +17,8 @@ data "template_file" "cloud-init-yaml" {
 resource "digitalocean_droplet" "web_template" {
   image         = "ubuntu-22-04-x64"
   name          = "web-template"
-  region        = "fra1"
-  size          = "s-1vcpu-512mb-10gb"
+  region        = "ams3"
+  size          = "s-1vcpu-1gb"
   ipv6          = true
   monitoring    = true
   droplet_agent = false
