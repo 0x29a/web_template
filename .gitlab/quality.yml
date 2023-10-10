@@ -22,14 +22,14 @@ markdownlint:
         - backend/requirements/development.txt
     paths:
       - .cache/pip
-      - venv/
+      - .fenv/
   variables:
     PIP_CACHE_DIR: $CI_PROJECT_DIR/.cache/pip
   before_script:
     - source .env.local && source .gitlab/environment
     - pip install virtualenv
-    - virtualenv venv
-    - source venv/bin/activate
+    - virtualenv .fenv
+    - source .fenv/bin/activate
     - pip install -r backend/requirements/development.txt
 
 flake8:

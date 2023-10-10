@@ -2,14 +2,14 @@
 
 export LC_ALL=C.UTF-8
 
-if [ ! -d "venv" ]
+if [ ! -d ".fenv" ]
 then
-    virtualenv -p python3 venv
+    virtualenv -p python3 .fenv
 fi
 
-PIP_CACHE_DIR=ansible/.cache/pip venv/bin/pip install -r ansible/requirements.txt
+PIP_CACHE_DIR=ansible/.cache/pip .fenv/bin/pip install -r ansible/requirements.txt
 
-venv/bin/ansible-galaxy install --roles-path=ansible/.cache/ansible -r ansible/requirements.yml
+.fenv/bin/ansible-galaxy install --roles-path=ansible/.cache/ansible -r ansible/requirements.yml
 
 rm -f private_key
 terraform -chdir=terraform output -raw private_key > private_key
@@ -18,4 +18,4 @@ chmod 400 private_key
 terraform -chdir=terraform output -raw ansible_inventory > ansible/hosts
 terraform -chdir=terraform output -raw ansible_variables > ansible/variables.yml
 
-ANSIBLE_ROLES_PATH=ansible/roles:ansible/.cache/ansible venv/bin/ansible-playbook -i ansible/hosts "$@"
+ANSIBLE_ROLES_PATH=ansible/roles:ansible/.cache/ansible .fenv/bin/ansible-playbook -i ansible/hosts "$@"

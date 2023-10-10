@@ -136,4 +136,4 @@ test:
 	$(DOCKER_COMPOSE) run --rm backend pytest
 
 cleanup:
-	rm -rf private_key ansible/variables.yml ansible/hosts ansible/.cache venv
+	rm -rf private_key ansible/variables.yml ansible/hosts ansible/.cache .fenv
