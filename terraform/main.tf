@@ -7,6 +7,13 @@ resource "digitalocean_ssh_key" "default" {
   public_key = tls_private_key.ssh.public_key_openssh
 }
 
+data "template_file" "cloud-init-yaml" {
+  template = file("cloud-init.yml")
+  vars = {
+    init_ssh_public_key = tls_private_key.ssh.public_key_openssh
+  }
+}
+
 resource "digitalocean_droplet" "web_template" {
   image         = "ubuntu-22-04-x64"
   name          = "web-template"
@@ -14,8 +21,9 @@ resource "digitalocean_droplet" "web_template" {
   size          = "s-1vcpu-512mb-10gb"
   ipv6          = true
   monitoring    = true
-  droplet_agent = true
+  droplet_agent = false
   ssh_keys      = [digitalocean_ssh_key.default.id]
+  user_data     = data.template_file.cloud-init-yaml.rendered
 }
 
 resource "digitalocean_firewall" "web" {
@@ -25,7 +33,7 @@ resource "digitalocean_firewall" "web" {
 
   inbound_rule {
     protocol         = "tcp"
-    port_range       = "22"
+    port_range       = "4444"
     source_addresses = ["::/0"]
   }
 

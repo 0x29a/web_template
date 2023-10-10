@@ -7,29 +7,15 @@ then
     virtualenv -p python3 venv
 fi
 
-if [ ! -f venv/bin/ansible-galaxy ]
-then
-    PIP_CACHE_DIR=ansible/.cache/pip venv/bin/pip install -r ansible/requirements.txt
-fi
+PIP_CACHE_DIR=ansible/.cache/pip venv/bin/pip install -r ansible/requirements.txt
 
-if [ ! -d ansible/.cache/ansible/ ]
-    then venv/bin/ansible-galaxy install --roles-path=ansible/.cache/ansible -r ansible/requirements.yml
-fi
+venv/bin/ansible-galaxy install --roles-path=ansible/.cache/ansible -r ansible/requirements.yml
 
-if [ ! -f "private_key" ]
-then
-    terraform -chdir=terraform output -raw private_key > private_key
-    chmod 400 private_key
-fi
+rm -f private_key
+terraform -chdir=terraform output -raw private_key > private_key
+chmod 400 private_key
 
-if [ ! -f "ansible/hosts" ]
-then
-    terraform -chdir=terraform output -raw ansible_inventory > ansible/hosts
-fi
-
-if [ ! -f "ansible/variables.yml" ]
-then
-    terraform -chdir=terraform output -raw ansible_variables > ansible/variables.yml
-fi
+terraform -chdir=terraform output -raw ansible_inventory > ansible/hosts
+terraform -chdir=terraform output -raw ansible_variables > ansible/variables.yml
 
 ANSIBLE_ROLES_PATH=ansible/roles:ansible/.cache/ansible venv/bin/ansible-playbook -i ansible/hosts "$@"

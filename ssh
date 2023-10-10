@@ -1,9 +1,6 @@
 #! /bin/sh
 
-if ! [ -f "private_key" ]
-then
-    terraform -chdir=terraform output -raw private_key > private_key
-    chmod 400 private_key
-fi
-
-ssh -i private_key root@$(terraform -chdir=terraform output -raw server_ip)
+rm -f private_key
+terraform -chdir=terraform output -raw private_key > private_key
+chmod 400 private_key
+ssh -i private_key -p 4444 ubuntu@$(terraform -chdir=terraform output -raw server_ip)
