@@ -14,7 +14,7 @@ data "template_file" "cloud-init-yaml" {
   }
 }
 
-resource "digitalocean_droplet" "web_template" {
+resource "digitalocean_droplet" "application" {
   image         = "ubuntu-22-04-x64"
   name          = "web-template"
   region        = "ams3"
@@ -26,10 +26,10 @@ resource "digitalocean_droplet" "web_template" {
   user_data     = data.template_file.cloud-init-yaml.rendered
 }
 
-resource "digitalocean_firewall" "web" {
+resource "digitalocean_firewall" "application" {
   name = "only-22-80-443-and-icmp"
 
-  droplet_ids = [digitalocean_droplet.web_template.id]
+  droplet_ids = [digitalocean_droplet.application.id]
 
   inbound_rule {
     protocol         = "tcp"

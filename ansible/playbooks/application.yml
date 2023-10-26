@@ -1,0 +1,33 @@
+- name: Application
+  hosts: application
+  vars_files:
+    - ../variables.yml
+  vars:
+    home_directory: "/home/ubuntu/{{ app_name }}"
+  tasks:
+    - name: Clone repository
+      git:
+        repo: {{ repo_url }}
+        dest: {{ home_directory }}
+
+    - name: Copy file within the server
+      copy:
+        src: "{{ home_directory }}/.env.local"
+        dest: "{{ home_directory }}/.env"
+        remote_src: yes
+    
+    - name: Authorize in GitLab registry
+      docker_login:
+        username: "{{ deploy_token_username }}"
+        password: "{{ deploy_token_password }}"
+        registry: registry.gitlab.com
+
+    - name: Pull containers
+      shell: docker compose pull
+      args:
+        chdir: {{ home_directory }}
+
+    - name: Start containers
+      shell: docker compose up -d
+      args:
+        chdir: {{ home_directory }}

@@ -1,5 +1,5 @@
 - name: Commons
-  hosts: web_template
+  hosts: application
   vars_files:
     - ../variables.yml
   roles:
