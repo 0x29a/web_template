@@ -1,4 +1,5 @@
 tomli<2.0.0
 werkzeug<2.1
-
-mypy<1.4
+# https://github.com/iMerica/dj-rest-auth/issues/503
+django-allauth<=0.54.0
+dj-rest-auth<=4.0.1

@@ -29,25 +29,6 @@ x-app: &default-app
     - CELERY_BROKER_URL
 
 services:
-  caddy:
-    build:
-      context: ./caddy
-      dockerfile: Dockerfile
-      cache_from:
-        - "${DOCKER_BUILD_IMAGE_PREFIX}/caddy:latest"
-
-    image: "${DOCKER_BUILD_IMAGE_PREFIX}/caddy:${DOCKER_BUILD_IMAGE_TAG:-latest}"
-    restart: unless-stopped
-    depends_on:
-      - backend
-    ports:
-      - "${DOCKER_CADDY_PORT_FORWARD:-80}:80"
-    volumes:
-      - caddy_data:/data
-      - caddy_config:/config
-    environment:
-      - SITE_ADDRESS
-
   backend:
     <<: *default-app
     command: /start_django
@@ -97,6 +78,4 @@ services:
     image: docker.io/redis:6.0
 
 volumes:
-  caddy_data:
-  caddy_config:
   production_postgres_data: {}

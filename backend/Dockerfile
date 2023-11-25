@@ -32,13 +32,16 @@ ARG BUILD_ENVIRONMENT=production
 
 ARG APP_HOME=/backend
 ARG APP_USER_ID=1000
+ARG APP_USER_GID=1000
 
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV BUILD_ENV ${BUILD_ENVIRONMENT}
 
+# This is needed to match host and container id and gid.
 RUN if [ "$APP_USER_ID" = 0 ]; then echo "backend user may not be root" && false; fi
-RUN useradd --home-dir ${APP_HOME} --create-home --shell /bin/bash --uid ${APP_USER_ID} backend
+RUN groupadd -g ${APP_USER_GID} backend
+RUN useradd --home-dir ${APP_HOME} --create-home --shell /bin/bash --uid ${APP_USER_ID} --gid ${APP_USER_GID} backend
 
 WORKDIR ${APP_HOME}
 

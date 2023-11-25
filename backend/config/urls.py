@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
 
-backend_urlpatterns = [
+urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     path("auth/", include("dj_rest_auth.urls")),
     path("auth/registration/", include("dj_rest_auth.registration.urls")),
@@ -11,10 +11,6 @@ backend_urlpatterns = [
 ]
 
 if settings.DEBUG:
-    backend_urlpatterns.append(
+    urlpatterns.append(
         path("__debug__/", include("debug_toolbar.urls")),
     )
-
-urlpatterns = [
-    path("backend/", include(backend_urlpatterns)),
-]

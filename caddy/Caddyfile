@@ -1,9 +1,11 @@
-{$SITE_ADDRESS} {
-	handle /backend/* {
-		reverse_proxy backend:5000
-	}
-
+{$CADDY_FRONTEND_HOST} {
 	handle {
 		reverse_proxy frontend:3000
+	}
+}
+
+{$CADDY_BACKEND_HOST} {
+	handle {
+		reverse_proxy backend:5000
 	}
 }

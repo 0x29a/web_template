@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file=requirements/test.txt requirements/test.in
 #
-amqp==5.1.1
+amqp==5.2.0
     # via
     #   -r requirements/production.txt
     #   kombu
@@ -12,7 +12,7 @@ asgiref==3.7.2
     # via
     #   -r requirements/production.txt
     #   django
-async-timeout==4.0.2
+async-timeout==4.0.3
     # via
     #   -r requirements/production.txt
     #   redis
@@ -20,28 +20,29 @@ attrs==23.1.0
     # via
     #   -r requirements/production.txt
     #   jsonschema
-billiard==3.6.4.0
+    #   referencing
+billiard==4.2.0
     # via
     #   -r requirements/production.txt
     #   celery
-celery==5.2.7
+celery==5.3.6
     # via
     #   -r requirements/production.txt
     #   django-celery-beat
     #   flower
-certifi==2023.5.7
+certifi==2023.11.17
     # via
     #   -r requirements/production.txt
     #   requests
-cffi==1.15.1
+cffi==1.16.0
     # via
     #   -r requirements/production.txt
     #   cryptography
-charset-normalizer==3.1.0
+charset-normalizer==3.3.2
     # via
     #   -r requirements/production.txt
     #   requests
-click==8.1.3
+click==8.1.7
     # via
     #   -r requirements/production.txt
     #   celery
@@ -56,7 +57,7 @@ click-plugins==1.1.1
     # via
     #   -r requirements/production.txt
     #   celery
-click-repl==0.2.0
+click-repl==0.3.0
     # via
     #   -r requirements/production.txt
     #   celery
@@ -64,7 +65,7 @@ cron-descriptor==1.4.0
     # via
     #   -r requirements/production.txt
     #   django-celery-beat
-cryptography==41.0.1
+cryptography==41.0.7
     # via
     #   -r requirements/production.txt
     #   pyjwt
@@ -72,8 +73,10 @@ defusedxml==0.7.1
     # via
     #   -r requirements/production.txt
     #   python3-openid
-dj-rest-auth[with_social]==4.0.1
-    # via -r requirements/production.txt
+dj-rest-auth[with-social]==5.0.2
+    # via
+    #   -r requirements/production.txt
+    #   dj-rest-auth
 django==4.1.3
     # via
     #   -r requirements/production.txt
@@ -82,21 +85,23 @@ django==4.1.3
     #   django-celery-beat
     #   django-model-utils
     #   django-redis
+    #   django-timezone-field
     #   djangorestframework
+    #   djangorestframework-simplejwt
     #   drf-spectacular
-django-allauth==0.54.0
+django-allauth==0.57.0
     # via
     #   -r requirements/production.txt
     #   dj-rest-auth
 django-celery-beat==2.5.0
     # via -r requirements/production.txt
-django-environ==0.10.0
+django-environ==0.11.2
     # via -r requirements/production.txt
 django-model-utils==4.3.1
     # via -r requirements/production.txt
-django-redis==5.2.0
+django-redis==5.4.0
     # via -r requirements/production.txt
-django-timezone-field==5.0
+django-timezone-field==6.1.0
     # via
     #   -r requirements/production.txt
     #   django-celery-beat
@@ -104,20 +109,23 @@ djangorestframework==3.14.0
     # via
     #   -r requirements/production.txt
     #   dj-rest-auth
+    #   djangorestframework-simplejwt
     #   drf-spectacular
-drf-spectacular==0.26.2
+djangorestframework-simplejwt==5.3.0
     # via -r requirements/production.txt
-exceptiongroup==1.1.1
+drf-spectacular==0.26.5
+    # via -r requirements/production.txt
+exceptiongroup==1.2.0
     # via pytest
-flower==1.2.0
+flower==2.0.1
     # via -r requirements/production.txt
-gunicorn==20.1.0
+gunicorn==21.2.0
     # via -r requirements/production.txt
-humanize==4.6.0
+humanize==4.9.0
     # via
     #   -r requirements/production.txt
     #   flower
-idna==3.4
+idna==3.6
     # via
     #   -r requirements/production.txt
     #   requests
@@ -127,11 +135,15 @@ inflection==0.5.1
     #   drf-spectacular
 iniconfig==2.0.0
     # via pytest
-jsonschema==4.17.3
+jsonschema==4.20.0
     # via
     #   -r requirements/production.txt
     #   drf-spectacular
-kombu==5.3.0
+jsonschema-specifications==2023.11.2
+    # via
+    #   -r requirements/production.txt
+    #   jsonschema
+kombu==5.3.4
     # via
     #   -r requirements/production.txt
     #   celery
@@ -139,61 +151,66 @@ oauthlib==3.2.2
     # via
     #   -r requirements/production.txt
     #   requests-oauthlib
-packaging==23.1
+packaging==23.2
+    # via
+    #   -r requirements/production.txt
+    #   gunicorn
+    #   pytest
+pluggy==1.3.0
     # via pytest
-pluggy==1.0.0
-    # via pytest
-prometheus-client==0.17.0
+prometheus-client==0.19.0
     # via
     #   -r requirements/production.txt
     #   flower
-prompt-toolkit==3.0.38
+prompt-toolkit==3.0.41
     # via
     #   -r requirements/production.txt
     #   click-repl
-psycopg2==2.9.6
+psycopg2==2.9.9
     # via -r requirements/production.txt
 pycparser==2.21
     # via
     #   -r requirements/production.txt
     #   cffi
-pyjwt[crypto]==2.7.0
+pyjwt[crypto]==2.8.0
     # via
     #   -r requirements/production.txt
     #   django-allauth
-pyrsistent==0.19.3
-    # via
-    #   -r requirements/production.txt
-    #   jsonschema
-pytest==7.3.1
+    #   djangorestframework-simplejwt
+    #   pyjwt
+pytest==7.4.3
     # via -r requirements/test.in
-python-crontab==2.7.1
+python-crontab==3.0.0
     # via
     #   -r requirements/production.txt
     #   django-celery-beat
 python-dateutil==2.8.2
     # via
     #   -r requirements/production.txt
+    #   celery
     #   python-crontab
 python3-openid==3.2.0
     # via
     #   -r requirements/production.txt
     #   django-allauth
-pytz==2023.3
+pytz==2023.3.post1
     # via
     #   -r requirements/production.txt
-    #   celery
-    #   django-timezone-field
     #   djangorestframework
     #   flower
-pyyaml==6.0
+pyyaml==6.0.1
     # via
     #   -r requirements/production.txt
     #   drf-spectacular
-redis==4.5.5
+redis==5.0.1
     # via
     #   -r requirements/production.txt
     #   django-redis
+referencing==0.31.1
+    # via
+    #   -r requirements/production.txt
+    #   jsonschema
+    #   jsonschema-specifications
 requests==2.31.0
     # via
     #   -r requirements/production.txt
@@ -203,10 +220,14 @@ requests-oauthlib==1.3.1
     # via
     #   -r requirements/production.txt
     #   django-allauth
+rpds-py==0.13.2
+    # via
+    #   -r requirements/production.txt
+    #   jsonschema
+    #   referencing
 six==1.16.0
     # via
     #   -r requirements/production.txt
-    #   click-repl
     #   python-dateutil
 sqlparse==0.4.4
     # via
@@ -216,38 +237,36 @@ tomli==1.2.3
     # via
     #   -c requirements/constraints.txt
     #   pytest
-tornado==6.3.2
+tornado==6.4
     # via
     #   -r requirements/production.txt
     #   flower
-typing-extensions==4.6.3
+typing-extensions==4.8.0
     # via
     #   -r requirements/production.txt
     #   asgiref
 tzdata==2023.3
     # via
     #   -r requirements/production.txt
+    #   celery
     #   django-celery-beat
 uritemplate==4.1.1
     # via
     #   -r requirements/production.txt
     #   drf-spectacular
-urllib3==2.0.2
+urllib3==2.1.0
     # via
     #   -r requirements/production.txt
     #   requests
-vine==5.0.0
+vine==5.1.0
     # via
     #   -r requirements/production.txt
     #   amqp
     #   celery
     #   kombu
-wcwidth==0.2.6
+wcwidth==0.2.12
     # via
     #   -r requirements/production.txt
     #   prompt-toolkit
-whitenoise==6.4.0
+whitenoise==6.6.0
     # via -r requirements/production.txt
-
-# The following packages are considered to be unsafe in a requirements file:
-# setuptools

@@ -1,13 +1,11 @@
 services:
-  caddy:
-    volumes:
-      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
-
   backend:
     depends_on:
       - mailhog
     volumes:
-      - ./backend:/backend:z
+      - ./backend:/backend
+    ports:
+      - 5000:5000
     # this is needed for ipdb & docker attach
     stdin_open: true
     tty: true
@@ -16,7 +14,9 @@ services:
     build:
       target: development
     volumes:
-      - ./frontend:/frontend:z
+      - ./frontend:/frontend
+    ports:
+      - 3000:3000
 
   mailhog:
     image: docker.io/mailhog/mailhog:v1.0.0
@@ -29,16 +29,7 @@ services:
       dockerfile: Dockerfile
     image: web_template_docs
     volumes:
-      - ./docs:/docs:z
+      - ./docs:/docs
     ports:
       - 8124:8124
     command: /start-docs
-
-  swagger:
-    image: docker.io/swaggerapi/swagger-ui:latest
-    ports:
-      - 8125:8080
-    environment:
-      - SWAGGER_JSON=/backend_api_schema.yml
-    volumes:
-      - ./frontend/backend_api_schema.yml:/backend_api_schema.yml

@@ -1,0 +1,24 @@
+services:
+  caddy:
+    build:
+      context: ./caddy
+      dockerfile: Dockerfile
+      cache_from:
+        - "${DOCKER_BUILD_IMAGE_PREFIX}/caddy:latest"
+
+    image: "${DOCKER_BUILD_IMAGE_PREFIX}/caddy:${DOCKER_BUILD_IMAGE_TAG:-latest}"
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    environment:
+      - CADDY_FRONTEND_HOST
+      - CADDY_BACKEND_HOST
+
+volumes:
+  caddy_data:
+  caddy_config:

@@ -1,11 +1,16 @@
 # See https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile
 
-FROM node:18-alpine AS development
-WORKDIR /frontend
+FROM node:21-alpine AS development
+
 ENV NODE_ENV=development
+
+WORKDIR /frontend
+
+USER node
+
 CMD [ "yarn", "dev" ]
 
-FROM node:18-alpine AS base
+FROM node:21-alpine AS base
 ENV NEXT_TELEMETRY_DISABLED 1
 
 # Install dependencies only when needed
