@@ -80,6 +80,7 @@ target/
 # IPython
 profile_default/
 ipython_config.py
+.ipython/
 
 # pyenv
 #   For a library or package, you might want to ignore these files since the code is
@@ -139,6 +140,10 @@ cython_debug/
 
 # docker-compose override
 docker-compose.override.yml
+
+# Misc
+.local/
+.bash_history
 
 # Terraform
 *.tfstate

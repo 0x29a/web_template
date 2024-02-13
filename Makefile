@@ -62,7 +62,7 @@ restart:
 %.restart:
 	$(DOCKER_COMPOSE) restart $*
 
-backend-restart:
+backend.restart:
 	$(DOCKER_COMPOSE) restart backend
 
 %.shell:

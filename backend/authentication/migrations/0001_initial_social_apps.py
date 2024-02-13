@@ -20,7 +20,7 @@ def create_social_app(apps, schema_editor):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('socialaccount', '0001_initial'),
+        ('socialaccount', '0005_socialtoken_nullable_app'),
     ]
 
     operations = [
